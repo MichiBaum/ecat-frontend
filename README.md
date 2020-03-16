@@ -1,27 +1,33 @@
-# EcatFrontend
+# Ecat Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.6.
+## About Ecat Frontend
+The frontend of Ecat is made with [Angular](https://angular.io/) and [PrimeNG](https://www.primefaces.org/primeng/).
+It lets the user indirectly interact with Ecat's backend server. The user will use the Ecat frontend to browse through all available Products that the backend provides. There will also be an admin panel that will be available through a login page.
 
-## Development server
+## Functionality
+### Customer
+- A customer is able to see ongoing discounts on the homepage
+- A customer is able to search for certain products
+- A customer is able to find products by categories
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+### Administrator
+- An administrator is able to create new products
+- An administrator is able to edit created products
+- An administrator is able to delete created products
+- An administrator is able to create new discounts
+- An administrator is able to edit created discounts
+- An administrator is able to delete created discounts
 
-## Code scaffolding
+## Startup
+### Windows
+To run the frontend on Windows, open CMD and navigate to the project using the cd command.
+Once in the project folder just run the following command.
+```
+ng serve
+```
+The frotnend will now compile and start. After that it should be available on http://localhost:4200/
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Documentation
+- The documentation for the Ecat project can be found [here](https://github.com/MichiBaum/ecat-backend/blob/master/tech_doku.docx)
+- [Angular documentation](https://angular.io/docs)
+- [PrimeNG documentation](https://www.primefaces.org/primeng/showcase/#/)
