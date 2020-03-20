@@ -1,0 +1,22 @@
+<div class="p-grid container p-justify-between">
+  <div class="p-col">
+    <ul>
+      <li>
+        <app-navigation></app-navigation>
+      </li>
+      <li>
+        <div class="ui-inputgroup" *ngIf="screenSize > 760">
+          <span class="ui-inputgroup-addon"><i class="fa fa-search" style="line-height: 1.25;"></i></span>
+          <input type="text" pInputText placeholder="Search">
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="p-col-2" id="titleContainer">
+    <h1>Title</h1>
+  </div>
+  <div class="p-col" id="logoutContainer">
+    <p-button label="logout"></p-button>
+  </div>
+
+</div>

@@ -1,0 +1,16 @@
+<div>
+  <p-carousel class="ui-carousel" [value]="promotions" [numVisible]="3" [autoplayInterval]="4000" [responsiveOptions]="responsiveOptions">
+    <p-header>
+      <h1>Promotions</h1>
+    </p-header>
+    <ng-template let-promotion pTemplate="promotion">
+      <div class="promotionCard">
+        <p-header>
+          <h1>{{ promotion.title }}</h1>
+        </p-header>
+        <img src="../../assets/imagesPlsDeleteMe/{{ promotion.imgPath }}.jpg">
+        <p>{{ promotion.description }}</p>
+      </div>
+    </ng-template>
+  </p-carousel>
+</div>

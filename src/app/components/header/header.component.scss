@@ -1,0 +1,31 @@
+.container {
+  margin: 0.5em;
+  border-bottom: 1px solid black;
+  height: 50px;
+}
+#titleContainer{
+  text-align: center;
+  position: relative;
+}
+#logoutContainer{
+  position: relative;
+  p-button{
+    position: absolute;
+    right: 0;
+  }
+}
+.p-col{
+  height: 50px;
+}
+h1{
+  margin: 0;
+}
+ul{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  li{
+    display: inline-block;
+    margin-right: 0.5em;
+  }
+}
