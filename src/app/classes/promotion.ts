@@ -1,12 +1,8 @@
-export class Promotion {
+export interface Promotion {
   title: String;
   description: String;
   imgPath: String;
-
-  constructor(title: String, description: String, imgPath: String) {
-    this.title = title;
-    this.description = description;
-    this.imgPath = imgPath;
-  }
+  startDate: number;
+  endDate: number;
 }
 

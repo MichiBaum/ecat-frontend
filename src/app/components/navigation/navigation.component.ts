@@ -1,6 +1,9 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {TreeNode} from "primeng/api/treenode";
-import {MenuItem} from "primeng";
+import {ProductTypesService} from "../../services/product-types.service";
+import {ProductGroup} from "../../classes/product-group";
+import {ProductClass} from "../../classes/product-class";
+import {ProductFamily} from "../../classes/product-family";
 
 @Component({
   selector: 'app-navigation',
@@ -9,11 +12,11 @@ import {MenuItem} from "primeng";
 })
 export class NavigationComponent implements OnInit {
   displaySideBar = false;
-  data: TreeNode[];
-  items: MenuItem[];
+  data: TreeNode[] = [];
+  productGroups: ProductGroup[] = [];
   screenSize: number;
 
-  constructor() { }
+  constructor(private productTypesService: ProductTypesService) { }
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.screenSize = event.target.innerWidth;
@@ -21,107 +24,46 @@ export class NavigationComponent implements OnInit {
 
   ngOnInit(): void {
     this.screenSize = window.innerWidth;
-    this.data = [
-      {
-        "label": "Group 1",
-        "children": [{
-          "label": "Class 1",
-          "children": [{"label": "Family 1"}, {"label": "Family 2"}]
-        },
-          {
-            "label": "Class 2",
-            "children": [{"label": "Family 1"}]
-          }]
-      },
-      {
-        "label": "Group 2",
-        "children": [
-          {
-            "label": "Class 1",
-            "children": [
-              {'label': 'Family 1'},
-              {'label': 'Family 2'},
-              {'label': 'Family 3'}
-            ]
-          },
-          {
-            "label": "Class 2",
-            "children": [
-              {'label': 'Family 1'},
-              {'label': 'Family 2'},
-              {'label': 'Family 3'}
-            ]
-          },
-          {
-            "label": "Class 3",
-            "children": [
-              {'label': 'Family 1'},
-              {'label': 'Family 2'},
-              {'label': 'Family 3'}
-            ]
-          },
-        ]
-      },
-      {
-        "label": "Group 3",
-        "children": [{
-          "label": "Class 1",
-          "children": [{"label": "Family 1"}, {"label": "Family 2"}]
-        },
-          {
-            "label": "Class 2",
-            "children": [{"label": "Family 1"}, {"label": "Family 2"}]
-          }]
-      }
-    ];
-    this.items = [
-      {
-        label : 'Group 1',
-        items : [
-          [
-            {
-              label : 'Class 1',
-              items: [
-                {
-                  label : 'Family 1'
-                }
-              ]
-            }
-          ]
+    this.productTypesService.getGroups().subscribe(data => {
+      this.productGroups = data;
+        this.productGroups.forEach(productGroup => {
+          this.data.push(this.convertProductGroupToTreenode(productGroup));
+        });
+    },
+      (error => {
+        console.log(error.status);
+      })
+    );
+  }
 
-        ]
-      },
-      {
-        label: 'Group 2',
-        items: [
-          [
-            {
-              label: 'Class 1',
-              items: [
-                {
-                  label: 'Family 1'
-                }
-              ]
-            }
-          ]
-        ]
-      },
-      {
-        label: 'Group 3',
-        items: [
-          [
-            {
-              label: 'Class 1',
-              items: [
-                {
-                  label: 'Family 1'
-                }
-              ]
-            }
-          ]
-        ]
+  private convertProductGroupToTreenode(productGroup: ProductGroup): TreeNode{
+    let children: TreeNode[] = [];
+    productGroup.productClasses.forEach(productClass => {
+        children.push(this.convertProductClassToTreenode(productClass));
       }
-    ]
+    );
+    return {
+      label: productGroup.name,
+      children: children
+    }
+  }
+
+  private convertProductClassToTreenode(productClass: ProductClass): TreeNode{
+    let children: TreeNode[] = [];
+    productClass.productFamilies.forEach(productFamily => {
+        children.push(this.convertProductFamilyToTreenode(productFamily));
+      }
+    );
+    return {
+      label: productClass.name,
+      children: children
+    }
+  }
+
+  private convertProductFamilyToTreenode(productFamily: ProductFamily): TreeNode{
+    return{
+      label: productFamily.name
+    }
   }
 
 }

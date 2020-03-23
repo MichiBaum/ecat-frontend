@@ -21,6 +21,8 @@ import { HomepageComponent } from './views/homepage/homepage.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ProductsComponent } from './views/products/products.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
+import {PromotionService} from "./services/promotion.service";
+import {HttpClientModule} from "@angular/common/http";
 
 const appRoutes: Routes = [
   {path: 'products', component: ProductsComponent},
@@ -51,9 +53,13 @@ const appRoutes: Routes = [
     RouterModule.forRoot(
       appRoutes
     ),
-    MegaMenuModule
+    MegaMenuModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    PromotionService,
+    HttpClientModule,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

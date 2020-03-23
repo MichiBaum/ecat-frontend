@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Promotion} from "../../classes/promotion";
+import {PromotionService} from "../../services/promotion.service";
 
 @Component({
   selector: 'app-homepage',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomepageComponent implements OnInit {
 
-  constructor() { }
+  promotions: Promotion[];
+
+  constructor(private promotionService: PromotionService) { }
 
   ngOnInit(): void {
+    this.promotionService.getPromotions().subscribe(data => {
+        this.promotions = data;
+      },
+      (error => {
+        console.log(error.status);
+      })
+    )
   }
 
 }

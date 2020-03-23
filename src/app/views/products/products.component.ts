@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Product} from "../../classes/product";
+import {ProductService} from "../../services/product.service";
 
 @Component({
   selector: 'app-products',
@@ -9,15 +10,16 @@ import {Product} from "../../classes/product";
 export class ProductsComponent implements OnInit {
   products: Product[] = [];
 
-  constructor() { }
+  constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
-    const product1 = new Product('Product', '12234435325325', '', 'Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum', 200);
-    const product2 = new Product('Product', '12234435325325', '', 'Lorem ipsum', 200);
-    const product3 = new Product('Product', '12234435325325', '', 'Lorem ipsum', 200);
-    const product4 = new Product('Product', '12234435325325', '', 'Lorem ipsum', 200);
-    const product5 = new Product('Product', '12234435325325', '', 'Lorem ipsum', 200);
-    this.products.push(product1, product2, product3, product4, product5);
+    this.productService.getProducts().subscribe(data => {
+      this.products = data;
+    },
+      (error => {
+        console.log(error.status);
+      })
+    )
   }
 
 }
