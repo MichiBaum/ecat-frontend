@@ -1,0 +1,17 @@
+<div class="p-grid p-dir-row">
+  <p-toast position="top-right"></p-toast>
+  <form [formGroup]="loginFormGroup">
+    <div class="p-col">
+      <label for="usernameField">Username</label>
+      <input pInputText formControlName="username" id="usernameField">
+    </div>
+
+    <div class="p-col">
+      <label for="passwordField">Password</label>
+      <input pInputText formControlName="password" id="passwordField">
+    </div>
+  </form>
+  <div class="p-col">
+    <p-button label="login" (onClick)="login()"></p-button>
+  </div>
+</div>

@@ -6,12 +6,12 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import {
-  ButtonModule,
+  ButtonModule, CalendarModule,
   CardModule,
-  CarouselModule,
+  CarouselModule, DropdownModule, InputTextareaModule,
   InputTextModule,
-  MegaMenuModule,
-  SidebarModule,
+  MegaMenuModule, MessageService,
+  SidebarModule, ToastModule,
   TreeModule
 } from "primeng";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
@@ -23,9 +23,19 @@ import { ProductsComponent } from './views/products/products.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import {PromotionService} from "./services/promotion.service";
 import {HttpClientModule} from "@angular/common/http";
+import { PromotionEditorComponent } from './views/promotion-editor/promotion-editor.component';
+import {ReactiveFormsModule} from "@angular/forms";
+import { LoginComponent } from './views/login/login.component';
+import {httpInterceptProviders} from "./httpInterceptors/HttpInteceptProviders";
+import {PermissionGuard} from "./guards/permission.guard";
 
 const appRoutes: Routes = [
   {path: 'products', component: ProductsComponent},
+  {path: 'admin/promotionEditor', component: PromotionEditorComponent, canActivate: [PermissionGuard], data: {
+    requiredPermission: 'ADMINISTRATE'
+  }},
+
+  {path: 'login', component: LoginComponent},
   {path: '**', component: HomepageComponent},
 ];
 
@@ -39,6 +49,8 @@ const appRoutes: Routes = [
     HomepageComponent,
     ProductsComponent,
     ProductCardComponent,
+    PromotionEditorComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,11 +66,18 @@ const appRoutes: Routes = [
       appRoutes
     ),
     MegaMenuModule,
-    HttpClientModule
+    HttpClientModule,
+    DropdownModule,
+    ReactiveFormsModule,
+    InputTextareaModule,
+    CalendarModule,
+    ToastModule,
   ],
   providers: [
     PromotionService,
     HttpClientModule,
+    MessageService,
+    httpInterceptProviders
   ],
   bootstrap: [AppComponent]
 })
