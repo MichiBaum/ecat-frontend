@@ -31,10 +31,6 @@ import {PermissionGuard} from "./guards/permission.guard";
 
 const appRoutes: Routes = [
   {path: 'products', component: ProductsComponent},
-  {path: 'admin/promotionEditor', component: PromotionEditorComponent, canActivate: [PermissionGuard], data: {
-    requiredPermission: 'ADMINISTRATE'
-  }},
-
   {path: 'login', component: LoginComponent},
   {path: '**', component: HomepageComponent},
 ];
