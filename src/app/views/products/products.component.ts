@@ -21,5 +21,8 @@ export class ProductsComponent implements OnInit {
       })
     )
   }
+  onDeletedProduct(productId: number){
+    this.products.splice(this.products.findIndex(product => product.id === productId), 1);
+  }
 
 }

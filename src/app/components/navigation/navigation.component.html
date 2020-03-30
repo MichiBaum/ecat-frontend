@@ -9,10 +9,10 @@
         </div>
       </li>
       <li>
-        <a href="https://localhost:4200/ecatAdmin">ecat admin</a>
+        <p-button *ngIf="authenticationService.hasPermission('ADMINISTRATE_ADMINS')" routerLink="/admin/adminEditor" label="ecat admin"></p-button>
       </li>
       <li>
-        <a href="https://localhost:4200/ecatAdmin">ecat promo</a>
+        <p-button *ngIf="authenticationService.hasPermission('ADMINISTRATE')" routerLink="/admin/promotionEditor" label="ecat promo"></p-button>
       </li>
     </ul>
     <p-tree selectionMode="single" [value]="data" (onNodeSelect)="navigateToProducts()">

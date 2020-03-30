@@ -8,7 +8,7 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import {
   ButtonModule, CalendarModule,
   CardModule,
-  CarouselModule, DropdownModule, InputTextareaModule,
+  CarouselModule, ConfirmationService, ConfirmDialogModule, DropdownModule, InputTextareaModule,
   InputTextModule,
   MegaMenuModule, MessageService,
   SidebarModule, ToastModule,
@@ -28,9 +28,11 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { LoginComponent } from './views/login/login.component';
 import {httpInterceptProviders} from "./httpInterceptors/HttpInteceptProviders";
 import {PermissionGuard} from "./guards/permission.guard";
+import { MiliDatePipe } from './customPipes/mili-date.pipe';
 
 const appRoutes: Routes = [
   {path: 'products', component: ProductsComponent},
+  {path: 'admin/promotionEditor', component: PromotionEditorComponent, canActivate: [PermissionGuard], data: {requiredPermission: 'ADMINISTRATE'}},
   {path: 'login', component: LoginComponent},
   {path: '**', component: HomepageComponent},
 ];
@@ -47,6 +49,7 @@ const appRoutes: Routes = [
     ProductCardComponent,
     PromotionEditorComponent,
     LoginComponent,
+    MiliDatePipe,
   ],
   imports: [
     BrowserModule,
@@ -68,12 +71,14 @@ const appRoutes: Routes = [
     InputTextareaModule,
     CalendarModule,
     ToastModule,
+    ConfirmDialogModule,
   ],
   providers: [
     PromotionService,
     HttpClientModule,
     MessageService,
-    httpInterceptProviders
+    httpInterceptProviders,
+    ConfirmationService
   ],
   bootstrap: [AppComponent]
 })
