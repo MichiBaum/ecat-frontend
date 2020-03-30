@@ -1,0 +1,30 @@
+<div class="container p-grid p-dir-row">
+  <form>
+    <div class="formGroup p-col">
+      <label>Selected Promotion</label>
+      <p-dropdown [options]="items" [(ngModel)]="selectedPromotion" name="selection"></p-dropdown>
+    </div>
+    <div class="formGroup p-col">
+      <label>Promotion Name</label>
+      <input type="text" pInputText [(ngModel)]="selectedPromotion.title" name="title">
+    </div>
+    <div class="formGroup p-col">
+      <label>Promotion Description</label>
+      <textarea type="text" pInputTextarea [(ngModel)]="selectedPromotion.description" name="description"></textarea>
+    </div>
+    <div class="formGroup p-col">
+      <label>Start Date</label>
+      <p-calendar [ngModel]="selectedPromotion.startDate | miliDate" (ngModelChange)="updateStartDate($event)" name="startDate"></p-calendar>
+    </div>
+    <div class="formGroup p-col">
+      <label>End Date</label>
+      <p-calendar [ngModel]="selectedPromotion.endDate | miliDate" (ngModelChange)="updateEndDate($event)" name="endDate"></p-calendar>
+    </div>
+    <div class="formGroup p-col">
+      <p-button label="Save" (onClick)="savePromotion()"></p-button>
+      <p-button label="Reset" (onClick)="resetFormToLastState()" [disabled]="!selectedPromotion.id"></p-button>
+      <p-button label="Delete" class="ui-button-danger" (onClick)="deletePromotion(selectedPromotion.id)" [disabled]="!selectedPromotion.id"></p-button>
+    </div>
+  </form>
+</div>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
