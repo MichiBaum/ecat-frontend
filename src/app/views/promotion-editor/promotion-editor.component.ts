@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Promotion} from "../../classes/promotion";
 import {PromotionService} from "../../services/promotion.service";
 import {ConfirmationService, MessageService, SelectItem} from "primeng";
