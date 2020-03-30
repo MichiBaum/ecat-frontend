@@ -1,7 +1,8 @@
 export interface Promotion {
-  title: String;
-  description: String;
-  imgPath: String;
+  id: number;
+  title: string;
+  description: string;
+  imgPath?: string;
   startDate: number;
   endDate: number;
 }
