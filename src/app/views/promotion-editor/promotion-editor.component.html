@@ -5,12 +5,12 @@
       <p-dropdown [options]="items" [(ngModel)]="selectedPromotion" name="selection"></p-dropdown>
     </div>
     <div class="formGroup p-col">
-      <label>Promotion Name</label>
-      <input type="text" pInputText [(ngModel)]="selectedPromotion.title" name="title">
+      <label for="titleField">Promotion Name</label>
+      <input type="text" pInputText [(ngModel)]="selectedPromotion.title" name="title" id="titleField">
     </div>
     <div class="formGroup p-col">
-      <label>Promotion Description</label>
-      <textarea type="text" pInputTextarea [(ngModel)]="selectedPromotion.description" name="description"></textarea>
+      <label for="descriptionField">Promotion Description</label>
+      <textarea type="text" pInputTextarea [(ngModel)]="selectedPromotion.description" name="description" id="descriptionField"></textarea>
     </div>
     <div class="formGroup p-col">
       <label>Start Date</label>
