@@ -1,7 +1,10 @@
 .container {
-  margin: 0.5em;
-  border-bottom: 1px solid black;
-  height: 50px;
+  background-color: rgba(0, 5, 143, 0.8);
+  margin-bottom: 1em;
+  padding: 0.5em;
+  color: white;
+  border-bottom: 5px solid rgb(0, 6, 94);
+  width: 100vw;
 }
 #titleContainer{
   text-align: center;
@@ -12,12 +15,10 @@
   p-button{
     position: absolute;
     right: 0;
+    margin-right: 0.5rem;
   }
 }
-.p-col{
-  height: 50px;
-}
-h1{
+h1, h2, h3{
   margin: 0;
 }
 ul{
@@ -28,4 +29,7 @@ ul{
     display: inline-block;
     margin-right: 0.5em;
   }
+}
+input{
+  width: 15vw;
 }

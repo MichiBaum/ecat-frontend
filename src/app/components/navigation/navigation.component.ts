@@ -4,6 +4,8 @@ import {ProductTypesService} from "../../services/product-types.service";
 import {ProductGroup} from "../../classes/product-group";
 import {ProductClass} from "../../classes/product-class";
 import {ProductFamily} from "../../classes/product-family";
+import {AuthenticationService} from "../../services/authentication.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-navigation',
@@ -16,7 +18,7 @@ export class NavigationComponent implements OnInit {
   productGroups: ProductGroup[] = [];
   screenSize: number;
 
-  constructor(private productTypesService: ProductTypesService) { }
+  constructor(private productTypesService: ProductTypesService, public authenticationService: AuthenticationService, private router: Router) { }
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.screenSize = event.target.innerWidth;
