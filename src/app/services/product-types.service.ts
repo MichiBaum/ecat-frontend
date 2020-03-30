@@ -7,7 +7,7 @@ import {ProductGroup} from "../classes/product-group";
 })
 export class ProductTypesService {
 
-  productsGroupUrl: string = 'http://localhost:8080/api/productsgroups';
+  private productsGroupUrl: string = 'http://localhost:8080/api/productsgroups';
 
   constructor(private http: HttpClient) { }
 

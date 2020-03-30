@@ -24,7 +24,7 @@ import { ProductCardComponent } from './components/product-card/product-card.com
 import {PromotionService} from "./services/promotion.service";
 import {HttpClientModule} from "@angular/common/http";
 import { PromotionEditorComponent } from './views/promotion-editor/promotion-editor.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { LoginComponent } from './views/login/login.component';
 import {httpInterceptProviders} from "./httpInterceptors/HttpInteceptProviders";
 import {PermissionGuard} from "./guards/permission.guard";

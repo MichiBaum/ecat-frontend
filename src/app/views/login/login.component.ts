@@ -31,8 +31,8 @@ export class LoginComponent implements OnInit {
   login(){
     const user: User = this.loginFormGroup.getRawValue();
     this.loginService.login(user).subscribe(data => {
-      this.authenticationService.setToken(data);
-      this.router.navigate(['/homepage']);
+    this.authenticationService.setToken(data);
+    this.router.navigate(['/homepage']);
     },
       (error => {
         this.messageService.add({severity: 'error', summary: 'Login failed', detail: 'You entered the wrong username or password'});

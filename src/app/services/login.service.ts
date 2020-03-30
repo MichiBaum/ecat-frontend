@@ -9,7 +9,7 @@ import {Observable} from "rxjs";
 })
 export class LoginService {
 
-  loginPath: string = 'http://localhost:8080/api/login';
+  private loginPath: string = 'http://localhost:8080/api/login';
 
   constructor(private http: HttpClient) { }
 

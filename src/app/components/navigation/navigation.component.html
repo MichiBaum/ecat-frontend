@@ -15,7 +15,7 @@
         <a href="https://localhost:4200/ecatAdmin">ecat promo</a>
       </li>
     </ul>
-    <p-tree selectionMode="single" [value]="data">
+    <p-tree selectionMode="single" [value]="data" (onNodeSelect)="navigateToProducts()">
     </p-tree>
   </p-sidebar>
 </div>

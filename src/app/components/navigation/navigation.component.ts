@@ -65,5 +65,8 @@ export class NavigationComponent implements OnInit {
       label: productFamily.name
     }
   }
+  navigateToProducts(){
+    this.router.navigate(['/products']);
+  }
 
 }
