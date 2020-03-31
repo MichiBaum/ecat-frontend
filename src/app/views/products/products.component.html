@@ -1,9 +1,8 @@
-<div class="p-grid">
-  <app-product-card
-    *ngFor="let product of products"
-    [product]="product"
-    (deletedProduct)="onDeletedProduct($event)"
-    class="p-col-1">
-
-  </app-product-card>
+<div class="p-grid p-justify-center">
+  <div *ngFor="let product of products" class="p-col-3">
+    <app-product-card
+      [product]="product"
+      (deletedProduct)="onDeletedProduct($event)">
+    </app-product-card>
+  </div>
 </div>
