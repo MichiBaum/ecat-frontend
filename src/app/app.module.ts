@@ -10,7 +10,7 @@ import {
   CardModule,
   CarouselModule, ConfirmationService, ConfirmDialogModule, DropdownModule, InputTextareaModule,
   InputTextModule,
-  MegaMenuModule, MessageService,
+  MegaMenuModule, MessageService, PasswordModule,
   SidebarModule, ToastModule,
   TreeModule
 } from "primeng";
@@ -73,6 +73,7 @@ const appRoutes: Routes = [
     ConfirmDialogModule,
     ReactiveFormsModule,
     FormsModule,
+    PasswordModule,
   ],
   providers: [
     PromotionService,
