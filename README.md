@@ -25,7 +25,7 @@ Once in the project folder just run the following command.
 ```
 ng serve
 ```
-The frotnend will now compile and start.  
+The frontend will now compile and start.  
 After that it should be available on http://localhost:4200/
 
 ## Documentation

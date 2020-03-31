@@ -14,11 +14,11 @@
     </div>
     <div class="formGroup p-col">
       <label>Start Date</label>
-      <p-calendar [ngModel]="selectedPromotion.startDate | miliDate" (ngModelChange)="updateStartDate($event)" name="startDate"></p-calendar>
+      <p-calendar [ngModel]="selectedPromotion.startDate | millisecondDate" (ngModelChange)="updateStartDate($event)" name="startDate"></p-calendar>
     </div>
     <div class="formGroup p-col">
       <label>End Date</label>
-      <p-calendar [ngModel]="selectedPromotion.endDate | miliDate" (ngModelChange)="updateEndDate($event)" name="endDate"></p-calendar>
+      <p-calendar [ngModel]="selectedPromotion.endDate | millisecondDate" (ngModelChange)="updateEndDate($event)" name="endDate"></p-calendar>
     </div>
     <div class="formGroup p-col">
       <p-button label="Save" (onClick)="savePromotion()"></p-button>

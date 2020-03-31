@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'miliDate'
+  name: 'millisecondDate'
 })
-export class MiliDatePipe implements PipeTransform {
+export class MillisecondDatePipe implements PipeTransform {
 
   transform(value: number): Date {
     if(value){
