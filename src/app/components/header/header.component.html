@@ -13,9 +13,9 @@
     </ul>
   </div>
   <div class="p-col-6" id="titleContainer">
-    <h1 *ngIf="screenSize > 969">Ecat Product catalog</h1>
-    <h2 *ngIf="screenSize < 970 && screenSize > 522">Ecat Product catalog</h2>
-    <h3 *ngIf="screenSize < 523">Ecat Product catalog</h3>
+    <h1 *ngIf="screenSize > 969" routerLink="/homepage">Ecat Product catalog</h1>
+    <h2 *ngIf="screenSize < 970 && screenSize > 522" routerLink="/homepage">Ecat Product catalog</h2>
+    <h3 *ngIf="screenSize < 523" routerLink="/homepage">Ecat Product catalog</h3>
   </div>
   <div class="p-col" id="logoutContainer">
     <p-button label="logout" *ngIf="authenticationService.hasPermission('ADMINISTRATE')"></p-button>
