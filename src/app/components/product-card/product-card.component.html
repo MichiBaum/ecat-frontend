@@ -1,6 +1,10 @@
 <p-card header="{{ product.name }}" subheader="{{ product.articleNr}}" class="p-grid">
   <p-header class="p-col">
-    <img src="assets/imagesPlsDeleteMe/Product.jpg">
+    <img src="assets/imagesPlsDeleteMe/Product1.jpg" *ngIf="product.id === 1">
+    <img src="assets/imagesPlsDeleteMe/Product2.jpg" *ngIf="product.id === 2">
+    <img src="assets/imagesPlsDeleteMe/Product3.jpg" *ngIf="product.id === 3">
+    <img src="assets/imagesPlsDeleteMe/Product4.jpg" *ngIf="product.id === 4">
+    <img src="assets/imagesPlsDeleteMe/Product5.jpg" *ngIf="product.id === 5">
   </p-header>
   <p class="p-col">{{ product.description }}</p>
   <p-footer class="p-col p-grid p-justify-between">
