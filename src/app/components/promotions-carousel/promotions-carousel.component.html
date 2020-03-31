@@ -8,7 +8,8 @@
         <p-header>
           <h1>{{ promotion.title }}</h1>
         </p-header>
-        <img src="assets/imagesPlsDeleteMe/Promo.jpg">
+        <img src="assets/imagesPlsDeleteMe/Promo1.jpg" *ngIf="promotion.id === 1">
+        <img src="assets/imagesPlsDeleteMe/Promo2.png" *ngIf="promotion.id === 2">
         <p>{{ promotion.description }}</p>
       </div>
     </ng-template>
