@@ -8,7 +8,7 @@ import {Product} from "../classes/product";
 export class ProductService {
 
   private productPath: string = 'http://localhost:8080/api/products/all';
-  private productDelete: string = 'http://localhost:8080/api/products/'
+  private productDelete: string = 'http://localhost:8080/api/products/';
 
   constructor(private http: HttpClient) { }
 

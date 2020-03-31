@@ -28,6 +28,7 @@ import { LoginComponent } from './views/login/login.component';
 import {httpInterceptProviders} from "./httpInterceptors/HttpInteceptProviders";
 import {PermissionGuard} from "./guards/permission.guard";
 import { MiliDatePipe } from './customPipes/mili-date.pipe';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 const appRoutes: Routes = [
   {path: 'products', component: ProductsComponent},
@@ -70,6 +71,8 @@ const appRoutes: Routes = [
     CalendarModule,
     ToastModule,
     ConfirmDialogModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [
     PromotionService,

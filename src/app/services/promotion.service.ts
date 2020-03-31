@@ -9,7 +9,7 @@ import {map} from "rxjs/operators";
 export class PromotionService {
 
   private promotionsPath: string = 'http://localhost:8080/api/promotions';
-  private savePromotionsPath: string = 'http://localhost:8080/api/promotions/save'
+  private savePromotionsPath: string = 'http://localhost:8080/api/promotions/save';
   constructor(private http: HttpClient) { }
 
   getPromotions(): Observable<Promotion[]> {
