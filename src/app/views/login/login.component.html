@@ -3,12 +3,12 @@
   <form [formGroup]="loginFormGroup">
     <div class="p-col">
       <label for="usernameField">Username</label>
-      <input pInputText formControlName="username" id="usernameField">
+      <input type="text" pInputText formControlName="username" id="usernameField">
     </div>
 
     <div class="p-col">
       <label for="passwordField">Password</label>
-      <input pPassword type="password" [feedback]="false" formControlName="password" id="passwordField">
+      <input type="password" pPassword formControlName="password" id="passwordField" [feedback]="false"/>
     </div>
   </form>
   <div class="p-col">
