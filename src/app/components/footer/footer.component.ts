@@ -1,4 +1,5 @@
 import {Component, HostListener, OnInit} from '@angular/core';
+import {WindowResizeListenerService} from "../../services/window-resize-listener.service";
 
 @Component({
   selector: 'app-footer',
@@ -8,14 +9,16 @@ import {Component, HostListener, OnInit} from '@angular/core';
 export class FooterComponent implements OnInit {
 
   screenSize: number;
-  constructor() { }
+
+  constructor(private windowResizeListenerService: WindowResizeListenerService) {
+    this.windowResizeListenerService.screenSizeEmitter.subscribe(
+      (screenSizeEmit: number) => {
+        this.screenSize = screenSizeEmit;
+      }
+    )
+  }
 
   ngOnInit(): void {
-    this.screenSize = window.innerWidth;
-  }
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {
-    this.screenSize = event.target.innerWidth;
   }
 
 }

@@ -6,6 +6,7 @@ import {ProductClass} from "../../classes/product-class";
 import {ProductFamily} from "../../classes/product-family";
 import {AuthenticationService} from "../../services/authentication.service";
 import {Router} from "@angular/router";
+import {WindowResizeListenerService} from "../../services/window-resize-listener.service";
 
 @Component({
   selector: 'app-navigation',
@@ -18,14 +19,20 @@ export class NavigationComponent implements OnInit {
   productGroups: ProductGroup[] = [];
   screenSize: number;
 
-  constructor(private productTypesService: ProductTypesService, public authenticationService: AuthenticationService, private router: Router) { }
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {
-    this.screenSize = event.target.innerWidth;
+  constructor(
+    private productTypesService: ProductTypesService,
+    public authenticationService: AuthenticationService,
+    private router: Router,
+    private windowResizeListenerService: WindowResizeListenerService
+  ) {
+    this.windowResizeListenerService.screenSizeEmitter.subscribe(
+      (screenSizeEmit: number) => {
+        this.screenSize = screenSizeEmit;
+      }
+    )
   }
 
   ngOnInit(): void {
-    this.screenSize = window.innerWidth;
     this.productTypesService.getGroups().subscribe(data => {
       this.productGroups = data;
         this.productGroups.forEach(productGroup => {

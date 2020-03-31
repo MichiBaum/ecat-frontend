@@ -10,7 +10,7 @@ import {ConfirmationService} from "primeng";
 })
 export class ProductCardComponent implements OnInit {
   @Input() product: Product;
-  @Output()deletedProduct = new EventEmitter();
+  @Output() deletedProduct = new EventEmitter();
 
   constructor(private productService: ProductService, private confirmService: ConfirmationService) { }
 

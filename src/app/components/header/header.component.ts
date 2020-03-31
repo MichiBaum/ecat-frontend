@@ -1,5 +1,6 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {AuthenticationService} from "../../services/authentication.service";
+import {WindowResizeListenerService} from "../../services/window-resize-listener.service";
 
 @Component({
   selector: 'app-header',
@@ -7,17 +8,18 @@ import {AuthenticationService} from "../../services/authentication.service";
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+
   screenSize: number;
 
-  constructor(public authenticationService: AuthenticationService) { }
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {
-    this.screenSize = event.target.innerWidth;
+  constructor(public authenticationService: AuthenticationService, private windowResizeListenerService: WindowResizeListenerService) {
+    this.windowResizeListenerService.screenSizeEmitter.subscribe(
+      (screenSizeEmit: number) => {
+        this.screenSize = screenSizeEmit;
+      }
+    )
   }
 
   ngOnInit(): void {
-    this.screenSize = window.innerWidth;
-
   }
 
 }
