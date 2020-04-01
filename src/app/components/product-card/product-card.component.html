@@ -1,19 +1,6 @@
 <p-card header="{{ product.name }}" subheader="{{ product.articleNr}}" class="p-grid">
   <p-header class="p-col">
-    <img src="assets/imagesPlsDeleteMe/Product1.jpg" *ngIf="product.id === 1">
-    <img src="assets/imagesPlsDeleteMe/Product2.jpg" *ngIf="product.id === 2">
-    <img src="assets/imagesPlsDeleteMe/Product3.jpg" *ngIf="product.id === 3">
-    <img src="assets/imagesPlsDeleteMe/Product4.jpg" *ngIf="product.id === 4">
-    <img src="assets/imagesPlsDeleteMe/Product5.jpg" *ngIf="product.id === 5">
-    <img src="assets/imagesPlsDeleteMe/Product6.jpg" *ngIf="product.id === 6">
-    <img src="assets/imagesPlsDeleteMe/Product7.jpg" *ngIf="product.id === 7">
-    <img src="assets/imagesPlsDeleteMe/Product8.jpg" *ngIf="product.id === 8">
+    <img src="assets/imagesPlsDeleteMe/{{product.pictureName}}">
   </p-header>
   <p class="p-col">{{ product.description }}</p>
-  <p-footer class="p-col p-grid p-justify-between">
-    <p-button label="Details" class="p-col"></p-button>
-    <p-button label="Edit" class="p-col"></p-button>
-    <p-button class="ui-button-danger p-col" label="Delete" (click)="deleteProduct(product.id)"></p-button>
-  </p-footer>
 </p-card>
-<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>

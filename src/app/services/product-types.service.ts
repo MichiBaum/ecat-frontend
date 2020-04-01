@@ -14,4 +14,5 @@ export class ProductTypesService {
   getGroups(){
     return this.http.get<ProductGroup[]>(this.productsGroupUrl);
   }
+
 }

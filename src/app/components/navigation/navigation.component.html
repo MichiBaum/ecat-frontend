@@ -15,7 +15,7 @@
         <p-button *ngIf="authenticationService.hasPermission('ADMINISTRATE')" routerLink="/admin/promotionEditor" label="ecat promo"></p-button>
       </li>
     </ul>
-    <p-tree selectionMode="single" [value]="data" (onNodeSelect)="navigateToProducts()">
+    <p-tree selectionMode="single" [value]="data" (onNodeSelect)="searchProducts($event)">
     </p-tree>
   </p-sidebar>
 </div>

@@ -10,19 +10,14 @@ import {ProductService} from "../../services/product.service";
 export class ProductsComponent implements OnInit {
   products: Product[] = [];
 
-  constructor(private productService: ProductService) { }
-
-  ngOnInit(): void {
-    this.productService.getProducts().subscribe(data => {
-      this.products = data;
-    },
-      (error => {
-        console.log(error.status);
-      })
+  constructor(private productService: ProductService) {
+    this.productService.products.subscribe(
+      (products) => this.products = products
     )
   }
-  onDeletedProduct(productId: number){
-    this.products.splice(this.products.findIndex(product => product.id === productId), 1);
+
+  ngOnInit(): void {
+
   }
 
 }

@@ -7,7 +7,7 @@
       <li *ngIf="screenSize > 969">
         <div class="ui-inputgroup">
           <span class="ui-inputgroup-addon"><i class="fa fa-search" style="line-height: 1.25;"></i></span>
-          <input type="text" pInputText placeholder="Search">
+          <input [(ngModel)]="searchtext" type="text" pInputText placeholder="Search" (keydown)="keyPressed($event)">
         </div>
       </li>
     </ul>

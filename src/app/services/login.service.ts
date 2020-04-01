@@ -16,4 +16,5 @@ export class LoginService {
   login(user: User): Observable<Token> {
     return this.http.post<Token>(this.loginPath, user);
   }
+
 }

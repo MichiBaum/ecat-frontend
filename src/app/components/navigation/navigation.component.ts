@@ -7,6 +7,7 @@ import {ProductFamily} from "../../classes/product-family";
 import {AuthenticationService} from "../../services/authentication.service";
 import {Router} from "@angular/router";
 import {WindowResizeListenerService} from "../../services/window-resize-listener.service";
+import {ProductService} from "../../services/product.service";
 
 @Component({
   selector: 'app-navigation',
@@ -23,7 +24,8 @@ export class NavigationComponent implements OnInit {
     private productTypesService: ProductTypesService,
     public authenticationService: AuthenticationService,
     private router: Router,
-    private windowResizeListenerService: WindowResizeListenerService
+    private windowResizeListenerService: WindowResizeListenerService,
+    private productService: ProductService
   ) {
     this.windowResizeListenerService.screenSizeEmitter.subscribe(
       (screenSizeEmit: number) => {
@@ -71,11 +73,11 @@ export class NavigationComponent implements OnInit {
 
   private convertProductFamilyToTreenode(productFamily: ProductFamily): TreeNode{
     return{
-      label: productFamily.name
+      label: productFamily.name,
     }
   }
-  navigateToProducts(){
-    this.router.navigate(['/products']);
-  }
 
+  searchProducts(event: any) {
+    this.productService.search(event.node.label, true);
+  }
 }

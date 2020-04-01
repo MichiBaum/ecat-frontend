@@ -1,6 +1,7 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from "../../services/authentication.service";
 import {WindowResizeListenerService} from "../../services/window-resize-listener.service";
+import {ProductService} from "../../services/product.service";
 
 @Component({
   selector: 'app-header',
@@ -10,8 +11,13 @@ import {WindowResizeListenerService} from "../../services/window-resize-listener
 export class HeaderComponent implements OnInit {
 
   screenSize: number;
+  searchtext: string;
 
-  constructor(public authenticationService: AuthenticationService, private windowResizeListenerService: WindowResizeListenerService) {
+  constructor(
+    public authenticationService: AuthenticationService,
+    private windowResizeListenerService: WindowResizeListenerService,
+    private productService: ProductService
+  ) {
     this.windowResizeListenerService.screenSizeEmitter.subscribe(
       (screenSizeEmit: number) => {
         this.screenSize = screenSizeEmit;
@@ -22,4 +28,9 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  keyPressed(event: KeyboardEvent) {
+    if(event.key === "Enter"){
+      this.productService.search(this.searchtext || "", true)
+    }
+  }
 }

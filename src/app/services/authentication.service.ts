@@ -15,18 +15,20 @@ export class AuthenticationService {
       return [];
     }
   }
+
   isLoggedIn(): boolean{
-    if(sessionStorage.getItem('token')){
-      return true;
-    }
-    return false;
+    return !!sessionStorage.getItem('token');
+
   }
+
   setToken(token: Token){
     sessionStorage.setItem('token', JSON.stringify(token));
   }
+
   getToken(): Token{
     return JSON.parse(sessionStorage.getItem('token'));
   }
+
   hasPermission(permission: string): boolean{
     return this.getPermissions().indexOf(permission) != -1;
 
