@@ -34,6 +34,16 @@ import {AuthErrorHandler} from "./errorHandlers/auth-error-handler";
 import {LoginErrorHandler} from "./errorHandlers/login-error-handler";
 import {ValidationErrorHandler} from "./errorHandlers/validation-error-handler";
 import {InternalServerErrorHandler} from "./errorHandlers/internal-server-error-handler";
+import {FooterModule} from "./components/footer/footer.module";
+import {HeaderModule} from "./components/header/header.module";
+import {NavigationModule} from "./components/navigation/navigation.module";
+import {ProductCardModule} from "./components/product-card/product-card.module";
+import {PromotionsCarouselModule} from "./components/promotions-carousel/promotions-carousel.module";
+import {HomepageModule} from "./views/homepage/homepage.module";
+import {LoginModule} from "./views/login/login.module";
+import {ProductsModule} from "./views/products/products.module";
+import {PromotionEditorModule} from "./views/promotion-editor/promotion-editor.module";
+import {CommonModule} from "@angular/common";
 
 const appRoutes: Routes = [
   {path: 'products', component: ProductsComponent},
@@ -45,40 +55,30 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    NavigationComponent,
-    PromotionsCarouselComponent,
-    FooterComponent,
-    HomepageComponent,
-    ProductsComponent,
-    ProductCardComponent,
-    PromotionEditorComponent,
-    LoginComponent,
-    MillisecondDatePipe,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ButtonModule,
-    SidebarModule,
-    TreeModule,
-    InputTextModule,
+    FooterModule,
+    HeaderModule,
+    NavigationModule,
+    ProductCardModule,
+    PromotionsCarouselModule,
+    HomepageModule,
+    LoginModule,
+    ProductsModule,
+    PromotionEditorModule,
     BrowserAnimationsModule,
-    CarouselModule,
-    CardModule,
     RouterModule.forRoot(
       appRoutes
     ),
-    MegaMenuModule,
     HttpClientModule,
-    DropdownModule,
-    InputTextareaModule,
     CalendarModule,
     ToastModule,
     ConfirmDialogModule,
     ReactiveFormsModule,
     FormsModule,
-    PasswordModule,
+    CommonModule
   ],
   providers: [
     PromotionService,
@@ -91,6 +91,8 @@ const appRoutes: Routes = [
     LoginErrorHandler,
     ValidationErrorHandler,
     InternalServerErrorHandler
+  ],
+  exports: [
   ],
   bootstrap: [AppComponent]
 })
