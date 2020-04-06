@@ -30,6 +30,10 @@ import {PermissionGuard} from "./guards/permission.guard";
 import { MillisecondDatePipe } from './customPipes/mili-date.pipe';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {DefaultErrorHandler} from "./errorHandlers/default-error-handler";
+import {AuthErrorHandler} from "./errorHandlers/auth-error-handler";
+import {LoginErrorHandler} from "./errorHandlers/login-error-handler";
+import {ValidationErrorHandler} from "./errorHandlers/validation-error-handler";
+import {InternalServerErrorHandler} from "./errorHandlers/internal-server-error-handler";
 
 const appRoutes: Routes = [
   {path: 'products', component: ProductsComponent},
@@ -82,7 +86,11 @@ const appRoutes: Routes = [
     MessageService,
     httpInterceptProviders,
     ConfirmationService,
-    DefaultErrorHandler
+    DefaultErrorHandler,
+    AuthErrorHandler,
+    LoginErrorHandler,
+    ValidationErrorHandler,
+    InternalServerErrorHandler
   ],
   bootstrap: [AppComponent]
 })
