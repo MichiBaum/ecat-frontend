@@ -8,6 +8,7 @@ import {AuthenticationService} from "../../services/authentication.service";
 import {Router} from "@angular/router";
 import {WindowResizeListenerService} from "../../services/window-resize-listener.service";
 import {ProductService} from "../../services/product.service";
+import {ProductType} from "../../classes/product-type.enum";
 
 @Component({
   selector: 'app-navigation',
@@ -55,6 +56,7 @@ export class NavigationComponent implements OnInit {
     );
     return {
       label: productGroup.name,
+      data: {type: ProductType.PRODUCT_GROUP, id: productGroup.id},
       children: children
     }
   }
@@ -67,6 +69,7 @@ export class NavigationComponent implements OnInit {
     );
     return {
       label: productClass.name,
+      data: {type: ProductType.PRODUCT_CLASS, id: productClass.id},
       children: children
     }
   }
@@ -74,10 +77,23 @@ export class NavigationComponent implements OnInit {
   private convertProductFamilyToTreenode(productFamily: ProductFamily): TreeNode{
     return{
       label: productFamily.name,
+      data: {type: ProductType.PRODUCT_FAMILY, id: productFamily.id},
     }
   }
 
   searchProducts(event: any) {
-    this.productService.search(event.node.label, true);
+    switch (event.node.data.type as ProductType) {
+      case ProductType.PRODUCT_CLASS:
+        this.productService.searchProductClass(event.node.data.id, true);
+        break;
+      case ProductType.PRODUCT_FAMILY:
+        this.productService.searchProductFamily(event.node.data.id, true);
+        break;
+      case ProductType.PRODUCT_GROUP:
+        this.productService.searchProductGroup(event.node.data.id, true);
+        break;
+      case ProductType.PRODUCT:
+        break;
+    }
   }
 }

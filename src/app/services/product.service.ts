@@ -34,4 +34,36 @@ export class ProductService {
     )
   }
 
+  searchProductGroup(id: any, withredirect: boolean) {
+    const path = "/productgroups/";
+    this.findProductByProductType(path, id, withredirect);
+  }
+
+  searchProductFamily(id: any, withredirect: boolean) {
+    const path = "/productfamilies/";
+    this.findProductByProductType(path, id, withredirect);
+  }
+
+  searchProductClass(id: any, withredirect: boolean) {
+    const path = "/productclasses/";
+    this.findProductByProductType(path, id, withredirect);
+  }
+
+  private findProductByProductType(path: string, id: any, withredirect: boolean) {
+    this.http.get<Product[]>(`${environment.api_url}${path}${id}`).pipe(
+      catchError(() => {
+        return of([])
+      })
+    ).subscribe(
+      (products) => {
+        if (withredirect) {
+          this.router.navigate(['/products']).then(() => {
+            this.products.emit(products as Product[])
+          });
+        } else {
+          this.products.emit(products as Product[])
+        }
+      }
+    )
+  }
 }
