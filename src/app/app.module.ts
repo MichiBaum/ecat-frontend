@@ -29,6 +29,7 @@ import {httpInterceptProviders} from "./httpInterceptors/HttpInteceptProviders";
 import {PermissionGuard} from "./guards/permission.guard";
 import { MillisecondDatePipe } from './customPipes/mili-date.pipe';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {DefaultErrorHandler} from "./errorHandlers/default-error-handler";
 
 const appRoutes: Routes = [
   {path: 'products', component: ProductsComponent},
@@ -80,7 +81,8 @@ const appRoutes: Routes = [
     HttpClientModule,
     MessageService,
     httpInterceptProviders,
-    ConfirmationService
+    ConfirmationService,
+    DefaultErrorHandler
   ],
   bootstrap: [AppComponent]
 })
