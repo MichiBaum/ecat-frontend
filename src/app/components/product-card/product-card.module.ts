@@ -2,6 +2,7 @@ import {NgModule} from "@angular/core";
 import {ProductCardComponent} from "./product-card.component";
 import {CardModule} from "primeng";
 import {CommonModule} from "@angular/common";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -10,9 +11,10 @@ import {CommonModule} from "@angular/common";
   exports: [
     ProductCardComponent
   ],
-  imports: [
-    CardModule,
-    CommonModule
-  ]
+    imports: [
+        CardModule,
+        CommonModule,
+        FormsModule
+    ]
 })
 export class ProductCardModule { }
