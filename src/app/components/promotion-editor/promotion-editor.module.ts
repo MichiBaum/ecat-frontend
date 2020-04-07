@@ -1,7 +1,7 @@
 import {NgModule} from "@angular/core";
 import {PromotionEditorComponent} from "./promotion-editor.component";
 import {CalendarModule, ConfirmDialogModule, DropdownModule, InputTextareaModule, InputTextModule} from "primeng";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MillisecondDatePipe} from "../../customPipes/mili-date.pipe";
 import {CommonModule} from "@angular/common";
 
@@ -19,7 +19,8 @@ import {CommonModule} from "@angular/common";
     ConfirmDialogModule,
     InputTextareaModule,
     InputTextModule,
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule
   ]
 })
 export class PromotionEditorModule { }

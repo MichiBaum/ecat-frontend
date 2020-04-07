@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Promotion} from "../../models/promotion";
 import {PromotionService} from "../../services/promotion.service";
 import {ConfirmationService, MessageService, SelectItem} from "primeng";
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-promotion-editor',
@@ -10,16 +11,22 @@ import {ConfirmationService, MessageService, SelectItem} from "primeng";
 })
 export class PromotionEditorComponent implements OnInit {
 
-  promotions: Promotion[] = [];
   promotionItems: SelectItem[] = [{label: 'New', value: {id: 0, title: '', description: '', startDate: null, endDate: null}}];
   selectedPromotion: Promotion = {id: 0, title: '', description: '', startDate: null, endDate: null};
+
+  promotionForm = new FormGroup({
+    id: new FormControl(),
+    title: new FormControl(),
+    description: new FormControl(),
+    startDate: new FormControl(),
+    endDate: new FormControl()
+  });
 
   constructor(private promotionService: PromotionService, private confirmService: ConfirmationService, private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.promotionService.getPromotions().subscribe(data => {
-      this.promotions = data;
-      this.promotions.forEach(promotion => {
+      data.forEach(promotion => {
         this.promotionItems.push(this.convertPromotionToSelectItem(promotion));
       })
     },
@@ -28,19 +35,21 @@ export class PromotionEditorComponent implements OnInit {
       })
     );
   }
-
+  updateForm(){
+    this.promotionForm.patchValue(this.selectedPromotion);
+  }
   savePromotion() {
-    this.promotionService.savePromotion(this.selectedPromotion).subscribe(data => {
+    this.promotionService.savePromotion(this.promotionForm.getRawValue()).subscribe(data => {
       if(this.selectedPromotion.id !== data.id){
-        this.promotions.push(data);
         this.promotionItems.push(this.convertPromotionToSelectItem(data));
       } else {
         Object.assign(this.selectedPromotion, data);
       }
       this.selectedPromotion = {id: 0, title: '', description: '', startDate: null, endDate: null};
       this.promotionItems.find(item => item.value.id === data.id).label = data.title;
+      this.updateForm();
     },
-      (error => {console.log(error.status)}))
+      (error => {}))
   }
 
   deletePromotion(promotionId: number) {
@@ -49,14 +58,17 @@ export class PromotionEditorComponent implements OnInit {
       accept: () => {
         this.promotionService.deletePromotion(promotionId).subscribe(data => {
           this.selectedPromotion = {id: 0, title: '', description: '', startDate: null, endDate: null};
-            this.promotionItems.splice(this.promotionItems.findIndex(item => item.value.id === promotionId), 1);
+          this.promotionItems.splice(this.promotionItems.findIndex(item => item.value.id === promotionId), 1);
+          this.updateForm();
           },
           (error => {}));
       }
     })
   }
 
-  resetFormToLastState() {}
+  resetFormToLastState() {
+    this.promotionForm.patchValue(this.selectedPromotion);
+  }
 
   private convertPromotionToSelectItem(promotion: Promotion): SelectItem{
     return {
@@ -66,16 +78,18 @@ export class PromotionEditorComponent implements OnInit {
   }
 
   updateStartDate(date: Date){
+    console.log(date);
     if(date){
-      this.selectedPromotion.startDate = date.getTime();
+      this.promotionForm.controls['startDate'].setValue(date.getTime());
     }else {
       this.messageService.add({severity: 'error', summary: 'Empty field', detail: 'No start date'});
     }
   }
 
   updateEndDate(date: Date){
+    console.log(date);
     if(date){
-      this.selectedPromotion.endDate = date.getTime();
+      this.promotionForm.controls['endDate'].setValue(date.getTime());
     }else {
       this.messageService.add({severity: 'error', summary: 'Empty field', detail: 'No end date'});
     }
