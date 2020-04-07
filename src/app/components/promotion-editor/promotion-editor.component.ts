@@ -11,7 +11,7 @@ import {ConfirmationService, MessageService, SelectItem} from "primeng";
 export class PromotionEditorComponent implements OnInit {
 
   promotions: Promotion[] = [];
-  items: SelectItem[] = [{label: 'New', value: {id: 0, title: '', description: '', startDate: null, endDate: null}}];
+  promotionItems: SelectItem[] = [{label: 'New', value: {id: 0, title: '', description: '', startDate: null, endDate: null}}];
   selectedPromotion: Promotion = {id: 0, title: '', description: '', startDate: null, endDate: null};
 
   constructor(private promotionService: PromotionService, private confirmService: ConfirmationService, private messageService: MessageService) { }
@@ -20,7 +20,7 @@ export class PromotionEditorComponent implements OnInit {
     this.promotionService.getPromotions().subscribe(data => {
       this.promotions = data;
       this.promotions.forEach(promotion => {
-        this.items.push(this.convertPromotionToSelectItem(promotion));
+        this.promotionItems.push(this.convertPromotionToSelectItem(promotion));
       })
     },
       (error => {
@@ -33,24 +33,25 @@ export class PromotionEditorComponent implements OnInit {
     this.promotionService.savePromotion(this.selectedPromotion).subscribe(data => {
       if(this.selectedPromotion.id !== data.id){
         this.promotions.push(data);
-        this.items.push(this.convertPromotionToSelectItem(data));
+        this.promotionItems.push(this.convertPromotionToSelectItem(data));
       } else {
         Object.assign(this.selectedPromotion, data);
       }
       this.selectedPromotion = {id: 0, title: '', description: '', startDate: null, endDate: null};
+      this.promotionItems.find(item => item.value.id === data.id).label = data.title;
     },
       (error => {console.log(error.status)}))
   }
 
   deletePromotion(promotionId: number) {
     this.confirmService.confirm({
-      message: 'Are you sure you want to delete this product',
+      message: 'Are you sure you want to delete this promotion',
       accept: () => {
         this.promotionService.deletePromotion(promotionId).subscribe(data => {
           this.selectedPromotion = {id: 0, title: '', description: '', startDate: null, endDate: null};
-            this.items.splice(this.items.findIndex(item => item.value.id === promotionId), 1);
+            this.promotionItems.splice(this.promotionItems.findIndex(item => item.value.id === promotionId), 1);
           },
-          (error => {console.log(error.status)}));
+          (error => {}));
       }
     })
   }
