@@ -1,7 +1,7 @@
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {ProductEditorComponent} from "./product-editor.component";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {
   ConfirmDialogModule,
   DropdownModule,
@@ -17,11 +17,12 @@ import {
   ],
   imports: [
     DropdownModule,
-    FormsModule,
     InputTextareaModule,
     InputTextModule,
     CommonModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class ProductEditorModule { }
