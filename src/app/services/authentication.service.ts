@@ -33,4 +33,8 @@ export class AuthenticationService {
     return this.getPermissions().indexOf(permission) != -1;
 
   }
+
+  logout() {
+    sessionStorage.removeItem('token');
+  }
 }

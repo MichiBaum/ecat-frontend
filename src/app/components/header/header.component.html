@@ -10,7 +10,7 @@
     <h2 routerLink="/homepage">Ecat Product catalog</h2>
   </div>
   <div class="p-col" id="logoutContainer">
-    <p-button label="logout" *ngIf="authenticationService.hasPermission('ADMINISTRATE')"></p-button>
+    <p-button label="logout" *ngIf="authenticationService.hasPermission('ADMINISTRATE')" (onClick)="authenticationService.logout()"></p-button>
   </div>
 
 </div>
