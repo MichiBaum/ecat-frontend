@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {DefaultErrorHandler} from "../errorHandlers/default-error-handler";
 import {catchError} from "rxjs/operators";
+import {HttpResponseErrorHandler} from "../errorHandlers/http-response-error-handler";
 
 @Injectable({
   providedIn: 'root'
@@ -19,17 +20,9 @@ export class ApiService {
     }));
   }
 
-  getSingle(path: String): Observable<any>{
-    return this.http.get(`${environment.api_url}${path}`).pipe(catchError(error => {
-      this.defaultErrorHandler.handle(error);
-      throw error;
-    }));
-  }
-
-  postSingle(path: String, object: any): Observable<any>{
+  postSingle(path: String, object: any, errorHandler: HttpResponseErrorHandler = this.defaultErrorHandler): Observable<any>{
     return this.http.post(`${environment.api_url}${path}`, object).pipe(catchError(error => {
-      console.log(error.message);
-      this.defaultErrorHandler.handle(error);
+      errorHandler.handle(error);
       throw error;
     }));
   }

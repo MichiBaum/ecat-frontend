@@ -1,0 +1,32 @@
+.formGroup{
+  display: block;
+  label{
+    display: block;
+    margin-bottom: 1em;
+  }
+  margin-bottom: 2em;
+  input{
+    width: 420px;
+  }
+  textarea{
+    width: 420px;
+  }
+  p-dropdown{
+    min-width: 300px !important;
+  }
+  p-calendar{
+    width: 420px;
+  }
+  .ui-dropdown{
+    min-width: 420px !important;
+  }
+}
+.ui-calendar{
+  min-width: 420px !important;
+}
+.container{
+  margin: 0.5rem;
+}
+:host{
+  text-align: center;
+}

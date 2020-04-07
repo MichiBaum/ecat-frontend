@@ -5,6 +5,7 @@ import {environment} from "../../environments/environment";
 import {catchError} from "rxjs/operators";
 import {of} from "rxjs";
 import {Router} from "@angular/router";
+import {ApiService} from "./api.service";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,17 @@ export class ProductService {
 
   @Output() products: EventEmitter<Product[]> = new EventEmitter<Product[]>();
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private apiService: ApiService) { }
+
+  getProducts(){
+    return this.apiService.getAll('/products');
+  }
+  saveProduct(product: Product){
+    return this.apiService.postSingle('/products/save', product)
+  }
+  deleteProduct(productId: number){
+    return this.apiService.deleteSingle('/products/' + productId);
+  }
 
   search(searchtext?: string, withredirect?: boolean) {
     const path = "/products/search";

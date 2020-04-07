@@ -19,6 +19,7 @@ import {AuthErrorHandler} from "./errorHandlers/auth-error-handler";
 import {LoginErrorHandler} from "./errorHandlers/login-error-handler";
 import {ValidationErrorHandler} from "./errorHandlers/validation-error-handler";
 import {InternalServerErrorHandler} from "./errorHandlers/internal-server-error-handler";
+import { ProductEditorComponent } from './components/product-editor/product-editor.component';
 import {FooterModule} from "./components/footer/footer.module";
 import {HeaderModule} from "./components/header/header.module";
 import {NavigationModule} from "./components/navigation/navigation.module";
@@ -29,10 +30,12 @@ import {LoginModule} from "./components/login/login.module";
 import {ProductsModule} from "./components/products/products.module";
 import {PromotionEditorModule} from "./components/promotion-editor/promotion-editor.module";
 import {CommonModule} from "@angular/common";
+import {ProductEditorModule} from "./components/product-editor/product-editor.module";
 
 const appRoutes: Routes = [
   {path: 'products', component: ProductsComponent},
   {path: 'admin/promotionEditor', component: PromotionEditorComponent, canActivate: [PermissionGuard], data: {requiredPermission: 'ADMINISTRATE'}},
+  {path: 'admin/productEditor', component: ProductEditorComponent, canActivate: [PermissionGuard], data: {requiredPermission: 'ADMINISTRATE'}},
   {path: 'login', component: LoginComponent},
   {path: '**', component: HomepageComponent},
 ];
@@ -53,6 +56,7 @@ const appRoutes: Routes = [
     LoginModule,
     ProductsModule,
     PromotionEditorModule,
+    ProductEditorModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(
       appRoutes
