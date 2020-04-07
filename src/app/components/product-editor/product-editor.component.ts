@@ -14,7 +14,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 export class ProductEditorComponent implements OnInit {
 
   productItems: SelectItem[] = [{label: 'New', value: {id: 0, name: '', description: '', articleNr: '', pictureName: '', price: null}}];
-  selectedProduct: Product;
+  selectedProduct: Product = {id: 0, name: '', description: '', articleNr: '', pictureName: '', price: null};
   productFamilyItems: SelectItem[] = [];
 
   productForm = new FormGroup({
