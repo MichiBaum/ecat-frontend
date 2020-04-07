@@ -1,6 +1,6 @@
 import {NgModule} from "@angular/core";
 import {PromotionsCarouselComponent} from "./promotions-carousel.component";
-import {CarouselModule} from "primeng";
+import {CardModule, CarouselModule} from "primeng";
 import {CommonModule} from "@angular/common";
 
 @NgModule({
@@ -10,9 +10,10 @@ import {CommonModule} from "@angular/common";
   exports: [
     PromotionsCarouselComponent
   ],
-  imports: [
-    CarouselModule,
-    CommonModule
-  ]
+    imports: [
+        CarouselModule,
+        CommonModule,
+        CardModule
+    ]
 })
 export class PromotionsCarouselModule { }
