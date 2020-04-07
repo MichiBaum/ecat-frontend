@@ -10,26 +10,10 @@ import {ProductService} from "../../services/product.service";
 })
 export class HeaderComponent implements OnInit {
 
-  screenSize: number;
-  searchtext: string;
-
   constructor(
     public authenticationService: AuthenticationService,
-    private windowResizeListenerService: WindowResizeListenerService,
-    private productService: ProductService
-  ) {
-    this.windowResizeListenerService.screenSizeEmitter.subscribe(
-      (screenSizeEmit: number) => {
-        this.screenSize = screenSizeEmit;
-      }
-    )
-  }
+  ) {}
 
   ngOnInit(): void {}
 
-  keyPressed(event: KeyboardEvent) {
-    if(event.key === "Enter" || this.searchtext?.length > 4){
-      this.productService.search(this.searchtext || "", true)
-    }
-  }
 }

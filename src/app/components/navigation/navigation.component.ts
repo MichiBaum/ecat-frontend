@@ -20,7 +20,7 @@ export class NavigationComponent implements OnInit {
   data: TreeNode[] = [];
   productGroups: ProductGroup[] = [];
   screenSize: number;
-  sidebar: any;
+  searchtext: string;
 
   constructor(
     private productTypesService: ProductTypesService,
@@ -95,6 +95,12 @@ export class NavigationComponent implements OnInit {
         this.productService.searchProductGroup(event.node.data.id, true);
         this.sideBarVisible = false;
         break;
+    }
+  }
+
+  onSearch(event: KeyboardEvent) {
+    if(event.key === "Enter" || this.searchtext?.length > 4){
+      this.productService.search(this.searchtext || "", true)
     }
   }
 }

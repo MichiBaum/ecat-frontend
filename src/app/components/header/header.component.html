@@ -4,18 +4,10 @@
       <li>
         <app-navigation></app-navigation>
       </li>
-      <li *ngIf="screenSize > 969">
-        <div class="ui-inputgroup">
-          <span class="ui-inputgroup-addon"><i class="fa fa-search" style="line-height: 1.25;"></i></span>
-          <input [(ngModel)]="searchtext" type="text" pInputText placeholder="Search" (keydown)="keyPressed($event)">
-        </div>
-      </li>
     </ul>
   </div>
   <div class="p-col-6" id="titleContainer">
-    <h1 *ngIf="screenSize > 969" routerLink="/homepage">Ecat Product catalog</h1>
-    <h2 *ngIf="screenSize < 970 && screenSize > 522" routerLink="/homepage">Ecat Product catalog</h2>
-    <h3 *ngIf="screenSize < 523" routerLink="/homepage">Ecat Product catalog</h3>
+    <h2 routerLink="/homepage">Ecat Product catalog</h2>
   </div>
   <div class="p-col" id="logoutContainer">
     <p-button label="logout" *ngIf="authenticationService.hasPermission('ADMINISTRATE')"></p-button>
