@@ -30,11 +30,7 @@ export class ProductService {
 
   search(searchtext?: string, withredirect?: boolean) {
     const path = "/products/search";
-    this.http.get<Product[]>(`${environment.api_url}${path}`, {params: {"searchtext": searchtext}}).pipe(
-      catchError(() => {
-        return of([])
-      })
-    ).subscribe(
+    this.apiService.getAll<Product>(`${environment.api_url}${path}`, {params: {"searchtext": searchtext}}).subscribe(
       (products) => {
         if (withredirect) {
           this.router.navigate(['/products']).then(() => {
@@ -63,11 +59,7 @@ export class ProductService {
   }
 
   private findProductByProductType(path: string, id: any, withredirect: boolean) {
-    this.http.get<Product[]>(`${environment.api_url}${path}${id}`).pipe(
-      catchError(() => {
-        return of([])
-      })
-    ).subscribe(
+    this.apiService.getAll<Product>(`${path}${id}`).subscribe(
       (products) => {
         if (withredirect) {
           this.router.navigate(['/products']).then(() => {

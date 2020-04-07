@@ -10,14 +10,13 @@ import {ApiService} from "./api.service";
 })
 export class LoginService {
 
-  private loginPath: string = 'http://localhost:8080/api/login';
+  private loginPath: string = '/login';
 
   constructor(private http: HttpClient, private apiService: ApiService) {
   }
 
   login(user: User): Observable<Token> {
-    this.apiService.postSingle<Token>(this.loginPath, user)
-    return this.http.post<Token>(this.loginPath, user);
+    return this.apiService.postSingle<Token>(this.loginPath, user);
   }
 
 }

@@ -9,6 +9,7 @@ import {ValidationErrorHandler} from "./validation-error-handler";
 export class DefaultErrorHandler implements HttpResponseErrorHandler{
 
   private readonly handlers: HttpResponseErrorHandler[];
+
   constructor(
     private authErrorHandler: AuthErrorHandler,
     private internalServerErrorHandler: InternalServerErrorHandler,

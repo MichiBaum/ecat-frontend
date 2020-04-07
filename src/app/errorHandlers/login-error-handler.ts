@@ -10,7 +10,6 @@ export class LoginErrorHandler implements HttpResponseErrorHandler{
 
   matches(error: HttpErrorResponse): boolean {
     return error.status === 403;
-
   }
 
   handle(error: HttpErrorResponse) {

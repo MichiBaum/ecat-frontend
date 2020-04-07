@@ -5,11 +5,12 @@ import {Injectable} from "@angular/core";
 
 @Injectable()
 export class InternalServerErrorHandler implements HttpResponseErrorHandler{
+
   constructor(private messageService: MessageService) {
   }
+
   matches(error: HttpErrorResponse): boolean {
     return error.status === 500;
-
   }
 
   handle(error: HttpErrorResponse) {

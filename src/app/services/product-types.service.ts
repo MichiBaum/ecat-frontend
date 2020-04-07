@@ -9,12 +9,12 @@ import {ProductFamily} from "../models/product-family";
 })
 export class ProductTypesService {
 
-  private productsGroupUrl: string = 'http://localhost:8080/api/productsgroups';
+  private productsGroupUrl: string = '/productsgroups';
 
   constructor(private http: HttpClient, private apiService: ApiService) { }
 
   getGroups(){
-    return this.http.get<ProductGroup[]>(this.productsGroupUrl);
+    return this.apiService.getAll<ProductGroup>(this.productsGroupUrl);
   }
 
   getFamilies(){
