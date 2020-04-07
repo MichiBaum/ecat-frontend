@@ -25,11 +25,10 @@ export class HeaderComponent implements OnInit {
     )
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   keyPressed(event: KeyboardEvent) {
-    if(event.key === "Enter"){
+    if(event.key === "Enter" || this.searchtext?.length > 4){
       this.productService.search(this.searchtext || "", true)
     }
   }

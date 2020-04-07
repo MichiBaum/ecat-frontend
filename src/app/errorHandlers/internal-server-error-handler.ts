@@ -8,10 +8,8 @@ export class InternalServerErrorHandler implements HttpResponseErrorHandler{
   constructor(private messageService: MessageService) {
   }
   matches(error: HttpErrorResponse): boolean {
-    if(error.status === 500){
-      return true;
-    }
-    return false;
+    return error.status === 500;
+
   }
 
   handle(error: HttpErrorResponse) {

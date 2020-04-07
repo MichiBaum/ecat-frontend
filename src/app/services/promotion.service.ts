@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Promotion} from "../classes/promotion";
+import {Promotion} from "../models/promotion";
 import {Observable} from "rxjs";
 @Injectable({
   providedIn: 'root'

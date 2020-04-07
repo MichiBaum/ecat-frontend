@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Promotion} from "../../classes/promotion";
+import {Promotion} from "../../models/promotion";
 import {PromotionService} from "../../services/promotion.service";
 import {ConfirmationService, MessageService, SelectItem} from "primeng";
 
@@ -53,11 +53,9 @@ export class PromotionEditorComponent implements OnInit {
           (error => {console.log(error.status)}));
       }
     })
-
   }
 
-  resetFormToLastState() {
-  }
+  resetFormToLastState() {}
 
   private convertPromotionToSelectItem(promotion: Promotion): SelectItem{
     return {
@@ -65,14 +63,15 @@ export class PromotionEditorComponent implements OnInit {
       value: promotion
     }
   }
+
   updateStartDate(date: Date){
     if(date){
       this.selectedPromotion.startDate = date.getTime();
     }else {
       this.messageService.add({severity: 'error', summary: 'Empty field', detail: 'No start date'});
     }
-
   }
+
   updateEndDate(date: Date){
     if(date){
       this.selectedPromotion.endDate = date.getTime();

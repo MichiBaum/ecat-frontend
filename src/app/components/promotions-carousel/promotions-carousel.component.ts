@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Promotion} from "../../classes/promotion";
+import {Promotion} from "../../models/promotion";
 
 @Component({
   selector: 'app-promotions-carousel',
@@ -7,7 +7,9 @@ import {Promotion} from "../../classes/promotion";
   styleUrls: ['./promotions-carousel.component.scss']
 })
 export class PromotionsCarouselComponent implements OnInit {
+
   @Input() promotions: Promotion[] = [];
+
   responsiveOptions = [
     {
       breakpoint: '1024px',
@@ -28,7 +30,6 @@ export class PromotionsCarouselComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
 }

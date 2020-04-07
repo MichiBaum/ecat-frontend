@@ -5,13 +5,12 @@ import {Injectable} from "@angular/core";
 
 @Injectable()
 export class AuthErrorHandler implements HttpResponseErrorHandler{
-  constructor(private messageService: MessageService) {
-  }
+
+  constructor(private messageService: MessageService) {}
+
   matches(error: HttpErrorResponse): boolean {
-    if(error.status === 403){
-      return true;
-    }
-    return false;
+    return error.status === 403;
+
   }
 
   handle(error: HttpErrorResponse) {

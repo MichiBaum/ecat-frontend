@@ -1,6 +1,6 @@
 import {NgModule} from "@angular/core";
 import {ProductsComponent} from "./products.component";
-import {ProductCardModule} from "../../components/product-card/product-card.module";
+import {ProductCardModule} from "../product-card/product-card.module";
 import {CommonModule} from "@angular/common";
 
 @NgModule({

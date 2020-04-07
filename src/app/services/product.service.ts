@@ -1,6 +1,6 @@
 import {EventEmitter, Injectable, Output} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Product} from "../classes/product";
+import {Product} from "../models/product";
 import {environment} from "../../environments/environment";
 import {catchError} from "rxjs/operators";
 import {of} from "rxjs";

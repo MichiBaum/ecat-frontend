@@ -1,14 +1,14 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TreeNode} from "primeng/api/treenode";
 import {ProductTypesService} from "../../services/product-types.service";
-import {ProductGroup} from "../../classes/product-group";
-import {ProductClass} from "../../classes/product-class";
-import {ProductFamily} from "../../classes/product-family";
+import {ProductGroup} from "../../models/product-group";
+import {ProductClass} from "../../models/product-class";
+import {ProductFamily} from "../../models/product-family";
 import {AuthenticationService} from "../../services/authentication.service";
 import {Router} from "@angular/router";
 import {WindowResizeListenerService} from "../../services/window-resize-listener.service";
 import {ProductService} from "../../services/product.service";
-import {ProductType} from "../../classes/product-type.enum";
+import {ProductType} from "../../models/product-type.enum";
 
 @Component({
   selector: 'app-navigation',

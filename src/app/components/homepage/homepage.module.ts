@@ -1,6 +1,6 @@
 import {NgModule} from "@angular/core";
 import {HomepageComponent} from "./homepage.component";
-import {PromotionsCarouselModule} from "../../components/promotions-carousel/promotions-carousel.module";
+import {PromotionsCarouselModule} from "../promotions-carousel/promotions-carousel.module";
 import {CommonModule} from "@angular/common";
 
 @NgModule({

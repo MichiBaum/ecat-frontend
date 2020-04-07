@@ -4,13 +4,12 @@ import {Injectable} from "@angular/core";
 
 @Injectable()
 export class ValidationErrorHandler {
-  constructor(private messageService: MessageService) {
-  }
+
+  constructor(private messageService: MessageService) {}
+
   matches(error: HttpErrorResponse): boolean {
-    if(error.status === 400){
-      return true;
-    }
-    return false;
+    return error.status === 400;
+
   }
 
   handle(error: HttpErrorResponse) {
