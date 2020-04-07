@@ -1,21 +1,6 @@
 <div>
-  <p-button icon="fa fa-bars" (click)="displaySideBar = true"></p-button>
-  <p-sidebar [(visible)]="displaySideBar">
-    <ul>
-      <li>
-        <div class="ui-inputgroup" *ngIf="screenSize < 760">
-          <span class="ui-inputgroup-addon"><i class="fa fa-search" style="line-height: 1.25;"></i></span>
-          <input type="text" pInputText placeholder="Search">
-        </div>
-      </li>
-      <li>
-        <p-button *ngIf="authenticationService.hasPermission('ADMINISTRATE_ADMINS')" routerLink="/admin/adminEditor" label="ecat admin"></p-button>
-      </li>
-      <li>
-        <p-button *ngIf="authenticationService.hasPermission('ADMINISTRATE')" routerLink="/admin/promotionEditor" label="ecat promo"></p-button>
-      </li>
-    </ul>
-    <p-tree selectionMode="single" [value]="data" (onNodeSelect)="searchProducts($event)">
-    </p-tree>
+  <p-button icon="fa fa-bars" (click)="sideBarVisible = true"></p-button>
+  <p-sidebar [(visible)]="sideBarVisible">
+    <p-tree selectionMode="single" [value]="data" (onNodeSelect)="searchProducts($event)"></p-tree>
   </p-sidebar>
 </div>

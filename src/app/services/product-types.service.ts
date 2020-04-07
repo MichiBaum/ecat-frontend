@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {ProductGroup} from "../models/product-group";
 import {ApiService} from "./api.service";
+import {ProductFamily} from "../models/product-family";
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class ProductTypesService {
   }
 
   getFamilies(){
-    return this.apiService.getAll('/productfamilies');
+    return this.apiService.getAll<ProductFamily>('/productfamilies');
   }
 
 }

@@ -4,7 +4,6 @@ import {ProductTypesService} from "../../services/product-types.service";
 import {ProductGroup} from "../../models/product-group";
 import {ProductClass} from "../../models/product-class";
 import {ProductFamily} from "../../models/product-family";
-import {AuthenticationService} from "../../services/authentication.service";
 import {Router} from "@angular/router";
 import {WindowResizeListenerService} from "../../services/window-resize-listener.service";
 import {ProductService} from "../../services/product.service";
@@ -16,14 +15,15 @@ import {ProductType} from "../../models/product-type.enum";
   styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent implements OnInit {
-  displaySideBar = false;
+
+  sideBarVisible = false;
   data: TreeNode[] = [];
   productGroups: ProductGroup[] = [];
   screenSize: number;
+  sidebar: any;
 
   constructor(
     private productTypesService: ProductTypesService,
-    public authenticationService: AuthenticationService,
     private router: Router,
     private windowResizeListenerService: WindowResizeListenerService,
     private productService: ProductService
@@ -85,14 +85,15 @@ export class NavigationComponent implements OnInit {
     switch (event.node.data.type as ProductType) {
       case ProductType.PRODUCT_CLASS:
         this.productService.searchProductClass(event.node.data.id, true);
+        this.sideBarVisible = false;
         break;
       case ProductType.PRODUCT_FAMILY:
         this.productService.searchProductFamily(event.node.data.id, true);
+        this.sideBarVisible = false;
         break;
       case ProductType.PRODUCT_GROUP:
         this.productService.searchProductGroup(event.node.data.id, true);
-        break;
-      case ProductType.PRODUCT:
+        this.sideBarVisible = false;
         break;
     }
   }

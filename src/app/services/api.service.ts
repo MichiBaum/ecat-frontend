@@ -13,16 +13,24 @@ export class ApiService {
 
   constructor(private http: HttpClient, private defaultErrorHandler: DefaultErrorHandler) { }
 
-  getAll(path: String): Observable<any>{
-    return this.http.get(`${environment.api_url}${path}`).pipe(catchError(error => {
+  getAll<T>(path: String): Observable<T[]>{
+    return this.http.get<T[]>(`${environment.api_url}${path}`).pipe(catchError(error => {
       this.defaultErrorHandler.handle(error);
-      return of([]);
+      return of<T[]>();
     }));
   }
 
-  postSingle(path: String, object: any, errorHandler: HttpResponseErrorHandler = this.defaultErrorHandler): Observable<any>{
-    return this.http.post(`${environment.api_url}${path}`, object).pipe(catchError(error => {
-      errorHandler.handle(error);
+  getSingle<T>(path: String): Observable<T>{
+    return this.http.get<T>(`${environment.api_url}${path}`).pipe(catchError(error => {
+      this.defaultErrorHandler.handle(error);
+      throw error;
+    }));
+  }
+
+  postSingle<T>(path: String, object: any): Observable<T>{
+    return this.http.post<T>(`${environment.api_url}${path}`, object).pipe(catchError(error => {
+      console.log(error.message);
+      this.defaultErrorHandler.handle(error);
       throw error;
     }));
   }

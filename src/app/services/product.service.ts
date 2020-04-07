@@ -3,7 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Product} from "../models/product";
 import {environment} from "../../environments/environment";
 import {catchError} from "rxjs/operators";
-import {of} from "rxjs";
+import {Observable, of} from "rxjs";
 import {Router} from "@angular/router";
 import {ApiService} from "./api.service";
 
@@ -16,12 +16,14 @@ export class ProductService {
 
   constructor(private http: HttpClient, private router: Router, private apiService: ApiService) { }
 
-  getProducts(){
-    return this.apiService.getAll('/products');
+  getProducts(): Observable<Product[]>{
+    return this.apiService.getAll<Product>('/products');
   }
-  saveProduct(product: Product){
-    return this.apiService.postSingle('/products/save', product)
+
+  saveProduct(product: Product): Observable<Product>{
+    return this.apiService.postSingle<Product>('/products/save', product)
   }
+
   deleteProduct(productId: number){
     return this.apiService.deleteSingle('/products/' + productId);
   }
