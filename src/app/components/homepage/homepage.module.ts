@@ -1,6 +1,6 @@
 import {NgModule} from "@angular/core";
 import {HomepageComponent} from "./homepage.component";
-import {PromotionsCarouselModule} from "../promotions-carousel/promotions-carousel.module";
+import {PromotionCarouselModule} from "../promotion-carousel/promotion-carousel.module";
 import {CommonModule} from "@angular/common";
 
 @NgModule({
@@ -10,7 +10,7 @@ import {CommonModule} from "@angular/common";
   exports: [
   ],
   imports: [
-    PromotionsCarouselModule,
+    PromotionCarouselModule,
     CommonModule
   ]
 })

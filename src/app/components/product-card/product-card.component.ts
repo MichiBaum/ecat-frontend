@@ -13,26 +13,24 @@ export class ProductCardComponent implements OnInit {
 
   @Input() product: Product;
 
-  productCardContextItems: MenuItem[];
+  productContextItems: MenuItem[];
 
   constructor(private productService: ProductService, public authService: AuthenticationService) {
   }
 
   ngOnInit(): void {
-    this.productCardContextItems = [
+    this.productContextItems = [
       {
         label: "New",
         routerLink: "../admin/promotionEditor"
       },
       {
         label: "Edit",
-        routerLinkActiveOptions: "../admin/promotionEditor"
+        routerLink: "../admin/promotionEditor"
       },
       {
         label: "Delete",
-        command: () => {
-          this.productService.deleteProduct(this.product.id); //TODO remove Product from List
-        }
+        routerLink: "../admin/promotionEditor"
       }
     ]
   }

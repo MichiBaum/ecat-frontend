@@ -24,13 +24,15 @@ import {FooterModule} from "./components/footer/footer.module";
 import {HeaderModule} from "./components/header/header.module";
 import {NavigationModule} from "./components/navigation/navigation.module";
 import {ProductCardModule} from "./components/product-card/product-card.module";
-import {PromotionsCarouselModule} from "./components/promotions-carousel/promotions-carousel.module";
+import {PromotionCarouselModule} from "./components/promotion-carousel/promotion-carousel.module";
 import {HomepageModule} from "./components/homepage/homepage.module";
 import {LoginModule} from "./components/login/login.module";
 import {ProductsModule} from "./components/products/products.module";
 import {PromotionEditorModule} from "./components/promotion-editor/promotion-editor.module";
 import {CommonModule} from "@angular/common";
 import {ProductEditorModule} from "./components/product-editor/product-editor.module";
+import {PromotionCarouselCardComponent} from "./components/promotion-carousel-card/promotion-carousel-card.component";
+import {PromotionCarouselCardModule} from "./components/promotion-carousel-card/promotion-carousel-card.module";
 
 const appRoutes: Routes = [
   {path: 'products', component: ProductsComponent},
@@ -51,7 +53,8 @@ const appRoutes: Routes = [
     HeaderModule,
     NavigationModule,
     ProductCardModule,
-    PromotionsCarouselModule,
+    PromotionCarouselModule,
+    PromotionCarouselCardModule,
     HomepageModule,
     LoginModule,
     ProductsModule,

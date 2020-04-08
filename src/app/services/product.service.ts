@@ -21,7 +21,7 @@ export class ProductService {
     return this.apiService.postSingle<Product>('/products/save', product)
   }
 
-  deleteProduct(productId: number){
+  deleteProduct(productId: number): Observable<void>{
     return this.apiService.deleteSingle('/products/' + productId);
   }
 

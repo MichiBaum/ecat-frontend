@@ -1,13 +1,9 @@
 <div>
   <p-carousel class="ui-carousel" [value]="promotions" [numVisible]="3" [autoplayInterval]="4000" [responsiveOptions]="responsiveOptions">
     <ng-template let-promotion pTemplate="promotion">
-      <p-card class="promotionCard">
-        <p-header>
-          <h1>{{ promotion.title }}</h1>
-        </p-header>
-        <img src="assets/images/{{promotion.pictureName}}">
-        <p>{{ promotion.description }}</p>
-      </p-card>
+      <app-promotions-carousel-card [promotion]="promotion"></app-promotions-carousel-card>
     </ng-template>
   </p-carousel>
 </div>
+
+<p-contextMenu [global]="true" [model]="promotionContextItems" *ngIf="this.authService.isLoggedIn()"></p-contextMenu>

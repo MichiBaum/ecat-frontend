@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Promotion} from "../models/promotion";
 import {Observable} from "rxjs";
 import {ApiService} from "./api.service";
+
 @Injectable({
   providedIn: 'root'
 })
