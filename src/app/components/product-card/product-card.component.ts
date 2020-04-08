@@ -32,7 +32,6 @@ export class ProductCardComponent implements OnInit {
       {
         label: "Löschen",
         command: () => {
-          console.log(this.product.id);
           this.productService.deleteProduct(this.product.id).subscribe(() => {
             this.deleteProduct.emit(this.product.id);
           },
