@@ -1,7 +1,6 @@
 import {EventEmitter, Injectable, Output} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
 import {Product} from "../models/product";
-import {Observable, of} from "rxjs";
+import {Observable} from "rxjs";
 import {Router} from "@angular/router";
 import {ApiService} from "./api.service";
 
@@ -12,7 +11,7 @@ export class ProductService {
 
   @Output() products: EventEmitter<Product[]> = new EventEmitter<Product[]>();
 
-  constructor(private http: HttpClient, private router: Router, private apiService: ApiService) { }
+  constructor(private router: Router, private apiService: ApiService) { }
 
   getProducts(): Observable<Product[]>{
     return this.apiService.getAll<Product>('/products');
