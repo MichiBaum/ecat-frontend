@@ -5,3 +5,5 @@
   <img src="assets/images/{{this.promotion.pictureName}}">
   <p>{{ this.promotion.description }}</p>
 </p-card>
+
+<p-contextMenu [global]="true" [model]="promotionContextItems" *ngIf="this.authService.isLoggedIn()"></p-contextMenu>

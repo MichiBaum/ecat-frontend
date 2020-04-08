@@ -31,25 +31,12 @@ export class PromotionCarouselComponent implements OnInit {
     }
   ];
 
-  promotionContextItems: MenuItem[];
 
-  constructor(public authService: AuthenticationService, private promotionService: PromotionService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.promotionContextItems = [
-      {
-        label: "Neu",
-        routerLink: "../admin/promotionEditor"
-      },
-      {
-        label: "Bearbeiten",
-        routerLink: "../admin/promotionEditor"
-      },
-      {
-        label: "Löschen",
-        routerLink: "../admin/promotionEditor"
-      }
-    ]
   }
-
+  onDeletePromotion(promotionId: number){
+    this.promotions.splice(this.promotions.findIndex(promotion => promotion.id == promotionId),1);
+  }
 }

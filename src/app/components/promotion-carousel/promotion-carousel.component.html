@@ -1,9 +1,7 @@
 <div>
   <p-carousel class="ui-carousel" [value]="promotions" [numVisible]="3" [autoplayInterval]="4000" [responsiveOptions]="responsiveOptions">
     <ng-template let-promotion pTemplate="promotion">
-      <app-promotions-carousel-card [promotion]="promotion"></app-promotions-carousel-card>
+      <app-promotions-carousel-card [promotion]="promotion" (deletePromotion)="onDeletePromotion($event)"></app-promotions-carousel-card>
     </ng-template>
   </p-carousel>
 </div>
-
-<p-contextMenu [global]="true" [model]="promotionContextItems" *ngIf="this.authService.isLoggedIn()"></p-contextMenu>
