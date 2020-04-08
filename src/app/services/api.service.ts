@@ -5,7 +5,6 @@ import {environment} from "../../environments/environment";
 import {DefaultErrorHandler} from "../errorHandlers/default-error-handler";
 import {catchError} from "rxjs/operators";
 import {HttpResponseErrorHandler} from "../errorHandlers/http-response-error-handler";
-import {T} from "@angular/cdk/keycodes";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +14,7 @@ export class ApiService {
   constructor(private http: HttpClient, private defaultErrorHandler: DefaultErrorHandler) { }
 
   getAll<T>(path: String, params?: {params: any}, errorHandler: HttpResponseErrorHandler = this.defaultErrorHandler): Observable<T[]>{
-    return this.http.get<T[]>(`${environment.api_url}${path}`).pipe(
+    return this.http.get<T[]>(`${environment.api_url}${path}`, params).pipe(
       catchError(error => {
         errorHandler.handle(error);
         return of<T[]>();

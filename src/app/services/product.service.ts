@@ -1,8 +1,6 @@
 import {EventEmitter, Injectable, Output} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Product} from "../models/product";
-import {environment} from "../../environments/environment";
-import {catchError} from "rxjs/operators";
 import {Observable, of} from "rxjs";
 import {Router} from "@angular/router";
 import {ApiService} from "./api.service";
@@ -30,7 +28,7 @@ export class ProductService {
 
   search(searchtext?: string, withredirect?: boolean) {
     const path = "/products/search";
-    this.apiService.getAll<Product>(`${environment.api_url}${path}`, {params: {"searchtext": searchtext}}).subscribe(
+    this.apiService.getAll<Product>(`${path}`, {params: {"searchtext": searchtext}}).subscribe(
       (products) => {
         if (withredirect) {
           this.router.navigate(['/products']).then(() => {
