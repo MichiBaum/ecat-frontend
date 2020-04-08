@@ -16,10 +16,7 @@ export class HomepageComponent implements OnInit {
   ngOnInit(): void {
     this.promotionService.getPromotions().subscribe(data => {
         this.promotions = data;
-      },
-      (error => {
-        console.log(error.status);
-      })
+      }
     )
   }
 

@@ -30,10 +30,7 @@ export class PromotionEditorComponent implements OnInit {
         this.promotionItems.push(this.convertPromotionToSelectItem(promotion));
       })
     },
-      (error => {
-        console.log(error.status);
-      })
-    );
+      (error => {}));
   }
   updateForm(){
     this.promotionForm.patchValue(this.selectedPromotion);
@@ -78,7 +75,6 @@ export class PromotionEditorComponent implements OnInit {
   }
 
   updateStartDate(date: Date){
-    console.log(date);
     if(date){
       this.promotionForm.controls['startDate'].setValue(date.getTime());
     }else {
@@ -87,7 +83,6 @@ export class PromotionEditorComponent implements OnInit {
   }
 
   updateEndDate(date: Date){
-    console.log(date);
     if(date){
       this.promotionForm.controls['endDate'].setValue(date.getTime());
     }else {

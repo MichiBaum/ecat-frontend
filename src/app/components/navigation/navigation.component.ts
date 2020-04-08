@@ -42,10 +42,7 @@ export class NavigationComponent implements OnInit {
           this.data.push(this.convertProductGroupToTreenode(productGroup));
         });
     },
-      (error => {
-        console.log(error.status);
-      })
-    );
+      (error => {}));
   }
 
   private convertProductGroupToTreenode(productGroup: ProductGroup): TreeNode{
