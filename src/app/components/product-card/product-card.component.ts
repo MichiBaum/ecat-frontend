@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Product} from "../../models/product";
 import {MenuItem} from "primeng";
 import {ProductService} from "../../services/product.service";
@@ -12,6 +12,7 @@ import {AuthenticationService} from "../../services/authentication.service";
 export class ProductCardComponent implements OnInit {
 
   @Input() product: Product;
+  @Output() deleteProduct = new EventEmitter();
 
   productContextItems: MenuItem[];
 
@@ -30,7 +31,13 @@ export class ProductCardComponent implements OnInit {
       },
       {
         label: "Löschen",
-        routerLink: "../admin/productEditor"
+        command: () => {
+          console.log(this.product.id);
+          this.productService.deleteProduct(this.product.id).subscribe(() => {
+            this.deleteProduct.emit(this.product.id);
+          },
+            (error => {}))
+        }
       }
     ]
   }
