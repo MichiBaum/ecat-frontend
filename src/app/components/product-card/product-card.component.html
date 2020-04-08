@@ -3,7 +3,9 @@
   subheader="{{ product.articleNr}}"
 >
   <p-header>
-    <img src="assets/images/{{product.pictureName}}">
+    <img #productCardImage src="assets/images/{{product.pictureName}}">
   </p-header>
   <p>{{ product.description }}</p>
 </p-card>
+
+<p-contextMenu [target]="productCardImage" [model]="productCardContextItems" *ngIf="this.authService.isLoggedIn()"></p-contextMenu>

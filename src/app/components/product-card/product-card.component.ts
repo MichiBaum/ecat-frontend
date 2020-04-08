@@ -1,5 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Output} from '@angular/core';
 import {Product} from "../../models/product";
+import {MenuItem} from "primeng";
+import {ProductService} from "../../services/product.service";
+import {AuthenticationService} from "../../services/authentication.service";
 
 @Component({
   selector: 'app-product-card',
@@ -10,10 +13,28 @@ export class ProductCardComponent implements OnInit {
 
   @Input() product: Product;
 
-  constructor() {
+  productCardContextItems: MenuItem[];
+
+  constructor(private productService: ProductService, public authService: AuthenticationService) {
   }
 
   ngOnInit(): void {
+    this.productCardContextItems = [
+      {
+        label: "New",
+        routerLink: "../admin/promotionEditor"
+      },
+      {
+        label: "Edit",
+        routerLinkActiveOptions: "../admin/promotionEditor"
+      },
+      {
+        label: "Delete",
+        command: () => {
+          this.productService.deleteProduct(this.product.id); //TODO remove Product from List
+        }
+      }
+    ]
   }
 
 }

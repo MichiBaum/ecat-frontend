@@ -12,6 +12,12 @@ import {Router} from "@angular/router";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+
+  constructor(private loginService: LoginService, private messageService: MessageService, private authenticationService: AuthenticationService, private router: Router) { }
+
+  ngOnInit(): void {
+  }
+
   loginFormGroup = new FormGroup(
     {
       username: new FormControl('', [
@@ -22,11 +28,6 @@ export class LoginComponent implements OnInit {
       ]),
     }
   );
-
-  constructor(private loginService: LoginService, private messageService: MessageService, private authenticationService: AuthenticationService, private router: Router) { }
-
-  ngOnInit(): void {
-  }
 
   login(){
     const user: User = this.loginFormGroup.getRawValue();

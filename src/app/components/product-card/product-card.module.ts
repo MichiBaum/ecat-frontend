@@ -1,6 +1,6 @@
 import {NgModule} from "@angular/core";
 import {ProductCardComponent} from "./product-card.component";
-import {CardModule} from "primeng";
+import {CardModule, ContextMenuModule} from "primeng";
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 
@@ -14,7 +14,8 @@ import {FormsModule} from "@angular/forms";
     imports: [
         CardModule,
         CommonModule,
-        FormsModule
+        FormsModule,
+        ContextMenuModule
     ]
 })
 export class ProductCardModule { }
