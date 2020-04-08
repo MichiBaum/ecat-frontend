@@ -1,6 +1,4 @@
 div{
-  border-right: 1px solid white;
-  border-left: 1px solid white ;
   border-collapse: collapse;
   height: 100%;
   display: inline-flex;
@@ -12,11 +10,8 @@ div{
 }
 footer{
   background-color: rgba(0, 5, 143, 0.8);
-  height: 20%;
-}
-:host{
+  height: 2.5rem;
+  width: 100%;
   position: fixed;
   bottom: 0;
-  z-index: 500;
-  width: 100%;
 }
