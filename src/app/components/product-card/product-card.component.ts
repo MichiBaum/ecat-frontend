@@ -26,7 +26,7 @@ export class ProductCardComponent implements OnInit {
       },
       {
         label: "Bearbeiten",
-        routerLinkActiveOptions: "../admin/productEditor"
+        routerLink: "../admin/productEditor"
       },
       {
         label: "Löschen",
