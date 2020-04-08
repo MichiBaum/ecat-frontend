@@ -3,7 +3,7 @@
   <p-sidebar [(visible)]="sideBarVisible">
     <div class="ui-inputgroup search-margine-bottom">
       <span class="ui-inputgroup-addon"><i class="fa fa-search" style="line-height: 1.25;"></i></span>
-      <input [(ngModel)]="searchtext" type="text" pInputText placeholder="Search" (keydown)="onSearch($event)">
+      <input [(ngModel)]="searchtext" type="text" pInputText placeholder="Suche" (keydown)="onSearch($event)">
     </div>
     <p-tree selectionMode="single" [value]="data" (onNodeSelect)="searchProducts($event)"></p-tree>
   </p-sidebar>

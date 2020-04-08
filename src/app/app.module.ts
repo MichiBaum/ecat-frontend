@@ -8,7 +8,7 @@ import { HomepageComponent } from './components/homepage/homepage.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ProductsComponent } from './components/products/products.component';
 import {PromotionService} from "./services/promotion.service";
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 import { PromotionEditorComponent } from './components/promotion-editor/promotion-editor.component';
 import { LoginComponent } from './components/login/login.component';
 import {httpInterceptProviders} from "./httpInterceptors/HttpInteceptProviders";
@@ -33,6 +33,8 @@ import {CommonModule} from "@angular/common";
 import {ProductEditorModule} from "./components/product-editor/product-editor.module";
 import {PromotionCarouselCardComponent} from "./components/promotion-carousel-card/promotion-carousel-card.component";
 import {PromotionCarouselCardModule} from "./components/promotion-carousel-card/promotion-carousel-card.module";
+import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
+import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 
 const appRoutes: Routes = [
   {path: 'products', component: ProductsComponent},
@@ -70,7 +72,15 @@ const appRoutes: Routes = [
     ConfirmDialogModule,
     ReactiveFormsModule,
     FormsModule,
-    CommonModule
+    CommonModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      },
+      defaultLanguage: 'de'
+    })
   ],
   providers: [
     PromotionService,
@@ -89,3 +99,7 @@ const appRoutes: Routes = [
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}

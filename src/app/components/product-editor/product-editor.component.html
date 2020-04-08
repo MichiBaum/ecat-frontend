@@ -1,33 +1,33 @@
 <div class="container p-grid p-dir-row p-justify-center">
   <form [formGroup]="productForm">
     <div class="formGroup p-col">
-      <label>Selected Product</label>
+      <label>Produktauswahl</label>
       <p-dropdown [options]="productItems" (onChange)="updateForm()" [(ngModel)]="selectedProduct" [ngModelOptions]="{standalone: true}"></p-dropdown>
     </div>
     <div class="formGroup p-col">
-      <label>Selected Product Family</label>
+      <label>Produktfamilienauswahl</label>
       <p-dropdown [options]="productFamilyItems" formControlName="productFamilyId"></p-dropdown>
     </div>
     <div class="formGroup p-col">
-      <label for="nameField">Product Name</label>
+      <label for="nameField">Produktname</label>
       <input type="text" pInputText formControlName="name" id="nameField">
     </div>
     <div class="formGroup p-col">
-      <label for="descriptionField">Product Description</label>
+      <label for="descriptionField">Produktbeschreibung</label>
       <textarea type="text" pInputTextarea formControlName="description" id="descriptionField"></textarea>
     </div>
     <div class="formGroup p-col">
-      <label for="articleNrField">Product Article Number</label>
+      <label for="articleNrField">Artikelnummer</label>
       <input type="text" pInputText formControlName="articleNr" id="articleNrField">
     </div>
     <div class="formGroup p-col">
-      <label for="priceField">Product Price</label>
+      <label for="priceField">Preis</label>
       <input type="number" pInputText formControlName="price" id="priceField">
     </div>
     <div class="formGroup p-col">
-      <p-button label="Save" (onClick)="saveProduct()"></p-button>
-      <p-button label="Reset" (onClick)="resetFormToLastState()" [disabled]="!selectedProduct || selectedProduct.id == 0 || !selectedProduct.id"></p-button>
-      <p-button label="Delete" class="ui-button-danger" (onClick)="deleteProduct(selectedProduct.id)" [disabled]="!selectedProduct || selectedProduct.id == 0 || !selectedProduct.id"></p-button>
+      <p-button label="Speichern" (onClick)="saveProduct()"></p-button>
+      <p-button label="Undo" (onClick)="resetFormToLastState()" [disabled]="!selectedProduct || selectedProduct.id == 0 || !selectedProduct.id"></p-button>
+      <p-button label="Löschen" class="ui-button-danger" (onClick)="deleteProduct(selectedProduct.id)" [disabled]="!selectedProduct || selectedProduct.id == 0 || !selectedProduct.id"></p-button>
     </div>
   </form>
 </div>

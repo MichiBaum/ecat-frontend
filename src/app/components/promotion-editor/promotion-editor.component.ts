@@ -54,7 +54,7 @@ export class PromotionEditorComponent implements OnInit {
 
   deletePromotion(promotionId: number) {
     this.confirmService.confirm({
-      message: 'Are you sure you want to delete this promotion',
+      message: 'Sind Sie sicher, dass Sie diese Aktion löschen wollen?',
       accept: () => {
         this.promotionService.deletePromotion(promotionId).subscribe(data => {
           this.selectedPromotion = {id: 0, title: '', description: '', startDate: null, endDate: null};
@@ -82,7 +82,7 @@ export class PromotionEditorComponent implements OnInit {
     if(date){
       this.promotionForm.controls['startDate'].setValue(date.getTime());
     }else {
-      this.messageService.add({severity: 'error', summary: 'Empty field', detail: 'No start date'});
+      this.messageService.add({severity: 'Fehler', summary: 'Empty field', detail: 'Startdatum ist leer'});
     }
   }
 
@@ -91,7 +91,7 @@ export class PromotionEditorComponent implements OnInit {
     if(date){
       this.promotionForm.controls['endDate'].setValue(date.getTime());
     }else {
-      this.messageService.add({severity: 'error', summary: 'Empty field', detail: 'No end date'});
+      this.messageService.add({severity: 'Fehler', summary: 'Empty field', detail: 'Enddatum ist leer'});
     }
   }
 

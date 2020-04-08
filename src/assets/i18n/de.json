@@ -1,0 +1,35 @@
+{
+  "errors": {
+    "promotion": {
+      "startDate": {
+        "notSet": "Kein Startdatum vorhanden",
+        "biggerThanEnd":"Startdatum kommt nach Enddatum"
+      },
+      "endDate": {
+        "notSet": "Kein Enddatum vorhanden"
+      },
+      "title": {
+        "notSet": "Kein Aktionsname vorhanden"
+      },
+      "id": {
+        "notValid": "Id ist inkorrekt"
+      }
+    },
+    "product": {
+      "articleNr": {
+        "notSet": "Keine Artikelnummer vorhanden"
+      },
+      "name": {
+        "notSet": "Kein Produktname vorhanden"
+      },
+      "price": {
+        "notSet": "Kein Preis vorhanden"
+      },
+      "family": {
+        "notSet": "Keine Produktfamilie vorhanden",
+        "notValid": "Produktfamilie ist inkorrekt"
+      }
+    }
+  }
+
+}

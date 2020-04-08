@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Product} from "../../models/product";
 import {MenuItem} from "primeng";
 import {ProductService} from "../../services/product.service";
@@ -21,15 +21,15 @@ export class ProductCardComponent implements OnInit {
   ngOnInit(): void {
     this.productContextItems = [
       {
-        label: "New",
+        label: "Neu",
         routerLink: "../admin/productEditor"
       },
       {
-        label: "Edit",
+        label: "Bearbeiten",
         routerLinkActiveOptions: "../admin/productEditor"
       },
       {
-        label: "Delete",
+        label: "Löschen",
         routerLink: "../admin/productEditor"
       }
     ]

@@ -14,6 +14,6 @@ export class InternalServerErrorHandler implements HttpResponseErrorHandler{
   }
 
   handle(error: HttpErrorResponse) {
-    this.messageService.add({severity: 'error', summary: 'Error', detail: error.error.message, life: 5000});
+    this.messageService.add({severity: 'error', summary: 'Fehler', detail: error.error.message, life: 5000});
   }
 }

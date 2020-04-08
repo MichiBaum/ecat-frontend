@@ -1,29 +1,29 @@
 <div class="container p-grid p-dir-row p-justify-center">
   <form [formGroup]="promotionForm">
     <div class="formGroup p-col">
-      <label>Selected Promotion</label>
+      <label>Aktionsauswahl</label>
       <p-dropdown [options]="promotionItems" [(ngModel)]="selectedPromotion" [ngModelOptions]="{standalone: true}" (onChange)="updateForm()"></p-dropdown>
     </div>
     <div class="formGroup p-col">
-      <label for="titleField">Promotion Name</label>
+      <label for="titleField">Aktionsname</label>
       <input type="text" pInputText formControlName="title" id="titleField">
     </div>
     <div class="formGroup p-col">
-      <label for="descriptionField">Promotion Description</label>
+      <label for="descriptionField">Aktionsbeschreibung</label>
       <textarea type="text" pInputTextarea formControlName="description" id="descriptionField"></textarea>
     </div>
     <div class="formGroup p-col">
-      <label>Start Date</label>
+      <label>Startdatum</label>
       <p-calendar [readonlyInput]="true" [ngModel]="promotionForm.get('startDate').value | millisecondDate" (onSelect)="updateStartDate($event)" [ngModelOptions]="{standalone: true}"></p-calendar>
     </div>
     <div class="formGroup p-col">
-      <label>End Date</label>
+      <label>Enddatum</label>
       <p-calendar [readonlyInput]="true" [ngModel]="promotionForm.get('endDate').value | millisecondDate" (onSelect)="updateEndDate($event)" [ngModelOptions]="{standalone: true}"></p-calendar>
     </div>
     <div class="formGroup p-col">
-      <p-button label="Save" (onClick)="savePromotion()"></p-button>
-      <p-button label="Reset" (onClick)="resetFormToLastState()" [disabled]="!selectedPromotion || !selectedPromotion.id || selectedPromotion.id == 0"></p-button>
-      <p-button label="Delete" class="ui-button-danger" (onClick)="deletePromotion(selectedPromotion.id)" [disabled]="!selectedPromotion || !selectedPromotion.id || selectedPromotion.id == 0"></p-button>
+      <p-button label="Speichern" (onClick)="savePromotion()"></p-button>
+      <p-button label="Undo" (onClick)="resetFormToLastState()" [disabled]="!selectedPromotion || !selectedPromotion.id || selectedPromotion.id == 0"></p-button>
+      <p-button label="Löschen" class="ui-button-danger" (onClick)="deletePromotion(selectedPromotion.id)" [disabled]="!selectedPromotion || !selectedPromotion.id || selectedPromotion.id == 0"></p-button>
     </div>
   </form>
 </div>

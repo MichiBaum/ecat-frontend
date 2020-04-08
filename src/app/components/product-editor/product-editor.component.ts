@@ -1,4 +1,4 @@
-import {Component, DoCheck, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ConfirmationService, SelectItem} from "primeng";
 import {Product} from "../../models/product";
 import {ProductService} from "../../services/product.service";
@@ -59,7 +59,7 @@ export class ProductEditorComponent implements OnInit {
 
   deleteProduct(productId: number) {
     this.confirmService.confirm({
-      message: 'Are you sure you want to delete this product',
+      message: 'Sind Sie sicher, dass Sie dieses Produkt löschen wollen?',
       accept: () => {
         this.productService.deleteProduct(productId).subscribe(() => {
           this.selectedProduct = {id: 0, name: '', description: '', articleNr: '', pictureName: '', price: null};

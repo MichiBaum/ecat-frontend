@@ -38,15 +38,15 @@ export class PromotionCarouselComponent implements OnInit {
   ngOnInit(): void {
     this.promotionContextItems = [
       {
-        label: "New",
+        label: "Neu",
         routerLink: "../admin/promotionEditor"
       },
       {
-        label: "Edit",
+        label: "Bearbeiten",
         routerLink: "../admin/promotionEditor"
       },
       {
-        label: "Delete",
+        label: "Löschen",
         routerLink: "../admin/promotionEditor"
       }
     ]

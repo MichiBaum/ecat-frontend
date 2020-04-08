@@ -13,6 +13,6 @@ export class LoginErrorHandler implements HttpResponseErrorHandler{
   }
 
   handle(error: HttpErrorResponse) {
-    this.messageService.add({severity: 'error', summary: 'Error', detail: 'Wrong credentials', life: 5000});
+    this.messageService.add({severity: 'error', summary: 'Fehler', detail: 'Falscher Benutzername oder Passwort', life: 5000});
   }
 }
