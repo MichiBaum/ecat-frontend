@@ -35,9 +35,7 @@ export class LoginComponent implements OnInit {
       this.authenticationService.setToken(data);
       this.router.navigate(['/homepage']);
     },
-      (error => {
-      })
-    )
+      (error => {}));
   }
 
 }
