@@ -22,15 +22,15 @@ export class ProductCardComponent implements OnInit {
     this.productContextItems = [
       {
         label: "New",
-        routerLink: "../admin/promotionEditor"
+        routerLink: "../admin/productEditor"
       },
       {
         label: "Edit",
-        routerLink: "../admin/promotionEditor"
+        routerLinkActiveOptions: "../admin/productEditor"
       },
       {
         label: "Delete",
-        routerLink: "../admin/promotionEditor"
+        routerLink: "../admin/productEditor"
       }
     ]
   }
