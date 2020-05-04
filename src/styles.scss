@@ -3,12 +3,16 @@
 @import '~primeng/resources/themes/nova-light/theme.css';
 @import '~primeng/resources/primeng.min.css';
 @import "~font-awesome/css/font-awesome.css";
-body{
+body, html{
   font-family: "Open Sans";
   margin: 0;
   padding: 0;
+  height: 100%;
 }
 .p-grid{
   margin: 0 !important;
+}
+router-outlet + * {
+  flex: 1;
 }
 

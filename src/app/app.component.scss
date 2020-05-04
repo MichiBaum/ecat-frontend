@@ -1,3 +1,5 @@
-app-footer{
-
+:host {
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
 }
