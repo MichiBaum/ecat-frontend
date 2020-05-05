@@ -37,4 +37,7 @@ export class AuthenticationService {
   logout() {
     sessionStorage.removeItem('token');
   }
+  getUsername(){
+    return JSON.parse(sessionStorage.getItem('token')).username;
+  }
 }

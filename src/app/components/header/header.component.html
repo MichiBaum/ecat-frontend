@@ -9,8 +9,9 @@
   <div class="p-col-6" id="titleContainer">
     <h2 routerLink="/homepage">Ecat Produktkatalog</h2>
   </div>
-  <div class="p-col" id="logoutContainer">
-    <p-button label="logout" *ngIf="authenticationService.hasPermission('ADMINISTRATE')" (onClick)="authenticationService.logout()"></p-button>
+  <div class="p-col p-grid p-justify-end" id="buttonContainer">
+    <p-button label="{{ authenticationService.getUsername() }}" *ngIf="authenticationService.isLoggedIn()" id="usernameBtn"></p-button>
+    <p-button label="logout" *ngIf="authenticationService.isLoggedIn()" (onClick)="authenticationService.logout()"></p-button>
   </div>
 
 </div>
