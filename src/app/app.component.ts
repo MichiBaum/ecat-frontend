@@ -1,4 +1,4 @@
-import {Component, HostListener} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {WindowResizeListenerService} from "./services/window-resize-listener.service";
 
 @Component({
@@ -6,7 +6,7 @@ import {WindowResizeListenerService} from "./services/window-resize-listener.ser
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
 
   constructor(private windowResizeListenerService: WindowResizeListenerService) {
   }
@@ -17,9 +17,9 @@ export class AppComponent {
     console.log("Window res")
   }
 
-  ngOnInit(): void {
+  ngOnInit(){
     this.windowResizeListenerService.screenSizeEmitter.emit(window.innerWidth);
-    console.log("Win siz")
+    console.log("Win siz");
   }
 
 }
