@@ -1,6 +1,14 @@
 import {NgModule} from "@angular/core";
 import {NavigationComponent} from "./navigation.component";
-import {ButtonModule, InputTextModule, SidebarModule, TreeModule} from "primeng";
+import {
+    BreadcrumbModule,
+    ButtonModule,
+    InputTextModule,
+    MegaMenuModule,
+    SidebarModule,
+    SlideMenuModule,
+    TreeModule
+} from "primeng";
 import {RouterModule} from "@angular/router";
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
@@ -19,7 +27,10 @@ import {FormsModule} from "@angular/forms";
         InputTextModule,
         RouterModule,
         CommonModule,
-        FormsModule
+        FormsModule,
+        BreadcrumbModule,
+        MegaMenuModule,
+        SlideMenuModule
     ]
 })
 export class NavigationModule { }

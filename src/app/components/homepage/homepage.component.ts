@@ -5,7 +5,10 @@ import {PromotionService} from "../../services/promotion.service";
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
-  styleUrls: ['./homepage.component.scss']
+  styleUrls: ['./homepage.component.scss'],
+  host: {
+    class:'p-col'
+  }
 })
 export class HomepageComponent implements OnInit {
 

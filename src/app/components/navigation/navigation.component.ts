@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {TreeNode} from "primeng/api/treenode";
 import {ProductTypesService} from "../../services/product-types.service";
 import {ProductGroup} from "../../models/product-group";
 import {ProductClass} from "../../models/product-class";
@@ -8,6 +7,7 @@ import {Router} from "@angular/router";
 import {WindowResizeListenerService} from "../../services/window-resize-listener.service";
 import {ProductService} from "../../services/product.service";
 import {ProductType} from "../../models/product-type.enum";
+import {MenuItem} from "primeng";
 
 @Component({
   selector: 'app-navigation',
@@ -17,7 +17,7 @@ import {ProductType} from "../../models/product-type.enum";
 export class NavigationComponent implements OnInit {
 
   sideBarVisible = false;
-  data: TreeNode[] = [];
+  menuItems: MenuItem[] =[];
   productGroups: ProductGroup[] = [];
   screenSize: number;
   searchtext: string;
@@ -39,57 +39,62 @@ export class NavigationComponent implements OnInit {
     this.productTypesService.getGroups().subscribe(data => {
       this.productGroups = data;
         this.productGroups.forEach(productGroup => {
-          this.data.push(this.convertProductGroupToTreenode(productGroup));
+          this.menuItems.push(this.convertProductGroupToTreenode(productGroup));
         });
-    },
-      (error => {}));
+    })
   }
 
-  private convertProductGroupToTreenode(productGroup: ProductGroup): TreeNode{
-    let children: TreeNode[] = [];
+  private convertProductGroupToTreenode(productGroup: ProductGroup): MenuItem{
+    let items: MenuItem[] = [];
     productGroup.productClasses.forEach(productClass => {
-        children.push(this.convertProductClassToTreenode(productClass));
+        items.push(this.convertProductClassToTreenode(productClass));
       }
     );
     return {
       label: productGroup.name,
-      data: {type: ProductType.PRODUCT_GROUP, id: productGroup.id},
-      children: children
+      command: () =>{
+        this.searchProducts(ProductType.PRODUCT_GROUP, productGroup.id);
+      },
+      items: items
     }
   }
 
-  private convertProductClassToTreenode(productClass: ProductClass): TreeNode{
-    let children: TreeNode[] = [];
+  private convertProductClassToTreenode(productClass: ProductClass): MenuItem{
+    let items: MenuItem[] = [];
     productClass.productFamilies.forEach(productFamily => {
-        children.push(this.convertProductFamilyToTreenode(productFamily));
+        items.push(this.convertProductFamilyToTreenode(productFamily));
       }
     );
     return {
       label: productClass.name,
-      data: {type: ProductType.PRODUCT_CLASS, id: productClass.id},
-      children: children
+      command: () =>{
+        this.searchProducts(ProductType.PRODUCT_CLASS, productClass.id);
+      },
+      items: items
     }
   }
 
-  private convertProductFamilyToTreenode(productFamily: ProductFamily): TreeNode{
+  private convertProductFamilyToTreenode(productFamily: ProductFamily): MenuItem{
     return{
       label: productFamily.name,
-      data: {type: ProductType.PRODUCT_FAMILY, id: productFamily.id},
+      command: () =>{
+        this.searchProducts(ProductType.PRODUCT_FAMILY, productFamily.id);
+      }
     }
   }
 
-  searchProducts(event: any) {
-    switch (event.node.data.type as ProductType) {
+  searchProducts(productType: ProductType, id: number) {
+    switch (productType) {
       case ProductType.PRODUCT_CLASS:
-        this.productService.searchProductClass(event.node.data.id, true);
+        this.productService.searchProductClass(id, true);
         this.sideBarVisible = false;
         break;
       case ProductType.PRODUCT_FAMILY:
-        this.productService.searchProductFamily(event.node.data.id, true);
+        this.productService.searchProductFamily(id, true);
         this.sideBarVisible = false;
         break;
       case ProductType.PRODUCT_GROUP:
-        this.productService.searchProductGroup(event.node.data.id, true);
+        this.productService.searchProductGroup(id, true);
         this.sideBarVisible = false;
         break;
     }

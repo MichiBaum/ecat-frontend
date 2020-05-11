@@ -1,16 +1,14 @@
 <div class="p-grid container p-justify-between">
-  <div class="p-col-fixed">
-    <ul>
-      <li>
-        <app-navigation></app-navigation>
-      </li>
-    </ul>
+  <div class="p-col">
+    <div class="ui-inputgroup">
+      <span class="ui-inputgroup-addon"><i class="fa fa-search" style="line-height: 1.25;"></i></span>
+      <input [(ngModel)]="searchtext" type="text" pInputText placeholder="Suche" (keydown)="onSearch($event)">
+    </div>
   </div>
   <div class="p-col grow" id="titleContainer">
-    <h1 routerLink="/homepage" *ngIf="screenSize > 450">Ecat Produktkatalog</h1>
-    <h3 routerLink="/homepage" *ngIf="screenSize < 451">Ecat Produktkatalog</h3>
+    <h1 class="header" routerLink="/homepage">Ecat Produktkatalog</h1>
   </div>
-  <div class="p-col-fixed p-grid p-justify-start p-dir-col ">
+  <div class="p-col p-grid p-justify-start p-dir-col ">
     <div class="p-grid p-justify-end">
       <p-button  class="marginBtm"  label="{{ authenticationService.getUsername() }}" *ngIf="authenticationService.isLoggedIn()"></p-button>
     </div>
@@ -18,5 +16,5 @@
       <p-button label="logout" *ngIf="authenticationService.isLoggedIn()" (onClick)="authenticationService.logout()"></p-button>
     </div>
   </div>
-
 </div>
+
