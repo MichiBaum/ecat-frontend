@@ -7,7 +7,6 @@ import {Router} from "@angular/router";
 import {WindowResizeListenerService} from "../../services/window-resize-listener.service";
 import {ProductService} from "../../services/product.service";
 import {ProductType} from "../../models/product-type.enum";
-import {MenuItem} from "primeng";
 import {NavigationService} from "../../services/navigation.service";
 import {CustomMenuItem} from "../../models/customMenuItem";
 
@@ -20,7 +19,6 @@ export class NavigationComponent implements OnInit {
 
   @ViewChild('slideMenuContainer') slideMenuContainer: ElementRef;
 
-  menuItems: CustomMenuItem[] =[];
   testItem: CustomMenuItem = {items: []};
   productGroups: ProductGroup[] = [];
   screenWidth: number;
