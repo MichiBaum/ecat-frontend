@@ -13,12 +13,14 @@ export class AppComponent implements OnInit{
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-    this.windowResizeListenerService.screenSizeEmitter.emit(event.target.innerWidth);
+    this.windowResizeListenerService.screenWidthEmitter.emit(event.target.innerWidth);
+    this.windowResizeListenerService.screenHeightEmitter.emit(window.innerHeight);
     console.log("Window res")
   }
 
   ngOnInit(){
-    this.windowResizeListenerService.screenSizeEmitter.emit(window.innerWidth);
+    this.windowResizeListenerService.screenWidthEmitter.emit(window.innerWidth);
+    this.windowResizeListenerService.screenHeightEmitter.emit(window.innerHeight);
     console.log("Win siz");
   }
 

@@ -20,17 +20,17 @@ import {FormsModule} from "@angular/forms";
   exports: [
     NavigationComponent
   ],
-    imports: [
-        ButtonModule,
-        SidebarModule,
-        TreeModule,
-        InputTextModule,
-        RouterModule,
-        CommonModule,
-        FormsModule,
-        BreadcrumbModule,
-        MegaMenuModule,
-        SlideMenuModule
-    ]
+  imports: [
+    ButtonModule,
+    SidebarModule,
+    TreeModule,
+    InputTextModule,
+    RouterModule,
+    CommonModule,
+    FormsModule,
+    BreadcrumbModule,
+    MegaMenuModule,
+    SlideMenuModule,
+  ]
 })
 export class NavigationModule { }

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ProductTypesService} from "../../services/product-types.service";
 import {ProductGroup} from "../../models/product-group";
 import {ProductClass} from "../../models/product-class";
@@ -8,6 +8,7 @@ import {WindowResizeListenerService} from "../../services/window-resize-listener
 import {ProductService} from "../../services/product.service";
 import {ProductType} from "../../models/product-type.enum";
 import {MenuItem} from "primeng";
+import {NavigationService} from "../../services/navigation.service";
 
 @Component({
   selector: 'app-navigation',
@@ -16,23 +17,36 @@ import {MenuItem} from "primeng";
 })
 export class NavigationComponent implements OnInit {
 
-  sideBarVisible = false;
+  @ViewChild('slideMenuContainer') slideMenuContainer: ElementRef;
+
   menuItems: MenuItem[] =[];
   productGroups: ProductGroup[] = [];
-  screenSize: number;
+  screenWidth: number;
+  screenHeight: number;
   searchtext: string;
+  displaySideBar: boolean = false;
 
   constructor(
     private productTypesService: ProductTypesService,
     private router: Router,
     private windowResizeListenerService: WindowResizeListenerService,
-    private productService: ProductService
+    private productService: ProductService,
+    private navigationService: NavigationService
   ) {
-    this.windowResizeListenerService.screenSizeEmitter.subscribe(
-      (screenSizeEmit: number) => {
-        this.screenSize = screenSizeEmit;
+    this.windowResizeListenerService.screenWidthEmitter.subscribe(
+      (screenWidthEmit: number) => {
+        this.screenWidth = screenWidthEmit;
       }
-    )
+    );
+    this.windowResizeListenerService.screenHeightEmitter.subscribe(
+      (screenHeightEmit: number)=>{
+        this.screenHeight = screenHeightEmit;
+    });
+    this.navigationService.sideBarEmitter.subscribe(
+      (displaySideBarEmit)=>{
+        this.displaySideBar = displaySideBarEmit;
+      }
+    );
   }
 
   ngOnInit(): void {
@@ -87,15 +101,12 @@ export class NavigationComponent implements OnInit {
     switch (productType) {
       case ProductType.PRODUCT_CLASS:
         this.productService.searchProductClass(id, true);
-        this.sideBarVisible = false;
         break;
       case ProductType.PRODUCT_FAMILY:
         this.productService.searchProductFamily(id, true);
-        this.sideBarVisible = false;
         break;
       case ProductType.PRODUCT_GROUP:
         this.productService.searchProductGroup(id, true);
-        this.sideBarVisible = false;
         break;
     }
   }

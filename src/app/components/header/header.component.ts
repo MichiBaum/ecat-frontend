@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from "../../services/authentication.service";
 import {WindowResizeListenerService} from "../../services/window-resize-listener.service";
 import {ProductService} from "../../services/product.service";
+import {NavigationService} from "../../services/navigation.service";
 
 @Component({
   selector: 'app-header',
@@ -10,17 +11,18 @@ import {ProductService} from "../../services/product.service";
 })
 export class HeaderComponent implements OnInit {
 
-  screenSize: any;
+  screenWidth: any;
   searchtext: string;
 
   constructor(
     public authenticationService: AuthenticationService,
     public windowResizeListenerService: WindowResizeListenerService,
-    private productService: ProductService
+    private productService: ProductService,
+    private navigationService: NavigationService
   ) {
-    this.windowResizeListenerService.screenSizeEmitter.subscribe(
-      (screenSizeEmit: number) => {
-        this.screenSize = screenSizeEmit;
+    this.windowResizeListenerService.screenWidthEmitter.subscribe(
+      (screenWidthEmit: number) => {
+        this.screenWidth = screenWidthEmit;
       }
     )
   }

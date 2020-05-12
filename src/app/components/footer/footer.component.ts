@@ -8,12 +8,12 @@ import {WindowResizeListenerService} from "../../services/window-resize-listener
 })
 export class FooterComponent implements OnInit {
 
-  screenSize: number;
+  screenWidth: number;
 
   constructor(private windowResizeListenerService: WindowResizeListenerService) {
-    this.windowResizeListenerService.screenSizeEmitter.subscribe(
-      (screenSizeEmit: number) => {
-        this.screenSize = screenSizeEmit;
+    this.windowResizeListenerService.screenWidthEmitter.subscribe(
+      (screenWidthEmit: number) => {
+        this.screenWidth = screenWidthEmit;
       }
     )
   }
