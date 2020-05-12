@@ -1,9 +1,24 @@
-import {NgModule,Component,ElementRef,AfterViewChecked,OnDestroy,Input,Renderer2,Inject,forwardRef,ViewChild,Output,EventEmitter,ChangeDetectorRef,ChangeDetectionStrategy} from '@angular/core';
+import {
+  NgModule,
+  Component,
+  ElementRef,
+  AfterViewChecked,
+  OnDestroy,
+  Input,
+  Renderer2,
+  Inject,
+  forwardRef,
+  ViewChild,
+  Output,
+  EventEmitter,
+  ChangeDetectorRef,
+  ChangeDetectionStrategy, OnInit,
+} from '@angular/core';
 import {trigger,state,style,transition,animate,AnimationEvent} from '@angular/animations';
 import {CommonModule} from '@angular/common';
-import {DomHandler} from 'primeng/dom';
-import {RouterModule} from '@angular/router';
-import {MenuItem} from "primeng";
+import {CustomDomHandler} from "../../models/customDom/customDomHandler";
+import {RouterModule} from "@angular/router";
+import {CustomMenuItem} from "../../models/customMenuItem";
 
 @Component({
     selector: 'app-customSlideMenuSub',
@@ -13,7 +28,7 @@ import {MenuItem} from "primeng";
         [style.width.px]="menuWidth" [style.left.px]="root ? slideMenu.left : slideMenu.menuWidth"
         [style.transitionProperty]="root ? 'left' : 'none'" [style.transitionDuration]="effectDuration + 'ms'"
         [style.transitionTimingFunction]="easing">
-        <ng-template ngFor let-child [ngForOf]="(root ? item : item.items)">
+        <ng-template ngFor let-child [ngForOf]="(item.items)">
           <li *ngIf="child.separator" class="ui-menu-separator ui-widget-content"
               [ngClass]="{'ui-helper-hidden': child.visible === false}">
           <li *ngIf="!child.separator" #listitem
@@ -48,10 +63,11 @@ import {MenuItem} from "primeng";
         </ng-template>
       </ul>
     `
-})
-export class CustomSlideMenuSub implements OnDestroy {
 
-    @Input() item: MenuItem;
+})
+export class CustomSlideMenuSub implements OnDestroy{
+
+    @Input() item: CustomMenuItem;
 
     @Input() root: boolean;
 
@@ -73,7 +89,7 @@ export class CustomSlideMenuSub implements OnDestroy {
 
     activeItem: any;
 
-    itemClick(event, item: MenuItem, listitem: any) {
+  itemClick(event, item: CustomMenuItem, listitem: any) {
         if (item.disabled) {
             event.preventDefault();
             return;
@@ -129,6 +145,7 @@ export class CustomSlideMenuSub implements OnDestroy {
         </div>
       </div>
     `,
+    styleUrls: ['./custom-slide-menu.component.scss'],
     animations: [
         trigger('overlayAnimation', [
             state('void', style({
@@ -147,7 +164,7 @@ export class CustomSlideMenuSub implements OnDestroy {
 })
 export class CustomSlideMenu implements AfterViewChecked, OnDestroy {
 
-    @Input() model: MenuItem[];
+    @Input() model: CustomMenuItem;
 
     @Input() popup: boolean;
 
@@ -201,9 +218,11 @@ export class CustomSlideMenu implements AfterViewChecked, OnDestroy {
 
     viewportUpdated: boolean;
 
+    testItem: CustomMenuItem = {items: []};
+
     constructor(public el: ElementRef, public renderer: Renderer2, private cd: ChangeDetectorRef) {}
 
-    ngAfterViewChecked() {
+  ngAfterViewChecked() {
         if (!this.viewportUpdated && !this.popup && this.containerViewChild) {
             this.updateViewPort();
             this.viewportUpdated = true;
@@ -223,7 +242,7 @@ export class CustomSlideMenu implements AfterViewChecked, OnDestroy {
     }
 
     updateViewPort() {
-        this.slideMenuContentViewChild.nativeElement.style.height = this.viewportHeight - DomHandler.getHiddenElementOuterHeight(this.backwardViewChild.nativeElement) + 'px';
+        this.slideMenuContentViewChild.nativeElement.style.height = this.viewportHeight - CustomDomHandler.getHiddenElementOuterHeight(this.backwardViewChild.nativeElement) + 'px';
     }
 
     toggle(event) {
@@ -250,7 +269,7 @@ export class CustomSlideMenu implements AfterViewChecked, OnDestroy {
                     this.moveOnTop();
                     this.onShow.emit({});
                     this.appendOverlay();
-                    DomHandler.absolutePosition(this.containerViewChild.nativeElement, this.target);
+                  CustomDomHandler.absolutePosition(this.containerViewChild.nativeElement, this.target);
                     this.bindDocumentClickListener();
                     this.bindDocumentResizeListener();
                 }
@@ -268,7 +287,7 @@ export class CustomSlideMenu implements AfterViewChecked, OnDestroy {
             if (this.appendTo === 'body')
                 document.body.appendChild(this.containerViewChild.nativeElement);
             else
-                DomHandler.appendChild(this.containerViewChild.nativeElement, this.appendTo);
+              CustomDomHandler.appendChild(this.containerViewChild.nativeElement, this.appendTo);
         }
     }
 
@@ -280,7 +299,7 @@ export class CustomSlideMenu implements AfterViewChecked, OnDestroy {
 
     moveOnTop() {
         if (this.autoZIndex) {
-            this.containerViewChild.nativeElement.style.zIndex = String(this.baseZIndex + (++DomHandler.zindex));
+            this.containerViewChild.nativeElement.style.zIndex = String(this.baseZIndex + (++CustomDomHandler.zindex));
         }
     }
 

@@ -9,6 +9,7 @@ import {ProductService} from "../../services/product.service";
 import {ProductType} from "../../models/product-type.enum";
 import {MenuItem} from "primeng";
 import {NavigationService} from "../../services/navigation.service";
+import {CustomMenuItem} from "../../models/customMenuItem";
 
 @Component({
   selector: 'app-navigation',
@@ -19,7 +20,8 @@ export class NavigationComponent implements OnInit {
 
   @ViewChild('slideMenuContainer') slideMenuContainer: ElementRef;
 
-  menuItems: MenuItem[] =[];
+  menuItems: CustomMenuItem[] =[];
+  testItem: CustomMenuItem = {items: []};
   productGroups: ProductGroup[] = [];
   screenWidth: number;
   screenHeight: number;
@@ -52,14 +54,15 @@ export class NavigationComponent implements OnInit {
   ngOnInit(): void {
     this.productTypesService.getGroups().subscribe(data => {
       this.productGroups = data;
-        this.productGroups.forEach(productGroup => {
-          this.menuItems.push(this.convertProductGroupToTreenode(productGroup));
-        });
+      this.testItem = {items: []};
+      this.productGroups.forEach(productGroup => {
+        this.testItem.items.push(this.convertProductGroupToTreenode(productGroup));
+      });
     })
   }
 
-  private convertProductGroupToTreenode(productGroup: ProductGroup): MenuItem{
-    let items: MenuItem[] = [];
+  private convertProductGroupToTreenode(productGroup: ProductGroup): CustomMenuItem{
+    let items: CustomMenuItem[] = [];
     productGroup.productClasses.forEach(productClass => {
         items.push(this.convertProductClassToTreenode(productClass));
       }
@@ -73,8 +76,8 @@ export class NavigationComponent implements OnInit {
     }
   }
 
-  private convertProductClassToTreenode(productClass: ProductClass): MenuItem{
-    let items: MenuItem[] = [];
+  private convertProductClassToTreenode(productClass: ProductClass): CustomMenuItem{
+    let items: CustomMenuItem[] = [];
     productClass.productFamilies.forEach(productFamily => {
         items.push(this.convertProductFamilyToTreenode(productFamily));
       }
@@ -88,7 +91,7 @@ export class NavigationComponent implements OnInit {
     }
   }
 
-  private convertProductFamilyToTreenode(productFamily: ProductFamily): MenuItem{
+  private convertProductFamilyToTreenode(productFamily: ProductFamily): CustomMenuItem{
     return{
       label: productFamily.name,
       command: () =>{
