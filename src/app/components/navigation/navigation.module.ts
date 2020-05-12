@@ -12,6 +12,7 @@ import {
 import {RouterModule} from "@angular/router";
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
+import {CustomSlideMenuModule} from "../custom-slidemenu/custom-slide-menu.component";
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import {FormsModule} from "@angular/forms";
     BreadcrumbModule,
     MegaMenuModule,
     SlideMenuModule,
+    CustomSlideMenuModule,
   ]
 })
 export class NavigationModule { }

@@ -1,10 +1,10 @@
-<p-slideMenu [model]="menuItems" [menuWidth]="250" [viewportHeight]="650" [style]="{'width': '250px', 'border': 'none'}" *ngIf="screenWidth > 1199"></p-slideMenu>
+<app-customSlideMenu [model]="menuItems" [menuWidth]="250" [viewportHeight]="650" [style]="{'width': '250px', 'border': 'none'}" *ngIf="screenWidth > 1199"></app-customSlideMenu>
 <p-sidebar [(visible)]="displaySideBar" [blockScroll]="true" [style]="{'width': '100%'}" *ngIf="screenWidth < 1200">
   <div class="ui-inputgroup">
     <span class="ui-inputgroup-addon"><i class="fa fa-search" style="line-height: 1.25;"></i></span>
     <input [(ngModel)]="searchtext" type="text" pInputText placeholder="Suche" (keydown)="onSearch($event)" style="width: 100%">
   </div>
   <div style="height: 100%">
-    <p-slideMenu [model]="menuItems" [menuWidth]="screenWidth - 50" [viewportHeight]="screenHeight - 50" [style]="{'width': 'auto', 'border': 'none'}"></p-slideMenu>
+    <app-customSlideMenu [model]="menuItems" [menuWidth]="screenWidth - 50" [viewportHeight]="screenHeight - 50" [style]="{'width': 'auto', 'border': 'none'}"></app-customSlideMenu>
   </div>
 </p-sidebar>
