@@ -19,7 +19,7 @@ export class NavigationComponent implements OnInit {
 
   @ViewChild('slideMenuContainer') slideMenuContainer: ElementRef;
 
-  testItem: CustomMenuItem = {items: []};
+  menuItem: CustomMenuItem = {items: []};
   productGroups: ProductGroup[] = [];
   screenWidth: number;
   screenHeight: number;
@@ -52,9 +52,9 @@ export class NavigationComponent implements OnInit {
   ngOnInit(): void {
     this.productTypesService.getGroups().subscribe(data => {
       this.productGroups = data;
-      this.testItem = {items: []};
+      this.menuItem = {items: []};
       this.productGroups.forEach(productGroup => {
-        this.testItem.items.push(this.convertProductGroupToTreenode(productGroup));
+        this.menuItem.items.push(this.convertProductGroupToTreenode(productGroup));
       });
     })
   }
