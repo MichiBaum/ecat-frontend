@@ -9,7 +9,10 @@ import {Router} from "@angular/router";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  host: {
+    class:'p-col'
+  }
 })
 export class LoginComponent implements OnInit {
 
@@ -35,7 +38,7 @@ export class LoginComponent implements OnInit {
       this.authenticationService.setToken(data);
       this.router.navigate(['/homepage']);
     },
-      (error => {}));
+      (() => {}));
   }
 
 }

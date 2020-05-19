@@ -3,6 +3,7 @@ import {Token} from "../models/token";
 import {User} from "../models/user";
 import {Observable} from "rxjs";
 import {ApiService} from "./api.service";
+import {LoginErrorHandler} from "../errorHandlers/login-error-handler";
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +12,11 @@ export class LoginService {
 
   private loginPath: string = '/login';
 
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService, private loginErrorHandler: LoginErrorHandler) {
   }
 
   login(user: User): Observable<Token> {
-    return this.apiService.postSingle<Token>(this.loginPath, user);
+    return this.apiService.postSingle<Token>(this.loginPath, user, this.loginErrorHandler);
   }
 
 }
