@@ -31,17 +31,17 @@ import {ProductsModule} from "./components/products/products.module";
 import {PromotionEditorModule} from "./components/promotion-editor/promotion-editor.module";
 import {CommonModule} from "@angular/common";
 import {ProductEditorModule} from "./components/product-editor/product-editor.module";
-import {PromotionCarouselCardComponent} from "./components/promotion-carousel-card/promotion-carousel-card.component";
 import {PromotionCarouselCardModule} from "./components/promotion-carousel-card/promotion-carousel-card.module";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 
 const appRoutes: Routes = [
+  {path: "homepage", component: HomepageComponent},
   {path: 'products', component: ProductsComponent},
   {path: 'admin/promotionEditor', component: PromotionEditorComponent, canActivate: [PermissionGuard], data: {requiredPermission: 'ADMINISTRATE'}},
   {path: 'admin/productEditor', component: ProductEditorComponent, canActivate: [PermissionGuard], data: {requiredPermission: 'ADMINISTRATE'}},
   {path: 'login', component: LoginComponent},
-  {path: '**', component: HomepageComponent},
+  {path: '**', redirectTo:"/homepage"},
 ];
 
 @NgModule({
