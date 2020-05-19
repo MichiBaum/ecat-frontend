@@ -1,11 +1,41 @@
-<p-card
-  header="{{ product.name }}"
-  subheader="{{ product.articleNr}}"
->
-  <p-header>
-    <img #productCardImage src="assets/images/{{product.pictureName}}">
-  </p-header>
-  <p>{{ product.description }}</p>
-</p-card>
-
+<div #container class="container p-grid p-dir-row">
+  <div class="p-col-fixed" [style.width.px]="container.offsetWidth">
+    <div class="imageContainer">
+      <img #productCardImage src="assets/images/{{product.pictureName}}">
+    </div>
+  </div>
+  <div class="p-col dynamicContainer">
+    <div class="content">
+      <div class="headerContainer">
+        <h1 class="noMargin">{{product.name}}</h1>
+        <h2 class="noMargin">{{product.articleNr}}</h2>
+      </div>
+      <div class="descriptionContainer" *ngIf="expanded">
+        <p class="noMargin">{{product.description}}</p>
+<!--        <p class="noMargin">{{product.description}}</p>-->
+<!--        <p class="noMargin">{{product.description}}</p>-->
+<!--        <p class="noMargin">{{product.description}}</p>-->
+<!--        <p class="noMargin">{{product.description}}</p>-->
+<!--        <p class="noMargin">{{product.description}}</p>-->
+<!--        <p class="noMargin">{{product.description}}</p>-->
+<!--        <p class="noMargin">{{product.description}}</p>-->
+<!--        <p class="noMargin">{{product.description}}</p>-->
+<!--        <p class="noMargin">{{product.description}}</p>-->
+<!--        <p class="noMargin">{{product.description}}</p>-->
+<!--        <p class="noMargin">{{product.description}}</p>-->
+<!--        <p class="noMargin">{{product.description}}</p>-->
+<!--        <p class="noMargin">{{product.description}}</p>-->
+<!--        <p class="noMargin">{{product.description}}</p>-->
+<!--        <p class="noMargin">{{product.description}}</p>-->
+<!--        <p class="noMargin">{{product.description}}</p>-->
+<!--        <p class="noMargin">{{product.description}}</p>-->
+<!--        <p class="noMargin">{{product.description}}</p>-->
+      </div>
+    </div>
+    <div class="footer">
+      <p-button label="Details" (onClick)="expand()"></p-button>
+      <p class="noMargin">{{product.price | currency:'CHF'}}</p>
+    </div>
+  </div>
+</div>
 <p-contextMenu [target]="productCardImage" [model]="productContextItems" *ngIf="this.authService.isLoggedIn()"></p-contextMenu>
