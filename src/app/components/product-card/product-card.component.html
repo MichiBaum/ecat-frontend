@@ -1,5 +1,5 @@
 <div #container class="container p-grid p-dir-row">
-  <div class="p-col-fixed" [style.width.px]="containerWidth">
+  <div class="p-col-fixed" [style.width.px]="!expanded && containerWidth">
     <img #productCardImage src="assets/images/{{product.pictureName}}">
   </div>
   <div class="p-col dynamicContainer">
