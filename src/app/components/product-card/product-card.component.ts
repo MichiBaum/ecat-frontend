@@ -56,7 +56,6 @@ export class ProductCardComponent implements OnInit {
   }
 
   expand(){
-    console.log('bruh');
     if(this.expanded == false){
       this.renderer2.setStyle(this.imageContainer.nativeElement, 'width', this.containerElement.nativeElement.offsetWidth + 'px');
       this.expanded = true;
