@@ -5,6 +5,7 @@ import {ProductService} from "../../services/product.service";
 import {ProductFamily} from "../../models/product-family";
 import {ProductTypesService} from "../../services/product-types.service";
 import {FormControl, FormGroup} from "@angular/forms";
+import {ProductEditorService} from "../../services/product-editor.service";
 
 @Component({
   selector: 'app-product-editor',
@@ -13,9 +14,10 @@ import {FormControl, FormGroup} from "@angular/forms";
 })
 export class ProductEditorComponent implements OnInit {
 
-  productItems: SelectItem[] = [{label: 'New', value: {id: 0, name: '', description: '', articleNr: '', pictureName: '', price: null}}];
-  selectedProduct: Product = {id: 0, name: '', description: '', articleNr: '', pictureName: '', price: null};
+  productItem: SelectItem = {label: 'New', value: {id: 0, name: '', description: '', articleNr: '', pictureName: '', price: null}};
+  product: Product = {id: 0, name: '', description: '', articleNr: '', pictureName: '', price: null};
   productFamilyItems: SelectItem[] = [];
+  showDialog: boolean = false;
 
   productForm = new FormGroup({
     id: new FormControl(),
@@ -26,14 +28,23 @@ export class ProductEditorComponent implements OnInit {
     price: new FormControl()
   });
 
-  constructor(private productService: ProductService, private productTypesService: ProductTypesService, private confirmService: ConfirmationService) { }
+  constructor(private productService: ProductService,
+              private productTypesService: ProductTypesService,
+              private confirmService: ConfirmationService,
+              private productEditorService: ProductEditorService)
+  {
+    this.productEditorService.showProductEditorEmitter.subscribe(showDialog => {
+      this.showDialog = showDialog;
+    });
+    this.productEditorService.productEmitter.subscribe(product => {
+      this.product = product;
+      this.productItem = this.convertProductToSelectItem(product);
+      this.updateForm();
+    })
+
+  }
 
   ngOnInit(): void {
-    this.productService.getProducts().subscribe(data => {
-      data.forEach(product => {
-        this.productItems.push(this.convertProductToSelectItem(product));
-      })
-    });
     this.productTypesService.getFamilies().subscribe(data => {
       data.forEach(productFamily => {
         this.productFamilyItems.push(this.convertProductFamilyToSelectItem(productFamily));
@@ -41,38 +52,18 @@ export class ProductEditorComponent implements OnInit {
     });
   }
   updateForm(){
-    this.productForm.patchValue(this.selectedProduct);
+    this.productForm.patchValue(this.product);
   }
   saveProduct() {
     this.productService.saveProduct(this.productForm.getRawValue()).subscribe(data => {
-      if (this.selectedProduct.id !== data.id) {
-        this.productItems.push(this.convertProductToSelectItem(data));
-      } else {
-        Object.assign(this.selectedProduct, data);
-        this.productItems.find(item => item.value.id === data.id).label = data.name;
-      }
-      this.selectedProduct = {id: 0, name: '', description: '', articleNr: '', pictureName: '', price: null};
+      Object.assign(this.product, data);
       this.updateForm();
     },
       (error => {}))
   }
 
-  deleteProduct(productId: number) {
-    this.confirmService.confirm({
-      message: 'Sind Sie sicher, dass Sie dieses Produkt löschen wollen?',
-      accept: () => {
-        this.productService.deleteProduct(productId).subscribe(() => {
-          this.selectedProduct = {id: 0, name: '', description: '', articleNr: '', pictureName: '', price: null};
-          this.productItems.splice(this.productItems.findIndex(item => item.value.id === productId), 1);
-          this.updateForm();
-        },
-          (error => {}));
-      }
-    })
-  }
-
   resetFormToLastState() {
-    this.productForm.patchValue(this.selectedProduct);
+    this.productForm.patchValue(this.product);
   }
 
   private convertProductToSelectItem(product: Product): SelectItem{
