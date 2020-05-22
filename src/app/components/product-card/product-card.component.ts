@@ -1,10 +1,11 @@
 import {
-  Component,
+  AfterViewChecked,
+  Component, ElementRef,
   EventEmitter,
   HostBinding,
   Input,
   OnInit,
-  Output,
+  Output, ViewChild,
 } from '@angular/core';
 import {Product} from "../../models/product";
 import {MenuItem} from "primeng";
@@ -16,15 +17,17 @@ import {AuthenticationService} from "../../services/authentication.service";
   templateUrl: './product-card.component.html',
   styleUrls: ['./product-card.component.scss'],
 })
-export class ProductCardComponent implements OnInit {
+export class ProductCardComponent implements OnInit, AfterViewChecked {
   @HostBinding('class.p-col-12') expandedClass = false;
   @HostBinding('class.p-sm-6') breakPointClassSm = true;
-  @HostBinding('class.p-md-3') breakPointClassMd = true;
+  @HostBinding('class.p-md-6') breakPointClassMd = true;
   @HostBinding('class.p-lg-3') breakPointClassLg = true;
   @HostBinding('class.p-xl-3') breakPointClassXl = true;
   @Input() product: Product;
   @Output() deleteProduct = new EventEmitter();
+  @ViewChild('container') containerElement: ElementRef;
   expanded: boolean = false;
+  containerWidth: number;
 
   productContextItems: MenuItem[];
 
@@ -50,7 +53,13 @@ export class ProductCardComponent implements OnInit {
             (() => {}))
         }
       }
-    ]
+    ];
+  }
+
+  ngAfterViewChecked(): void {
+    setTimeout(() => {
+      this.containerWidth = this.containerElement.nativeElement.offsetWidth;
+    }, 0)
   }
 
   expand(){

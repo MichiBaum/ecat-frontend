@@ -1,8 +1,6 @@
 <div #container class="container p-grid p-dir-row">
-  <div class="p-col-fixed" [style.width.px]="container.offsetWidth">
-    <div class="imageContainer">
-      <img #productCardImage src="assets/images/{{product.pictureName}}">
-    </div>
+  <div class="p-col-fixed" [style.width.px]="containerWidth">
+    <img #productCardImage src="assets/images/{{product.pictureName}}">
   </div>
   <div class="p-col dynamicContainer">
     <div class="content">
@@ -12,24 +10,6 @@
       </div>
       <div class="descriptionContainer" *ngIf="expanded">
         <p class="noMargin">{{product.description}}</p>
-<!--        <p class="noMargin">{{product.description}}</p>-->
-<!--        <p class="noMargin">{{product.description}}</p>-->
-<!--        <p class="noMargin">{{product.description}}</p>-->
-<!--        <p class="noMargin">{{product.description}}</p>-->
-<!--        <p class="noMargin">{{product.description}}</p>-->
-<!--        <p class="noMargin">{{product.description}}</p>-->
-<!--        <p class="noMargin">{{product.description}}</p>-->
-<!--        <p class="noMargin">{{product.description}}</p>-->
-<!--        <p class="noMargin">{{product.description}}</p>-->
-<!--        <p class="noMargin">{{product.description}}</p>-->
-<!--        <p class="noMargin">{{product.description}}</p>-->
-<!--        <p class="noMargin">{{product.description}}</p>-->
-<!--        <p class="noMargin">{{product.description}}</p>-->
-<!--        <p class="noMargin">{{product.description}}</p>-->
-<!--        <p class="noMargin">{{product.description}}</p>-->
-<!--        <p class="noMargin">{{product.description}}</p>-->
-<!--        <p class="noMargin">{{product.description}}</p>-->
-<!--        <p class="noMargin">{{product.description}}</p>-->
       </div>
     </div>
     <div class="footer">
