@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ProductTypesService} from "../../services/product-types.service";
 import {ProductGroup} from "../../models/product-group";
 import {ProductClass} from "../../models/product-class";
@@ -16,8 +16,6 @@ import {CustomMenuItem} from "../../models/customMenuItem";
   styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent implements OnInit {
-
-  @ViewChild('slideMenuContainer') slideMenuContainer: ElementRef;
 
   menuItem: CustomMenuItem = {items: []};
   productGroups: ProductGroup[] = [];
