@@ -39,7 +39,6 @@ const appRoutes: Routes = [
   {path: "homepage", component: HomepageComponent},
   {path: 'products', component: ProductsComponent},
   {path: 'admin/promotionEditor', component: PromotionEditorComponent, canActivate: [PermissionGuard], data: {requiredPermission: 'ADMINISTRATE'}},
-  {path: 'admin/productEditor', component: ProductEditorComponent, canActivate: [PermissionGuard], data: {requiredPermission: 'ADMINISTRATE'}},
   {path: 'login', component: LoginComponent},
   {path: '**', redirectTo:"/homepage"},
 ];
