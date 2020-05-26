@@ -3,6 +3,7 @@ import {PromotionCarouselComponent} from "./promotion-carousel.component";
 import {CardModule, CarouselModule, ContextMenuModule} from "primeng";
 import {CommonModule} from "@angular/common";
 import {PromotionCarouselCardModule} from "../promotion-carousel-card/promotion-carousel-card.module";
+import {PromotionEditorModule} from "../promotion-editor/promotion-editor.module";
 
 @NgModule({
   declarations: [
@@ -11,12 +12,13 @@ import {PromotionCarouselCardModule} from "../promotion-carousel-card/promotion-
   exports: [
     PromotionCarouselComponent
   ],
-  imports: [
-    CarouselModule,
-    CommonModule,
-    CardModule,
-    ContextMenuModule,
-    PromotionCarouselCardModule
-  ]
+    imports: [
+        CarouselModule,
+        CommonModule,
+        CardModule,
+        ContextMenuModule,
+        PromotionCarouselCardModule,
+        PromotionEditorModule
+    ]
 })
 export class PromotionCarouselModule { }

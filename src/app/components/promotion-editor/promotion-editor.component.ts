@@ -1,18 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {Promotion} from "../../models/promotion";
 import {PromotionService} from "../../services/promotion.service";
-import {ConfirmationService, MessageService, SelectItem} from "primeng";
+import {ConfirmationService, MessageService} from "primeng";
 import {FormControl, FormGroup} from "@angular/forms";
+import {PromotionEditorService} from "../../services/promotion-editor.service";
 
 @Component({
   selector: 'app-promotion-editor',
   templateUrl: './promotion-editor.component.html',
   styleUrls: ['./promotion-editor.component.scss']
 })
-export class PromotionEditorComponent implements OnInit {
+export class PromotionEditorComponent{
 
-  promotionItems: SelectItem[] = [{label: 'New', value: {id: 0, title: '', description: '', startDate: null, endDate: null}}];
-  selectedPromotion: Promotion = {id: 0, title: '', description: '', startDate: null, endDate: null};
+  promotion: Promotion = {id: 0, title: '', description: '', startDate: null, endDate: null};
+  showDialog: boolean = false;
 
   promotionForm = new FormGroup({
     id: new FormControl(),
@@ -22,56 +23,33 @@ export class PromotionEditorComponent implements OnInit {
     endDate: new FormControl()
   });
 
-  constructor(private promotionService: PromotionService, private confirmService: ConfirmationService, private messageService: MessageService) { }
-
-  ngOnInit(): void {
-    this.promotionService.getPromotions().subscribe(data => {
-      data.forEach(promotion => {
-        this.promotionItems.push(this.convertPromotionToSelectItem(promotion));
-      })
-    },
-      (error => {}));
+  constructor(private promotionService: PromotionService,
+              private confirmService: ConfirmationService,
+              private messageService: MessageService,
+              private promotionEditorService: PromotionEditorService)
+  {
+    this.promotionEditorService.promotionEmitter.subscribe(promotion => {
+      this.promotion = promotion;
+      this.updateForm();
+    });
+    this.promotionEditorService.showPromotionEditorEmitter.subscribe(showDialog => {
+      this.showDialog = showDialog;
+    });
   }
+
   updateForm(){
-    this.promotionForm.patchValue(this.selectedPromotion);
+    this.promotionForm.patchValue(this.promotion);
   }
   savePromotion() {
     this.promotionService.savePromotion(this.promotionForm.getRawValue()).subscribe(data => {
-      if(this.selectedPromotion.id !== data.id){
-        this.promotionItems.push(this.convertPromotionToSelectItem(data));
-      } else {
-        Object.assign(this.selectedPromotion, data);
-      }
-      this.selectedPromotion = {id: 0, title: '', description: '', startDate: null, endDate: null};
-      this.promotionItems.find(item => item.value.id === data.id).label = data.title;
-      this.updateForm();
+      Object.assign(this.promotion, data);
+      this.showDialog = false;
     },
       (error => {}))
   }
 
-  deletePromotion(promotionId: number) {
-    this.confirmService.confirm({
-      message: 'Sind Sie sicher, dass Sie diese Aktion löschen wollen?',
-      accept: () => {
-        this.promotionService.deletePromotion(promotionId).subscribe(data => {
-          this.selectedPromotion = {id: 0, title: '', description: '', startDate: null, endDate: null};
-          this.promotionItems.splice(this.promotionItems.findIndex(item => item.value.id === promotionId), 1);
-          this.updateForm();
-          },
-          (error => {}));
-      }
-    })
-  }
-
   resetFormToLastState() {
-    this.promotionForm.patchValue(this.selectedPromotion);
-  }
-
-  private convertPromotionToSelectItem(promotion: Promotion): SelectItem{
-    return {
-      label: promotion.title,
-      value: promotion
-    }
+    this.promotionForm.patchValue(this.promotion);
   }
 
   updateStartDate(date: Date){

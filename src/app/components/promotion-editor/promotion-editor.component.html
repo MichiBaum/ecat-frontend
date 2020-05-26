@@ -1,30 +1,30 @@
-<div class="container p-grid p-dir-row p-justify-center">
-  <form [formGroup]="promotionForm">
-    <div class="formGroup p-col">
-      <label>Aktionsauswahl</label>
-      <p-dropdown [options]="promotionItems" [(ngModel)]="selectedPromotion" [ngModelOptions]="{standalone: true}" (onChange)="updateForm()"></p-dropdown>
-    </div>
-    <div class="formGroup p-col">
-      <label for="titleField">Aktionsname</label>
-      <input type="text" pInputText formControlName="title" id="titleField">
-    </div>
-    <div class="formGroup p-col">
-      <label for="descriptionField">Aktionsbeschreibung</label>
-      <textarea type="text" pInputTextarea formControlName="description" id="descriptionField"></textarea>
-    </div>
-    <div class="formGroup p-col">
-      <label>Startdatum</label>
-      <p-calendar [readonlyInput]="true" [ngModel]="promotionForm.get('startDate').value | millisecondDate" (onSelect)="updateStartDate($event)" [ngModelOptions]="{standalone: true}"></p-calendar>
-    </div>
-    <div class="formGroup p-col">
-      <label>Enddatum</label>
-      <p-calendar [readonlyInput]="true" [ngModel]="promotionForm.get('endDate').value | millisecondDate" (onSelect)="updateEndDate($event)" [ngModelOptions]="{standalone: true}"></p-calendar>
-    </div>
-    <div class="formGroup p-col">
-      <p-button label="Speichern" (onClick)="savePromotion()"></p-button>
-      <p-button label="Undo" (onClick)="resetFormToLastState()" [disabled]="!selectedPromotion || !selectedPromotion.id || selectedPromotion.id == 0"></p-button>
-      <p-button label="Löschen" class="ui-button-danger" (onClick)="deletePromotion(selectedPromotion.id)" [disabled]="!selectedPromotion || !selectedPromotion.id || selectedPromotion.id == 0"></p-button>
-    </div>
-  </form>
-</div>
+<p-dialog [(visible)]="showDialog" [modal]="true" [contentStyle]="{height: 'auto'}">
+  <div class="container p-grid p-dir-row p-justify-center">
+    <form [formGroup]="promotionForm">
+      <div class="formGroup p-col">
+        <label for="titleField">Aktionsname</label>
+        <input type="text" pInputText formControlName="title" id="titleField">
+      </div>
+      <div class="formGroup p-col">
+        <label for="descriptionField">Aktionsbeschreibung</label>
+        <textarea type="text" pInputTextarea formControlName="description" id="descriptionField"></textarea>
+      </div>
+      <div class="formGroup p-col">
+        <label>Startdatum</label>
+        <!--        [ngModelOptions]="{standalone: true}" makes date display as text inside input-->
+        <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" [readonlyInput]="true" [ngModel]="promotionForm.get('startDate').value | millisecondDate" (onSelect)="updateStartDate($event)" [ngModelOptions]="{standalone: true}"></p-calendar>
+      </div>
+      <div class="formGroup p-col">
+        <label>Enddatum</label>
+        <!--        [ngModelOptions]="{standalone: true}" makes date display as text inside input-->
+        <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" [readonlyInput]="true" [ngModel]="promotionForm.get('endDate').value | millisecondDate" (onSelect)="updateEndDate($event)" [ngModelOptions]="{standalone: true}"></p-calendar>
+      </div>
+      <div class="formGroup p-col">
+        <p-button label="Speichern" (onClick)="savePromotion()"></p-button>
+        <p-button label="Undo" (onClick)="resetFormToLastState()" [disabled]="!promotion || !promotion.id || promotion.id == 0"></p-button>
+      </div>
+    </form>
+  </div>
+</p-dialog>
+
 <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>

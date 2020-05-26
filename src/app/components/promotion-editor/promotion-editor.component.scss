@@ -21,12 +21,12 @@
     min-width: 420px !important;
   }
 }
-.ui-calendar{
-  min-width: 420px !important;
-}
 .container{
   margin: 0.5rem;
 }
 :host{
   text-align: center;
+}
+.ui-dialog{
+  height: 80vh;
 }

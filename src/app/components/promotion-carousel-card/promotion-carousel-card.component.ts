@@ -3,6 +3,7 @@ import {Promotion} from "../../models/promotion";
 import {MenuItem} from "primeng";
 import {AuthenticationService} from "../../services/authentication.service";
 import {PromotionService} from "../../services/promotion.service";
+import {PromotionEditorService} from "../../services/promotion-editor.service";
 
 @Component({
   selector: 'app-promotions-carousel-card',
@@ -15,17 +16,24 @@ export class PromotionCarouselCardComponent implements OnInit {
   @Output() deletePromotion = new EventEmitter();
   promotionContextItems: MenuItem[];
 
-  constructor(public authService: AuthenticationService, private promotionService: PromotionService) { }
+  constructor(public authService: AuthenticationService,
+              private promotionService: PromotionService,
+              private promotionEditorService: PromotionEditorService
+  ) { }
 
   ngOnInit(): void {
     this.promotionContextItems = [
       {
         label: "Neu",
-        routerLink: "../admin/promotionEditor"
+        command: () => {
+          this.promotionEditorService.editPromotion({id: 0, title: '', description: '', pictureName: '', startDate: Date.now(), endDate: Date.now()});
+        }
       },
       {
         label: "Bearbeiten",
-        routerLink: "../admin/promotionEditor"
+        command: () => {
+          this.promotionEditorService.editPromotion(this.promotion);
+        }
       },
       {
         label: "Löschen",
