@@ -43,7 +43,9 @@ export class ProductCardComponent implements OnInit {
     this.productContextItems = [
       {
         label: "Neu",
-        routerLink: "../admin/productEditor"
+        command: () => {
+          this.productEditorService.editProduct({id: 0, name: '', description: '', articleNr: '', pictureName: '', price: null});
+        }
       },
       {
         label: "Bearbeiten",
