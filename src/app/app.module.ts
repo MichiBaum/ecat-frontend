@@ -19,7 +19,6 @@ import {AuthErrorHandler} from "./errorHandlers/auth-error-handler";
 import {LoginErrorHandler} from "./errorHandlers/login-error-handler";
 import {ValidationErrorHandler} from "./errorHandlers/validation-error-handler";
 import {InternalServerErrorHandler} from "./errorHandlers/internal-server-error-handler";
-import { ProductEditorComponent } from './components/product-editor/product-editor.component';
 import {FooterModule} from "./components/footer/footer.module";
 import {HeaderModule} from "./components/header/header.module";
 import {NavigationModule} from "./components/navigation/navigation.module";
