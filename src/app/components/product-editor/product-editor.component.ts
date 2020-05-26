@@ -55,7 +55,7 @@ export class ProductEditorComponent implements OnInit {
   saveProduct() {
     this.productService.saveProduct(this.productForm.getRawValue()).subscribe(data => {
       Object.assign(this.product, data);
-      this.updateForm();
+      this.showDialog = false;
     },
       (error => {}))
   }
