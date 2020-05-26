@@ -14,7 +14,6 @@ import {ProductEditorService} from "../../services/product-editor.service";
 })
 export class ProductEditorComponent implements OnInit {
 
-  productItem: SelectItem = {label: 'New', value: {id: 0, name: '', description: '', articleNr: '', pictureName: '', price: null}};
   product: Product = {id: 0, name: '', description: '', articleNr: '', pictureName: '', price: null};
   productFamilyItems: SelectItem[] = [];
   showDialog: boolean = false;
@@ -38,7 +37,6 @@ export class ProductEditorComponent implements OnInit {
     });
     this.productEditorService.productEmitter.subscribe(product => {
       this.product = product;
-      this.productItem = this.convertProductToSelectItem(product);
       this.updateForm();
     })
 
@@ -66,12 +64,6 @@ export class ProductEditorComponent implements OnInit {
     this.productForm.patchValue(this.product);
   }
 
-  private convertProductToSelectItem(product: Product): SelectItem{
-    return {
-      label: product.name,
-      value: product
-    }
-  }
   private convertProductFamilyToSelectItem(productFamily: ProductFamily): SelectItem{
     return {
       label: productFamily.name,
