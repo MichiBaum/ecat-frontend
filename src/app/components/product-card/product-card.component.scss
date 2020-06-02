@@ -27,3 +27,12 @@ img{
 .content{
   flex: 1;
 }
+/* styles for '...' */
+.headerContainer {
+  overflow: hidden;
+  position: relative;
+  line-height: 1.2em;
+  height: 2.4em;
+  max-height: 2.4em;
+  font-weight: bold;
+}

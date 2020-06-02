@@ -18,24 +18,22 @@ import {ProductEditorService} from "../../services/product-editor.service";
   styleUrls: ['./product-card.component.scss'],
 })
 export class ProductCardComponent implements OnInit {
-  @HostBinding('class.p-col-12') expandedClass = false;
+  @HostBinding('class.p-col-12') breakPointClassFullWidth = true;
   @HostBinding('class.p-sm-6') breakPointClassSm = true;
-  @HostBinding('class.p-md-6') breakPointClassMd = true;
-  @HostBinding('class.p-lg-3') breakPointClassLg = true;
   @HostBinding('class.p-xl-3') breakPointClassXl = true;
   @Input() product: Product;
   @Output() deleteProduct = new EventEmitter();
   @ViewChild('container') containerElement: ElementRef;
   @ViewChild('imageContainer') imageContainer: ElementRef;
   expanded: boolean = false;
-
+  breakPointClass: string;
   productContextItems: MenuItem[];
 
   constructor(private productService: ProductService,
               public authService: AuthenticationService,
               private renderer2: Renderer2,
               private productEditorService: ProductEditorService,
-              private confirmationService: ConfirmationService
+              private confirmationService: ConfirmationService,
   ) {
   }
 
@@ -60,8 +58,8 @@ export class ProductCardComponent implements OnInit {
             message: 'Sind sie sicher, dass sie dieses Produkt löschen wolllen?',
             accept: () => {
               this.productService.deleteProduct(this.product.id).subscribe(() => {
-                this.deleteProduct.emit(this.product.id);
-              },
+                  this.deleteProduct.emit(this.product.id);
+                },
                 (error => {}))
             }
           });
@@ -78,10 +76,7 @@ export class ProductCardComponent implements OnInit {
       this.renderer2.setStyle(this.imageContainer.nativeElement, 'width', '100%');
       this.expanded = false;
     }
-    this.expandedClass = this.expanded;
     this.breakPointClassSm = !this.expanded;
-    this.breakPointClassMd = !this.expanded;
-    this.breakPointClassLg = !this.expanded;
     this.breakPointClassXl = !this.expanded;
   }
 
