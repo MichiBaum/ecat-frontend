@@ -18,14 +18,16 @@ import {ProductEditorService} from "../../services/product-editor.service";
   styleUrls: ['./product-card.component.scss'],
 })
 export class ProductCardComponent implements OnInit {
+  expanded: boolean = false;
   @HostBinding('class.p-col-12') breakPointClassFullWidth = true;
-  @HostBinding('class.p-sm-6') breakPointClassSm = true;
-  @HostBinding('class.p-xl-3') breakPointClassXl = true;
   @Input() product: Product;
+  @Input() classes: string;
   @Output() deleteProduct = new EventEmitter();
   @ViewChild('container') containerElement: ElementRef;
   @ViewChild('imageContainer') imageContainer: ElementRef;
-  expanded: boolean = false;
+  @HostBinding('class') get hostClasses(): string{
+    return this.expanded ? 'p-col-12': this.classes;
+  };
   productContextItems: MenuItem[];
 
   constructor(private productService: ProductService,
@@ -75,8 +77,6 @@ export class ProductCardComponent implements OnInit {
       this.renderer2.setStyle(this.imageContainer.nativeElement, 'width', '100%');
       this.expanded = false;
     }
-    this.breakPointClassSm = !this.expanded;
-    this.breakPointClassXl = !this.expanded;
   }
 
 }
