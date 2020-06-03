@@ -31,7 +31,7 @@ export class ProductCardComponent implements OnInit {
   productContextItems: MenuItem[];
 
   constructor(private productService: ProductService,
-              public authService: AuthenticationService,
+              private authService: AuthenticationService,
               private renderer2: Renderer2,
               private productEditorService: ProductEditorService,
               private confirmationService: ConfirmationService,
