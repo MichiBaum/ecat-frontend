@@ -26,7 +26,6 @@ export class ProductCardComponent implements OnInit {
   @ViewChild('container') containerElement: ElementRef;
   @ViewChild('imageContainer') imageContainer: ElementRef;
   expanded: boolean = false;
-  breakPointClass: string;
   productContextItems: MenuItem[];
 
   constructor(private productService: ProductService,
