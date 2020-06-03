@@ -21,8 +21,6 @@ export class PromotionsComponent implements OnInit {
       this.promotions = promotions;
       this.newPromotions = promotions.slice(0, 2);
       this.normalPromotions = promotions.slice(2);
-      console.log(this.normalPromotions);
-      console.log(this.newPromotions);
     })
   }
   onDeletePromotion(promotionId: number){
