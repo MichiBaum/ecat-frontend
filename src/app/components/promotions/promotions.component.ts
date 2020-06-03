@@ -25,8 +25,8 @@ export class PromotionsComponent implements OnInit {
   }
   onDeletePromotion(promotionId: number){
     this.promotions.splice(this.promotions.findIndex(promotion => promotion.id == promotionId),1);
-    this.newPromotions.splice(this.newPromotions.findIndex(promotion => promotion.id == promotionId),1);
-    this.normalPromotions.splice(this.normalPromotions.findIndex(promotion => promotion.id == promotionId),1);
+    this.newPromotions = this.promotions.slice(0, 2);
+    this.normalPromotions = this.promotions.slice(2);
   }
 
 }
