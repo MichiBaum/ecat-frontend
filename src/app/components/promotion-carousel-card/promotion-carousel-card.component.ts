@@ -16,7 +16,7 @@ export class PromotionCarouselCardComponent implements OnInit {
   @Output() deletePromotion = new EventEmitter();
   promotionContextItems: MenuItem[];
 
-  constructor(public authService: AuthenticationService,
+  constructor(private authService: AuthenticationService,
               private promotionService: PromotionService,
               private promotionEditorService: PromotionEditorService
   ) { }

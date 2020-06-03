@@ -15,8 +15,8 @@ export class HeaderComponent implements OnInit {
   searchtext: string;
 
   constructor(
-    public authenticationService: AuthenticationService,
-    public windowResizeListenerService: WindowResizeListenerService,
+    private authenticationService: AuthenticationService,
+    private windowResizeListenerService: WindowResizeListenerService,
     private productService: ProductService,
     private navigationService: NavigationService
   ) {
