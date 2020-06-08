@@ -1,5 +1,6 @@
 .formGroup{
   display: block;
+  text-align: center;
   label{
     display: block;
     margin-bottom: 1em;
@@ -26,7 +27,4 @@
 }
 .container{
   margin: 0.5rem;
-}
-:host{
-  text-align: center;
 }
