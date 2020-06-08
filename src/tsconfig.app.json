@@ -9,7 +9,8 @@
     "polyfills.ts"
   ],
   "angularCompilerOptions": {
-    "disableTypeScriptVersionCheck": true
+    "disableTypeScriptVersionCheck": true,
+    "enableIvy": false
   },
   "include": [
     "src/**/*.d.ts"
