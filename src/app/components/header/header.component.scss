@@ -1,10 +1,13 @@
 .container {
-  background-color: rgba(0, 5, 143, 0.8);
   margin-bottom: 1em;
   padding: 0.5em;
   color: white;
-  border-bottom: 5px solid rgb(0, 6, 94);
   width: 100%;
+  max-width: 1920px;
+}
+.headerBackground{
+  background-color: rgba(0, 5, 143, 0.8);
+  border-bottom: 5px solid rgb(0, 6, 94);
 }
 #titleContainer{
   text-align: center;
