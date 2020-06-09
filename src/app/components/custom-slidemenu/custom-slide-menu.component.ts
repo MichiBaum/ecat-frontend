@@ -218,8 +218,6 @@ export class CustomSlideMenu implements AfterViewChecked, OnDestroy {
 
     viewportUpdated: boolean;
 
-    testItem: CustomMenuItem = {items: []};
-
     constructor(public el: ElementRef, public renderer: Renderer2, private cd: ChangeDetectorRef) {}
 
   ngAfterViewChecked() {
