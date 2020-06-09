@@ -15,6 +15,20 @@
         "notValid": "Id ist inkorrekt"
       }
     },
+    "user": {
+      "password": {
+        "isEmpty": "Das Passwort kann nicht leer sein"
+      },
+      "id": {
+        "notValid": "Die ID vom Benutzer ist falsch"
+      },
+      "name": {
+        "isForgiven": "Dieser Benutzername ist schon vergeben"
+      },
+      "permissions": {
+        "isEmpty": "Die Berechtigungen können nicht leer sein"
+      }
+    },
     "product": {
       "articleNr": {
         "notSet": "Keine Artikelnummer vorhanden"
