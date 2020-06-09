@@ -23,14 +23,12 @@ import {FooterModule} from "./components/footer/footer.module";
 import {HeaderModule} from "./components/header/header.module";
 import {NavigationModule} from "./components/navigation/navigation.module";
 import {ProductCardModule} from "./components/product-card/product-card.module";
-import {PromotionCarouselModule} from "./components/promotion-carousel/promotion-carousel.module";
 import {HomepageModule} from "./components/homepage/homepage.module";
 import {LoginModule} from "./components/login/login.module";
 import {ProductsModule} from "./components/products/products.module";
 import {PromotionEditorModule} from "./components/promotion-editor/promotion-editor.module";
 import {CommonModule} from "@angular/common";
 import {ProductEditorModule} from "./components/product-editor/product-editor.module";
-import {PromotionCarouselCardModule} from "./components/promotion-carousel-card/promotion-carousel-card.module";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {NotFoundErrorHandler} from "./errorHandlers/not-found-error-handler";
@@ -54,8 +52,6 @@ const appRoutes: Routes = [
     HeaderModule,
     NavigationModule,
     ProductCardModule,
-    PromotionCarouselModule,
-    PromotionCarouselCardModule,
     HomepageModule,
     LoginModule,
     ProductsModule,
