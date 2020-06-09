@@ -12,7 +12,7 @@ import {
   Output,
   EventEmitter,
   ChangeDetectorRef,
-  ChangeDetectionStrategy, OnInit,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import {trigger,state,style,transition,animate,AnimationEvent} from '@angular/animations';
 import {CommonModule} from '@angular/common';
