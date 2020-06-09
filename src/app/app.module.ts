@@ -32,6 +32,7 @@ import {ProductEditorModule} from "./components/product-editor/product-editor.mo
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {NotFoundErrorHandler} from "./errorHandlers/not-found-error-handler";
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 const appRoutes: Routes = [
   {path: 'homepage', component: HomepageComponent},
@@ -75,7 +76,8 @@ const appRoutes: Routes = [
         deps: [HttpClient]
       },
       defaultLanguage: 'de'
-    })
+    }),
+    FontAwesomeModule
   ],
   providers: [
     PromotionService,
