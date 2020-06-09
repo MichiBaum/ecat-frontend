@@ -18,14 +18,14 @@ import {forkJoin} from "rxjs";
 export class AdminEditorComponent implements OnInit {
   selectedUser: User;
   ownUser: User;
-  usersItems: SelectItem[] = [{label: 'Neu', value: {id: null, name: 'Neuer Admin', permissions: [], password: null}}];
+  usersItems: SelectItem[] = [{label: 'Neu', value: {id: null, name: 'Neuer Admin', permissions: [], password: ''}}];
   permissionsItems: SelectItem[] = [];
   showDialog: boolean = false;
   adminForm = new FormGroup({
     id: new FormControl(),
     name: new FormControl(),
     permissions: new FormControl(),
-    password: new FormControl(),
+    password: new FormControl(''),
   });
 
   constructor(private userService: UserService,
@@ -111,6 +111,8 @@ export class AdminEditorComponent implements OnInit {
   }
 
   passwordsMatch(): boolean{
+    console.log(this.adminForm.get('password').value);
+    console.log((<HTMLInputElement>document.getElementById('confirmPasswordField')).value);
     return this.adminForm.get('password').value == (<HTMLInputElement>document.getElementById('confirmPasswordField')).value;
   }
 
