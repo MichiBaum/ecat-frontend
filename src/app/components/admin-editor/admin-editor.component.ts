@@ -111,8 +111,6 @@ export class AdminEditorComponent implements OnInit {
   }
 
   passwordsMatch(): boolean{
-    console.log(this.adminForm.get('password').value);
-    console.log((<HTMLInputElement>document.getElementById('confirmPasswordField')).value);
     return this.adminForm.get('password').value == (<HTMLInputElement>document.getElementById('confirmPasswordField')).value;
   }
 
