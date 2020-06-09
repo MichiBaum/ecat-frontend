@@ -34,7 +34,7 @@ export class PromotionCardComponent implements OnInit {
   promotionContextItems: MenuItem[];
 
   constructor(private renderer2: Renderer2,
-              private authService: AuthenticationService,
+              public authService: AuthenticationService,
               private promotionEditorService: PromotionEditorService,
               private promotionService: PromotionService) { }
 
