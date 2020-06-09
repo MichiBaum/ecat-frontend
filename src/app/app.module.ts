@@ -33,9 +33,10 @@ import {ProductEditorModule} from "./components/product-editor/product-editor.mo
 import {PromotionCarouselCardModule} from "./components/promotion-carousel-card/promotion-carousel-card.module";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import {NotFoundErrorHandler} from "./errorHandlers/not-found-error-handler";
 
 const appRoutes: Routes = [
-  {path: "homepage", component: HomepageComponent},
+  {path: 'homepage', component: HomepageComponent},
   {path: 'products', component: ProductsComponent},
   {path: 'admin/promotionEditor', component: PromotionEditorComponent, canActivate: [PermissionGuard], data: {requiredPermission: 'ADMINISTRATE'}},
   {path: 'login', component: LoginComponent},
@@ -90,7 +91,8 @@ const appRoutes: Routes = [
     AuthErrorHandler,
     LoginErrorHandler,
     ValidationErrorHandler,
-    InternalServerErrorHandler
+    InternalServerErrorHandler,
+    NotFoundErrorHandler
   ],
   exports: [
   ],

@@ -4,6 +4,7 @@ import {HttpResponseErrorHandler} from "./http-response-error-handler";
 import {AuthErrorHandler} from "./auth-error-handler";
 import {InternalServerErrorHandler} from "./internal-server-error-handler";
 import {ValidationErrorHandler} from "./validation-error-handler";
+import {NotFoundErrorHandler} from "./not-found-error-handler";
 
 @Injectable()
 export class DefaultErrorHandler implements HttpResponseErrorHandler{
@@ -13,12 +14,14 @@ export class DefaultErrorHandler implements HttpResponseErrorHandler{
   constructor(
     private authErrorHandler: AuthErrorHandler,
     private internalServerErrorHandler: InternalServerErrorHandler,
-    private validationErrorHandler: ValidationErrorHandler
+    private validationErrorHandler: ValidationErrorHandler,
+    private notFoundErrorHandler: NotFoundErrorHandler
   ){
     this.handlers = [
       authErrorHandler,
       internalServerErrorHandler,
-      validationErrorHandler
+      validationErrorHandler,
+      notFoundErrorHandler
     ];
   }
 

@@ -11,11 +11,12 @@
   </div>
   <div class="p-col p-grid p-justify-start p-dir-col ">
     <div class="p-grid p-justify-end">
-      <p-button  class="marginBtm"  label="{{ authenticationService.getUsername() }}" *ngIf="authenticationService.isLoggedIn()"></p-button>
+      <p-button (onClick)="adminEditorService.editUser()" class="marginBtm"  label="{{ authenticationService.getUsername() }}" *ngIf="authenticationService.isLoggedIn()"></p-button>
     </div>
     <div class="p-grid p-justify-end" id="buttonContainer">
       <p-button label="logout" *ngIf="authenticationService.isLoggedIn()" (onClick)="authenticationService.logout()"></p-button>
     </div>
   </div>
 </div>
+<app-admin-editor *ngIf="authenticationService.isLoggedIn()"></app-admin-editor>
 

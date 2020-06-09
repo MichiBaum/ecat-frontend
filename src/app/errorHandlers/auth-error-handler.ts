@@ -13,6 +13,10 @@ export class AuthErrorHandler implements HttpResponseErrorHandler{
   }
 
   handle(error: HttpErrorResponse) {
-    this.messageService.add({severity: 'error', summary: 'Fehler', detail: error.error.message, life: 5000});
+    if(error.error){
+      this.messageService.add({severity: 'error', summary: 'Fehler', detail: error.error.message, life: 5000});
+    }else{
+      this.messageService.add({severity: 'error', summary: 'Fehler', detail: error.message, life: 5000});
+    }
   }
 }

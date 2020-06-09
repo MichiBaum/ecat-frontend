@@ -1,16 +1,14 @@
 import {MessageService} from "primeng";
 import {HttpErrorResponse} from "@angular/common/http";
-import {HttpResponseErrorHandler} from "./http-response-error-handler";
 import {Injectable} from "@angular/core";
 
 @Injectable()
-export class InternalServerErrorHandler implements HttpResponseErrorHandler{
-
+export class NotFoundErrorHandler {
   constructor(private messageService: MessageService) {
   }
 
   matches(error: HttpErrorResponse): boolean {
-    return error.status === 500;
+    return error.status === 404;
   }
 
   handle(error: HttpErrorResponse) {

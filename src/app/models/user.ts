@@ -1,4 +1,8 @@
+import {Permission} from "./permission";
+
 export interface User {
-  username: string;
+  id: number;
+  name: string;
   password: string;
+  permissions: Permission[];
 }

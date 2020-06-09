@@ -3,6 +3,7 @@ import {AuthenticationService} from "../../services/authentication.service";
 import {WindowResizeListenerService} from "../../services/window-resize-listener.service";
 import {ProductService} from "../../services/product.service";
 import {NavigationService} from "../../services/navigation.service";
+import {AdminEditorService} from "../../services/admin-editor.service";
 
 @Component({
   selector: 'app-header',
@@ -15,10 +16,11 @@ export class HeaderComponent implements OnInit {
   searchtext: string;
 
   constructor(
-    private authenticationService: AuthenticationService,
+    public authenticationService: AuthenticationService,
     private windowResizeListenerService: WindowResizeListenerService,
     private productService: ProductService,
-    private navigationService: NavigationService
+    public navigationService: NavigationService,
+    public adminEditorService: AdminEditorService
   ) {
     this.windowResizeListenerService.screenWidthEmitter.subscribe(
       (screenWidthEmit: number) => {

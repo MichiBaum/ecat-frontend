@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
 
   loginFormGroup = new FormGroup(
     {
-      username: new FormControl('', [
+      name: new FormControl('', [
         Validators.required
       ]),
       password: new FormControl('', [
