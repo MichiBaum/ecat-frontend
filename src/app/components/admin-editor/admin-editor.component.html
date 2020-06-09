@@ -15,17 +15,17 @@
       </div>
       <div class="formGroup p-col">
         <label for="passwordField">Neues Passwort</label>
-        <input type="text" pInputText formControlName="password" id="passwordField">
-      </div>
-      <div class="formGroup p-col">
-        <label for="confirmPasswordField">Neues Passwort bestätigen</label>
-        <input type="text" pInputText id="confirmPasswordField">
-      </div>
-      <div class="formGroup p-col">
-        <p-button label="Speichern" (onClick)="saveUser()"></p-button>
-        <p-button label="Löschen" (onClick)="deleteUser()" [disabled]="!selectedUser || selectedUser.id == ownUser.id || selectedUser.id == 0 || !selectedUser.id"></p-button>
-        <p-button label="Undo" (onClick)="resetFormToLastState()" [disabled]="!selectedUser || selectedUser.id == 0 || !selectedUser.id"></p-button>
+        <input type="password" pInputText formControlName="password" id="passwordField">
       </div>
     </form>
+    <div class="formGroup p-col">
+      <label for="confirmPasswordField">Neues Passwort bestätigen</label>
+      <input type="password" pInputText id="confirmPasswordField">
+    </div>
+    <div class="formGroup p-col">
+      <p-button label="Speichern" (onClick)="saveUser()"></p-button>
+      <p-button label="Löschen" (onClick)="deleteUser()" [disabled]="!selectedUser || selectedUser.id == ownUser.id || selectedUser.id == 0 || !selectedUser.id"></p-button>
+      <p-button label="Undo" (onClick)="resetFormToLastState()" [disabled]="!selectedUser || selectedUser.id == 0 || !selectedUser.id"></p-button>
+    </div>
   </div>
 </p-dialog>

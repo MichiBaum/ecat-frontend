@@ -67,7 +67,7 @@ export class AdminEditorComponent implements OnInit {
   }
 
   saveUser() {
-    if((<HTMLInputElement>document.getElementById('passwordField')).value != (<HTMLInputElement>document.getElementById('confirmPasswordField')).value){
+    if(!this.passwordsMatch()){
       this.messageService.add({severity:'error', summary:'Fehler', detail:'Die Passwörter stimmen nicht überein'});
     }else{
       this.userService.saveUser(this.adminForm.getRawValue()).subscribe(user => {
@@ -108,6 +108,10 @@ export class AdminEditorComponent implements OnInit {
       label: permission.permission,
       value: permission.permission
     }
+  }
+
+  passwordsMatch(): boolean{
+    return this.adminForm.get('password').value == (<HTMLInputElement>document.getElementById('confirmPasswordField')).value;
   }
 
 }
