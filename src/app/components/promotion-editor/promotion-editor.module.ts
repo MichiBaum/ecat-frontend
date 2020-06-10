@@ -2,7 +2,6 @@ import {NgModule} from "@angular/core";
 import {PromotionEditorComponent} from "./promotion-editor.component";
 import {
   CalendarModule,
-  ConfirmDialogModule,
   DialogModule,
   DropdownModule,
   InputTextareaModule,
@@ -24,7 +23,6 @@ import {CommonModule} from "@angular/common";
     DropdownModule,
     FormsModule,
     CalendarModule,
-    ConfirmDialogModule,
     InputTextareaModule,
     InputTextModule,
     CommonModule,

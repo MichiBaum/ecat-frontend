@@ -24,7 +24,6 @@ export class PromotionEditorComponent{
   });
 
   constructor(private promotionService: PromotionService,
-              private confirmService: ConfirmationService,
               private messageService: MessageService,
               private promotionEditorService: PromotionEditorService)
   {

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {PromotionsComponent} from "./promotions.component";
 import {PromotionCardModule} from "../promotion-card/promotion-card.module";
 import {PromotionEditorModule} from "../promotion-editor/promotion-editor.module";
+import {ConfirmDialogModule} from "primeng";
 
 
 
@@ -13,10 +14,11 @@ import {PromotionEditorModule} from "../promotion-editor/promotion-editor.module
   exports: [
     PromotionsComponent
   ],
-  imports: [
-    CommonModule,
-    PromotionCardModule,
-    PromotionEditorModule,
-  ]
+    imports: [
+        CommonModule,
+        PromotionCardModule,
+        PromotionEditorModule,
+        ConfirmDialogModule,
+    ]
 })
 export class PromotionsModule { }

@@ -51,11 +51,13 @@
     "delete": "Löschen"
   },
   "confirmation": {
-    "product": {
-      "delete": "Sind Sie sicher, dass Sie dieses Produkt löschen wollen?"
-    },
-    "promotion": {
-      "delete": "Sind Sie sicher, dass Sie diese Aktion löschen wollen?"
+    "delete": {
+      "product": {
+        "delete": "Sind Sie sicher, dass Sie dieses Produkt löschen wollen?"
+      },
+      "promotion": {
+        "delete": "Sind Sie sicher, dass Sie diese Aktion löschen wollen?"
+      }
     }
   }
 

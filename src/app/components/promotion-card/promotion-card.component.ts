@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import {Promotion} from "../../models/promotion";
 import {AuthenticationService} from "../../services/authentication.service";
-import {MenuItem} from "primeng";
+import {ConfirmationService, MenuItem} from "primeng";
 import {PromotionEditorService} from "../../services/promotion-editor.service";
 import {PromotionService} from "../../services/promotion.service";
 import {TranslateService} from "@ngx-translate/core";
@@ -38,7 +38,8 @@ export class PromotionCardComponent implements OnInit {
               public authService: AuthenticationService,
               private promotionEditorService: PromotionEditorService,
               private promotionService: PromotionService,
-              private translateService: TranslateService
+              private translateService: TranslateService,
+              private confirmationService: ConfirmationService
   ) { }
 
   ngOnInit(): void {
@@ -58,10 +59,15 @@ export class PromotionCardComponent implements OnInit {
       {
         label: this.translateService.instant('navigation.delete'),
         command: () => {
-          this.promotionService.deletePromotion(this.promotion.id).subscribe(() => {
-              this.deletePromotion.emit(this.promotion.id);
-            },
-            (error => {}))
+          this.confirmationService.confirm({
+            message: this.translateService.instant('confirmation.delete.promotion'),
+            accept: () => {
+              this.promotionService.deletePromotion(this.promotion.id).subscribe(() => {
+                  this.deletePromotion.emit(this.promotion.id);
+                },
+                (error => {}))
+            }
+          });
         }
       }
     ];
