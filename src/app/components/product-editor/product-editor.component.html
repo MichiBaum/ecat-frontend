@@ -22,7 +22,7 @@
         <input type="number" pInputText formControlName="price" id="priceField">
       </div>
       <div class="formGroup p-col">
-        <p-button label="{{ 'buttons.save' | translate }}" (onClick)="saveProduct()"></p-button>
+        <p-button label="{{ 'buttons.save' | translate }}" (onClick)="saveProduct()" class="marginRight"></p-button>
         <p-button label="{{ 'buttons.undo' | translate }}" (onClick)="resetFormToLastState()" [disabled]="!product || product.id == 0 || !product.id"></p-button>
       </div>
     </form>

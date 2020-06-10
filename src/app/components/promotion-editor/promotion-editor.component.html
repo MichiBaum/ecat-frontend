@@ -20,7 +20,7 @@
         <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" [readonlyInput]="true" [ngModel]="promotionForm.get('endDate').value | millisecondDate" (onSelect)="updateEndDate($event)" [ngModelOptions]="{standalone: true}"></p-calendar>
       </div>
       <div class="formGroup p-col">
-        <p-button label="{{ 'buttons.save' | translate }}" (onClick)="savePromotion()"></p-button>
+        <p-button label="{{ 'buttons.save' | translate }}" (onClick)="savePromotion()" class="marginRight"></p-button>
         <p-button label="{{ 'buttons.undo' | translate }}" (onClick)="resetFormToLastState()" [disabled]="!promotion || !promotion.id || promotion.id == 0"></p-button>
       </div>
     </form>

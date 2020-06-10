@@ -23,8 +23,8 @@
       <input type="password" pInputText id="confirmPasswordField">
     </div>
     <div class="formGroup p-col">
-      <p-button label="{{ 'buttons.save' | translate }}" (onClick)="saveUser()"></p-button>
-      <p-button label="{{ 'buttons.delete' | translate }}" (onClick)="deleteUser()" [disabled]="!selectedUser || selectedUser.id == ownUser.id || selectedUser.id == 0 || !selectedUser.id"></p-button>
+      <p-button label="{{ 'buttons.save' | translate }}" (onClick)="saveUser()" class="marginRight"></p-button>
+      <p-button label="{{ 'buttons.delete' | translate }}" (onClick)="deleteUser()" class="marginRight" [disabled]="!selectedUser || selectedUser.id == ownUser.id || selectedUser.id == 0 || !selectedUser.id"></p-button>
       <p-button label="{{ 'buttons.undo' | translate }}" (onClick)="resetFormToLastState()" [disabled]="!selectedUser || selectedUser.id == 0 || !selectedUser.id"></p-button>
     </div>
   </div>
