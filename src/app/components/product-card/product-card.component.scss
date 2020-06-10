@@ -13,7 +13,9 @@ img{
 .dynamicContainer {
   display: flex;
   flex-direction: column;
+  max-width: 100%;
 }
+.articleNrContainer
 .footer{
   padding-top: 1rem;
   display: flex;
@@ -27,6 +29,7 @@ img{
 /* styles for '...' */
 .headerContainer {
   overflow: hidden;
+  text-overflow: ellipsis;
   position: relative;
   line-height: 1.2em;
   height: 2.4em;
