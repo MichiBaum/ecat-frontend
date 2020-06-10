@@ -43,6 +43,10 @@
         "notSet": "Keine Produktfamilie vorhanden",
         "notValid": "Produktfamilie ist inkorrekt"
       }
+    },
+    "error": "Fehler",
+    "fields": {
+      "empty": "Leeres Feld"
     }
   },
   "navigation": {
@@ -55,6 +59,39 @@
       "product": "Sind Sie sicher, dass Sie dieses Produkt löschen wollen?",
       "promotion": "Sind Sie sicher, dass Sie diese Aktion löschen wollen?"
     }
+  },
+  "title": "Ecat Produktkatalog",
+  "promotionEditor": {
+    "promotionName": "Aktionsname",
+    "promotionDescription": "Aktionsbeschreibung",
+    "startDate": "Startdatum",
+    "endDate": "Enddatum"
+  },
+  "productEditor": {
+    "productFamilySelection": "Produktfamilienauswahl",
+    "productName": "Produktname",
+    "productDescription": "Produktbeschreibung",
+    "articleNumber": "Artikelnummer",
+    "price": "Preis"
+  },
+  "adminEditor": {
+    "userSelection": "Benutzerauswahl",
+    "name": "Name",
+    "permissions": "Rechte",
+    "newPassword": "Neues Passwort",
+    "newPasswordConfirm": "Neues Passwort bestätigen"
+  },
+  "buttons": {
+    "save": "Speichern",
+    "delete": "Löschen",
+    "undo": "Undo",
+    "logout": "Logout",
+    "userManagement": "Benutzermanagement"
+  },
+  "footer": {
+    "contact": "Kontakt",
+    "location": "Standort",
+    "openingTimes": "Öffnungszeiten"
   }
 
 }

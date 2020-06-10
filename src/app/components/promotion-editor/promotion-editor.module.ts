@@ -10,6 +10,7 @@ import {
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MillisecondDatePipe} from "../../customPipes/mili-date.pipe";
 import {CommonModule} from "@angular/common";
+import {TranslateModule} from "@ngx-translate/core";
 
 @NgModule({
   declarations: [
@@ -19,15 +20,16 @@ import {CommonModule} from "@angular/common";
     exports: [
         PromotionEditorComponent
     ],
-  imports: [
-    DropdownModule,
-    FormsModule,
-    CalendarModule,
-    InputTextareaModule,
-    InputTextModule,
-    CommonModule,
-    ReactiveFormsModule,
-    DialogModule
-  ]
+    imports: [
+        DropdownModule,
+        FormsModule,
+        CalendarModule,
+        InputTextareaModule,
+        InputTextModule,
+        CommonModule,
+        ReactiveFormsModule,
+        DialogModule,
+        TranslateModule
+    ]
 })
 export class PromotionEditorModule { }

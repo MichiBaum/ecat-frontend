@@ -2,26 +2,26 @@
   <div class="container p-grid p-dir-row p-justify-center">
     <form [formGroup]="promotionForm">
       <div class="formGroup p-col">
-        <label for="titleField">Aktionsname</label>
+        <label for="titleField">{{ 'promotionEditor.promotionName' | translate }}</label>
         <input type="text" pInputText formControlName="title" id="titleField">
       </div>
       <div class="formGroup p-col">
-        <label for="descriptionField">Aktionsbeschreibung</label>
+        <label for="descriptionField">{{ 'promotionEditor.promotionDescription' | translate }}</label>
         <textarea type="text" pInputTextarea formControlName="description" id="descriptionField"></textarea>
       </div>
       <div class="formGroup p-col">
-        <label>Startdatum</label>
+        <label>{{ 'promotionEditor.startDate' | translate }}</label>
         <!--        [ngModelOptions]="{standalone: true}" makes date display as text inside input-->
         <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" [readonlyInput]="true" [ngModel]="promotionForm.get('startDate').value | millisecondDate" (onSelect)="updateStartDate($event)" [ngModelOptions]="{standalone: true}"></p-calendar>
       </div>
       <div class="formGroup p-col">
-        <label>Enddatum</label>
+        <label>{{ 'promotionEditor.endDate' | translate }}</label>
         <!--        [ngModelOptions]="{standalone: true}" makes date display as text inside input-->
         <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" [readonlyInput]="true" [ngModel]="promotionForm.get('endDate').value | millisecondDate" (onSelect)="updateEndDate($event)" [ngModelOptions]="{standalone: true}"></p-calendar>
       </div>
       <div class="formGroup p-col">
-        <p-button label="Speichern" (onClick)="savePromotion()"></p-button>
-        <p-button label="Undo" (onClick)="resetFormToLastState()" [disabled]="!promotion || !promotion.id || promotion.id == 0"></p-button>
+        <p-button label="{{ 'buttons.save' | translate }}" (onClick)="savePromotion()"></p-button>
+        <p-button label="{{ 'buttons.undo' | translate }}" (onClick)="resetFormToLastState()" [disabled]="!promotion || !promotion.id || promotion.id == 0"></p-button>
       </div>
     </form>
   </div>

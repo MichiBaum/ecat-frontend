@@ -2,17 +2,17 @@
   <div class="p-col-fixed p-grid container p-justify-between" style="width: 100%">
     <div class="p-col p-grid">
       <p-button icon="fa fa-bars" (onClick)="navigationService.sideBarEmitter.emit(true)" *ngIf="screenWidth < 1200"></p-button>
-      <div class="ui-inputgroup p-col"*ngIf="screenWidth > 1199">
+      <div class="ui-inputgroup p-col" *ngIf="screenWidth > 1199">
         <span class="ui-inputgroup-addon"><i class="fa fa-search" style="line-height: 1.25;"></i></span>
         <input [(ngModel)]="searchtext" type="text" pInputText placeholder="Suche" (keydown)="onSearch($event)" style="width: 100%">
       </div>
     </div>
     <div class="p-col grow p-grid p-align-center p-justify-center" id="titleContainer">
-      <h1 class="noMargin" routerLink="/homepage">Ecat Produktkatalog</h1>
+      <h1 class="noMargin" routerLink="/homepage">{{ 'title' | translate }}</h1>
     </div>
     <div class="p-col p-grid p-justify-end p-align-center p-dir-row">
-      <p-button (onClick)="adminEditorService.editUser()" class="marginRight" label="Benutzermanagement" *ngIf="authenticationService.isLoggedIn()"></p-button>
-      <p-button label="logout" *ngIf="authenticationService.isLoggedIn()" (onClick)="authenticationService.logout()"></p-button>
+      <p-button (onClick)="adminEditorService.editUser()" class="marginRight" label="{{ 'buttons.userManagement' | translate }}" *ngIf="authenticationService.isLoggedIn()"></p-button>
+      <p-button label="{{ 'buttons.logout' | translate }}" *ngIf="authenticationService.isLoggedIn()" (onClick)="authenticationService.logout()"></p-button>
     </div>
   </div>
 </div>

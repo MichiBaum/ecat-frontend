@@ -2,28 +2,28 @@
   <div class="container p-grid p-justify-center">
     <form [formGroup]="productForm">
       <div class="formGroup p-col">
-        <label>Produktfamilienauswahl</label>
+        <label>{{ 'productEditor.productFamilySelection' | translate }}</label>
         <p-dropdown [options]="productFamilyItems" formControlName="productFamilyId"></p-dropdown>
       </div>
       <div class="formGroup p-col">
-        <label for="nameField">Produktname</label>
+        <label for="nameField">{{ 'productEditor.productName' | translate }}</label>
         <input type="text" pInputText formControlName="name" id="nameField">
       </div>
       <div class="formGroup p-col">
-        <label for="descriptionField">Produktbeschreibung</label>
+        <label for="descriptionField">{{ 'productEditor.productDescription' | translate }}</label>
         <textarea type="text" pInputTextarea formControlName="description" id="descriptionField"></textarea>
       </div>
       <div class="formGroup p-col">
-        <label for="articleNrField">Artikelnummer</label>
+        <label for="articleNrField">{{ 'productEditor.articleNumber' | translate }}</label>
         <input type="text" pInputText formControlName="articleNr" id="articleNrField">
       </div>
       <div class="formGroup p-col">
-        <label for="priceField">Preis</label>
+        <label for="priceField">{{ 'productEditor.price' | translate }}</label>
         <input type="number" pInputText formControlName="price" id="priceField">
       </div>
       <div class="formGroup p-col">
-        <p-button label="Speichern" (onClick)="saveProduct()"></p-button>
-        <p-button label="Undo" (onClick)="resetFormToLastState()" [disabled]="!product || product.id == 0 || !product.id"></p-button>
+        <p-button label="{{ 'buttons.save' | translate }}" (onClick)="saveProduct()"></p-button>
+        <p-button label="{{ 'buttons.undo' | translate }}" (onClick)="resetFormToLastState()" [disabled]="!product || product.id == 0 || !product.id"></p-button>
       </div>
     </form>
   </div>

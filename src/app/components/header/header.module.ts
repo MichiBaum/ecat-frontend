@@ -6,6 +6,7 @@ import {ButtonModule, InputTextModule} from "primeng";
 import {RouterModule} from "@angular/router";
 import {CommonModule} from "@angular/common";
 import {AdminEditorModule} from "../admin-editor/admin-editor.module";
+import {TranslateModule} from "@ngx-translate/core";
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {AdminEditorModule} from "../admin-editor/admin-editor.module";
         InputTextModule,
         RouterModule,
         CommonModule,
-        AdminEditorModule
+        AdminEditorModule,
+        TranslateModule
     ]
 })
 export class HeaderModule { }

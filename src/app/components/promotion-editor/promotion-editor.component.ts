@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import {Promotion} from "../../models/promotion";
 import {PromotionService} from "../../services/promotion.service";
-import {ConfirmationService, MessageService} from "primeng";
+import {MessageService} from "primeng";
 import {FormControl, FormGroup} from "@angular/forms";
 import {PromotionEditorService} from "../../services/promotion-editor.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-promotion-editor',
@@ -25,7 +26,9 @@ export class PromotionEditorComponent{
 
   constructor(private promotionService: PromotionService,
               private messageService: MessageService,
-              private promotionEditorService: PromotionEditorService)
+              private promotionEditorService: PromotionEditorService,
+              private translateService: TranslateService
+  )
   {
     this.promotionEditorService.promotionEmitter.subscribe(promotion => {
       this.promotion = promotion;
@@ -55,7 +58,7 @@ export class PromotionEditorComponent{
     if(date){
       this.promotionForm.controls['startDate'].setValue(date.getTime());
     }else {
-      this.messageService.add({severity: 'Fehler', summary: 'Empty field', detail: 'Startdatum ist leer'});
+      this.messageService.add({severity: 'error', summary: this.translateService.instant('errors.fields.empty'), detail: this.translateService.instant('errors.promotion.endDate.notSet')});
     }
   }
 
@@ -63,7 +66,7 @@ export class PromotionEditorComponent{
     if(date){
       this.promotionForm.controls['endDate'].setValue(date.getTime());
     }else {
-      this.messageService.add({severity: 'Fehler', summary: 'Empty field', detail: 'Enddatum ist leer'});
+      this.messageService.add({severity: 'error', summary: this.translateService.instant('errors.fields.empty'), detail: this.translateService.instant('errors.promotion.startDate.notSet')});
     }
   }
 

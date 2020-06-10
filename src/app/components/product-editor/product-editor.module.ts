@@ -8,6 +8,7 @@ import {
     InputTextareaModule,
     InputTextModule
 } from "primeng";
+import {TranslateModule} from "@ngx-translate/core";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {
         ConfirmDialogModule,
         ReactiveFormsModule,
         FormsModule,
-        DialogModule
+        DialogModule,
+        TranslateModule
     ]
 })
 export class ProductEditorModule { }
