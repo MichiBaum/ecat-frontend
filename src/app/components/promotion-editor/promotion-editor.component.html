@@ -12,12 +12,12 @@
       <div class="formGroup p-col">
         <label>{{ 'promotionEditor.startDate' | translate }}</label>
         <!--        [ngModelOptions]="{standalone: true}" makes date display as text inside input-->
-        <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" [readonlyInput]="true" [ngModel]="promotionForm.get('startDate').value | millisecondDate" (onSelect)="updateStartDate($event)" [ngModelOptions]="{standalone: true}"></p-calendar>
+        <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" [readonlyInput]="true" [ngModel]="promotionForm.get('startDate').value | millisecondDate" (onSelect)="updateStartDate($event)" [ngModelOptions]="{standalone: true}" dateFormat="dd.mm.yy"></p-calendar>
       </div>
       <div class="formGroup p-col">
         <label>{{ 'promotionEditor.endDate' | translate }}</label>
         <!--        [ngModelOptions]="{standalone: true}" makes date display as text inside input-->
-        <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" [readonlyInput]="true" [ngModel]="promotionForm.get('endDate').value | millisecondDate" (onSelect)="updateEndDate($event)" [ngModelOptions]="{standalone: true}"></p-calendar>
+        <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" [readonlyInput]="true" [ngModel]="promotionForm.get('endDate').value | millisecondDate" (onSelect)="updateEndDate($event)" [ngModelOptions]="{standalone: true}" dateFormat="dd.mm.yy"></p-calendar>
       </div>
       <div class="formGroup p-col">
         <p-button label="{{ 'buttons.save' | translate }}" (onClick)="savePromotion()" class="marginRight"></p-button>
