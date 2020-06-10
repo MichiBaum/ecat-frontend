@@ -44,6 +44,19 @@
         "notValid": "Produktfamilie ist inkorrekt"
       }
     }
+  },
+  "navigation": {
+    "new": "Neu",
+    "edit": "Bearbeiten",
+    "delete": "Löschen"
+  },
+  "confirmation": {
+    "product": {
+      "delete": "Sind Sie sicher, dass Sie dieses Produkt löschen wollen?"
+    },
+    "promotion": {
+      "delete": "Sind Sie sicher, dass Sie diese Aktion löschen wollen?"
+    }
   }
 
 }

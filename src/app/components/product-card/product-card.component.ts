@@ -11,6 +11,7 @@ import {ConfirmationService, MenuItem} from "primeng";
 import {ProductService} from "../../services/product.service";
 import {AuthenticationService} from "../../services/authentication.service";
 import {ProductEditorService} from "../../services/product-editor.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-product-card',
@@ -35,28 +36,29 @@ export class ProductCardComponent implements OnInit {
               private renderer2: Renderer2,
               private productEditorService: ProductEditorService,
               private confirmationService: ConfirmationService,
+              private translateService: TranslateService
   ) {
   }
 
   ngOnInit(): void {
     this.productContextItems = [
       {
-        label: "Neu",
+        label: this.translateService.instant('navigation.new'),
         command: () => {
           this.productEditorService.editProduct({id: 0, name: '', description: '', articleNr: '', pictureName: '', price: null});
         }
       },
       {
-        label: "Bearbeiten",
+        label: this.translateService.instant('navigation.edit'),
         command: () => {
           this.productEditorService.editProduct(this.product);
         }
       },
       {
-        label: "Löschen",
+        label: this.translateService.instant('navigation.delete'),
         command: () => {
           this.confirmationService.confirm({
-            message: 'Sind sie sicher, dass sie dieses Produkt löschen wolllen?',
+            message: this.translateService.instant('confirmation.delete.product'),
             accept: () => {
               this.productService.deleteProduct(this.product.id).subscribe(() => {
                   this.deleteProduct.emit(this.product.id);

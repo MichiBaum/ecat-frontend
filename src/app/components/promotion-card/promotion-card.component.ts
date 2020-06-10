@@ -14,6 +14,7 @@ import {AuthenticationService} from "../../services/authentication.service";
 import {MenuItem} from "primeng";
 import {PromotionEditorService} from "../../services/promotion-editor.service";
 import {PromotionService} from "../../services/promotion.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-promotion-card',
@@ -36,24 +37,26 @@ export class PromotionCardComponent implements OnInit {
   constructor(private renderer2: Renderer2,
               public authService: AuthenticationService,
               private promotionEditorService: PromotionEditorService,
-              private promotionService: PromotionService) { }
+              private promotionService: PromotionService,
+              private translateService: TranslateService
+  ) { }
 
   ngOnInit(): void {
     this.promotionContextItems = [
       {
-        label: "Neu",
+        label: this.translateService.instant('navigation.new'),
         command: () => {
           this.promotionEditorService.editPromotion({id: 0, title: '', description: '', pictureName: '', startDate: Date.now(), endDate: Date.now()});
         }
       },
       {
-        label: "Bearbeiten",
+        label: this.translateService.instant('navigation.edit'),
         command: () => {
           this.promotionEditorService.editPromotion(this.promotion);
         }
       },
       {
-        label: "Löschen",
+        label: this.translateService.instant('navigation.delete'),
         command: () => {
           this.promotionService.deletePromotion(this.promotion.id).subscribe(() => {
               this.deletePromotion.emit(this.promotion.id);
