@@ -52,12 +52,8 @@
   },
   "confirmation": {
     "delete": {
-      "product": {
-        "delete": "Sind Sie sicher, dass Sie dieses Produkt löschen wollen?"
-      },
-      "promotion": {
-        "delete": "Sind Sie sicher, dass Sie diese Aktion löschen wollen?"
-      }
+      "product": "Sind Sie sicher, dass Sie dieses Produkt löschen wollen?",
+      "promotion": "Sind Sie sicher, dass Sie diese Aktion löschen wollen?"
     }
   }
 
