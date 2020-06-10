@@ -73,7 +73,7 @@ export class AdminEditorComponent implements OnInit {
       this.userService.saveUser(this.adminForm.getRawValue()).subscribe(user => {
           if(this.ownUser.id == user.id){
             this.authenticationService.logout();
-            this.router.navigate(['/homepage']);
+            this.router.navigate(['/login']);
           }else if(this.selectedUser.id !== user.id){
             this.usersItems.push(this.convertUserToSelectItem(user));
           }else{
