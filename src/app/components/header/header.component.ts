@@ -4,7 +4,6 @@ import {WindowResizeListenerService} from "../../services/window-resize-listener
 import {ProductService} from "../../services/product.service";
 import {NavigationService} from "../../services/navigation.service";
 import {AdminEditorService} from "../../services/admin-editor.service";
-import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -21,8 +20,7 @@ export class HeaderComponent implements OnInit {
     private windowResizeListenerService: WindowResizeListenerService,
     private productService: ProductService,
     public navigationService: NavigationService,
-    public adminEditorService: AdminEditorService,
-    public router: Router
+    public adminEditorService: AdminEditorService
   ) {
     this.windowResizeListenerService.screenWidthEmitter.subscribe(
       (screenWidthEmit: number) => {

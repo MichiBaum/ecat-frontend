@@ -1,7 +1,7 @@
 <div class="headerBackground p-grid p-justify-center">
   <div class="p-col-fixed p-grid container p-justify-between" style="width: 100%">
     <div class="p-col p-grid">
-      <p-button icon="fa fa-bars" (onClick)="navigationService.sideBarEmitter.emit(true)" *ngIf="screenWidth < 1200 && router.url !== '/login'"></p-button>
+      <p-button icon="fa fa-bars" (onClick)="navigationService.sideBarEmitter.emit(true)" *ngIf="screenWidth < 1200"></p-button>
       <div class="ui-inputgroup p-col" *ngIf="screenWidth > 1199">
         <span class="ui-inputgroup-addon"><i class="fa fa-search" style="line-height: 1.25;"></i></span>
         <input [(ngModel)]="searchtext" type="text" pInputText placeholder="Suche" (keydown)="onSearch($event)" style="width: 100%">
