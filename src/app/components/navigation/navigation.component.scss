@@ -1,4 +1,10 @@
 .search-margin-bottom{
   margin-bottom: 2rem;
 }
+:host{
+  ::ng-deep .ui-slidemenu .ui-menuitem-link:focus {
+    outline: 0 !important;
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0) !important;
+  }
+}
 
