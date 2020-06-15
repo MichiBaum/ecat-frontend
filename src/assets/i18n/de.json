@@ -82,7 +82,8 @@
     "permissions": "Rechte",
     "newPassword": "Neues Passwort",
     "newPasswordConfirm": "Neues Passwort bestätigen",
-    "successfulSave": "Der Benutzer wurde erfolgreich gespeichert"
+    "successfulSave": "Der Benutzer wurde erfolgreich gespeichert",
+    "passwordMismatch": "Die Passwörter stimmen nicht überein"
   },
   "buttons": {
     "save": "Speichern",

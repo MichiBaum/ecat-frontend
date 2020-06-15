@@ -70,7 +70,7 @@ export class AdminEditorComponent implements OnInit {
 
   saveUser() {
     if(!this.passwordsMatch()){
-      this.messageService.add({severity:'error', summary:'Fehler', detail:'Die Passwörter stimmen nicht überein'});
+      this.messageService.add({severity:'error', summary:this.translateService.instant('toastMessages.error'), detail:this.translateService.instant('adminEditor.passwordMismatch')});
     }else{
       this.userService.saveUser(this.adminForm.getRawValue()).subscribe(user => {
           if(this.ownUser.id == user.id){
