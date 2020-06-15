@@ -46,7 +46,8 @@ export class PromotionEditorComponent{
     this.promotionService.savePromotion(this.promotionForm.getRawValue()).subscribe(data => {
       Object.assign(this.promotion, data);
       this.showDialog = false;
-    },
+      this.messageService.add({severity: 'success', summary: this.translateService.instant('toastMessages.success'), detail: this.translateService.instant('promotionEditor.successfulSave')});
+      },
       (error => {}))
   }
 

@@ -9,6 +9,7 @@ import {Permission} from "../../models/permission";
 import {PermissionService} from "../../services/permission.service";
 import {Router} from "@angular/router";
 import {forkJoin} from "rxjs";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-admin-editor',
@@ -33,7 +34,8 @@ export class AdminEditorComponent implements OnInit {
               private adminEditorService: AdminEditorService,
               private permissionService: PermissionService,
               private router: Router,
-              private messageService: MessageService)
+              private messageService: MessageService,
+              private translateService: TranslateService)
   {
     adminEditorService.showAdminEditorEmitter.subscribe(showDialog => {
       this.showDialog = showDialog;
@@ -81,6 +83,7 @@ export class AdminEditorComponent implements OnInit {
             this.usersItems.find(userItem => userItem.value.id === user.id).label = user.name;
           }
           this.adminForm.patchValue(this.selectedUser);
+          this.messageService.add({severity:'success', summary:this.translateService.instant('toastMessages.success'), detail:this.translateService.instant('adminEditor.successfulSave')});
         },
         (error => {}))
     }

@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {ConfirmationService, SelectItem} from "primeng";
+import {ConfirmationService, MessageService, SelectItem} from "primeng";
 import {Product} from "../../models/product";
 import {ProductService} from "../../services/product.service";
 import {ProductFamily} from "../../models/product-family";
 import {ProductTypesService} from "../../services/product-types.service";
 import {FormControl, FormGroup} from "@angular/forms";
 import {ProductEditorService} from "../../services/product-editor.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-product-editor',
@@ -30,7 +31,9 @@ export class ProductEditorComponent implements OnInit {
   constructor(private productService: ProductService,
               private productTypesService: ProductTypesService,
               private confirmService: ConfirmationService,
-              private productEditorService: ProductEditorService)
+              private productEditorService: ProductEditorService,
+              private messageService: MessageService,
+              private translateService: TranslateService)
   {
     this.productEditorService.showProductEditorEmitter.subscribe(showDialog => {
       this.showDialog = showDialog;
@@ -56,6 +59,7 @@ export class ProductEditorComponent implements OnInit {
     this.productService.saveProduct(this.productForm.getRawValue()).subscribe(data => {
       Object.assign(this.product, data);
       this.showDialog = false;
+        this.messageService.add({severity:'success', summary:this.translateService.instant('toastMessages.success'), detail:this.translateService.instant('productEditor.successfulSave')});
     },
       (error => {}))
   }
