@@ -1,7 +1,7 @@
 <app-header></app-header>
 <div class="content-container">
   <div class="content p-grid p-dir-row">
-    <app-navigation class="p-col-fixed" style="width: auto"></app-navigation>
+    <app-navigation class="p-col-fixed" style="width: auto" *ngIf="router.url !== '/login'"></app-navigation>
     <router-outlet></router-outlet>
   </div>
 </div>

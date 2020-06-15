@@ -1,5 +1,6 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {WindowResizeListenerService} from "./services/window-resize-listener.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -8,8 +9,10 @@ import {WindowResizeListenerService} from "./services/window-resize-listener.ser
 })
 export class AppComponent implements OnInit{
 
-  constructor(private windowResizeListenerService: WindowResizeListenerService) {
-  }
+  constructor(
+    private windowResizeListenerService: WindowResizeListenerService,
+    public router: Router
+  ) {}
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
