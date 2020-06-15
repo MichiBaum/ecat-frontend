@@ -65,21 +65,24 @@
     "promotionName": "Aktionsname",
     "promotionDescription": "Aktionsbeschreibung",
     "startDate": "Startdatum",
-    "endDate": "Enddatum"
+    "endDate": "Enddatum",
+    "successfulSave": "Die Aktion wurde erfolgreich gespeichert"
   },
   "productEditor": {
     "productFamilySelection": "Produktfamilienauswahl",
     "productName": "Produktname",
     "productDescription": "Produktbeschreibung",
     "articleNumber": "Artikelnummer",
-    "price": "Preis"
+    "price": "Preis",
+    "successfulSave": "Das Produkt wurde erfolgreich gespeichert"
   },
   "adminEditor": {
     "userSelection": "Benutzerauswahl",
     "name": "Name",
     "permissions": "Rechte",
     "newPassword": "Neues Passwort",
-    "newPasswordConfirm": "Neues Passwort bestätigen"
+    "newPasswordConfirm": "Neues Passwort bestätigen",
+    "successfulSave": "Der Benutzer wurde erfolgreich gespeichert"
   },
   "buttons": {
     "save": "Speichern",
@@ -92,6 +95,10 @@
     "contact": "Kontakt",
     "location": "Standort",
     "openingTimes": "Öffnungszeiten"
+  },
+  "toastMessages": {
+    "success": "Erfolg",
+    "error": "Fehler"
   }
 
 }
