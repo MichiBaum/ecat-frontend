@@ -44,8 +44,17 @@
         "notValid": "Produktfamilie ist inkorrekt"
       }
     },
-    "login": {
+    "loginErrorHandler": {
       "wrongCredentials": "Falscher Benutzername oder falsches Passwort"
+    },
+    "authErrorHandler": {
+      "forbidden": "Verbotene Anfrage"
+    },
+    "internalServerErrrorHandler": {
+      "error": "Es ist ein Fehler aufgetreten"
+    },
+    "notFoundErrorHandler": {
+      "resourceNotFound": "Die angefragte Ressource konnte nicht gefunden werden"
     },
     "fields": {
       "empty": "Leeres Feld"

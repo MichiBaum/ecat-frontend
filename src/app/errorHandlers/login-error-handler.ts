@@ -14,6 +14,11 @@ export class LoginErrorHandler implements HttpResponseErrorHandler{
   }
 
   handle(error: HttpErrorResponse) {
-    this.messageService.add({severity: 'error', summary: this.translateService.instant('toastMessages.error'), detail: this.translateService.instant('errors.login.wrongCredentials'), life: 5000});
+    this.messageService.add({
+      severity: 'error',
+      summary: this.translateService.instant('toastMessages.error'),
+      detail: this.translateService.instant('errors.loginErrorHandler.wrongCredentials'),
+      life: 5000
+    });
   }
 }

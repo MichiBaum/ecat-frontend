@@ -20,4 +20,13 @@ export class AuthErrorHandler implements HttpResponseErrorHandler{
       this.messageService.add({severity: 'error', summary: this.translateService.instant('toastMessages.error'), detail: error.message, life: 5000});
     }
   }
+
+  handleGeneric(){
+    this.messageService.add({
+      severity: 'error',
+      summary: this.translateService.instant('toastMessages.error'),
+      detail: this.translateService.instant('errors.authErrorHandler.forbidden'),
+      life: 5000
+    })
+  }
 }
