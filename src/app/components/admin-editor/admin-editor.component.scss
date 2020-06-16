@@ -8,3 +8,15 @@
 .marginRight{
   margin-right: 0.5rem;
 }
+form{
+  padding: 0;
+}
+.input{
+  width: 100%;
+}
+::ng-deep .ui-dropdown{
+  width: 100% !important;
+}
+::ng-deep .ui-multiselect{
+  width: 100% !important;
+}
