@@ -1,6 +1,6 @@
 <div class="container">
-  <div class="slidemenuContainer">
-    <app-customSlideMenu class="slidemenu" [model]="menuItem" [menuWidth]="250" [viewportHeight]="650" [style]="{'width': '250px', 'border': 'none'}" *ngIf="screenWidth > 1199"></app-customSlideMenu>
+  <div class="slidemenuContainer" *ngIf="screenWidth > 1199">
+    <app-customSlideMenu class="slidemenu" [model]="menuItem" [menuWidth]="250" [viewportHeight]="650" [style]="{'width': '250px', 'border': 'none'}"></app-customSlideMenu>
   </div>
   <p-sidebar [(visible)]="displaySideBar" [blockScroll]="true" [style]="{'width': '100%'}" *ngIf="screenWidth < 1200">
     <div class="ui-inputgroup">
