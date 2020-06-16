@@ -44,7 +44,9 @@
         "notValid": "Produktfamilie ist inkorrekt"
       }
     },
-    "error": "Fehler",
+    "login": {
+      "wrongCredentials": "Falscher Benutzername oder falsches Passwort"
+    },
     "fields": {
       "empty": "Leeres Feld"
     }

@@ -2,10 +2,11 @@ import {HttpResponseErrorHandler} from "./http-response-error-handler";
 import {HttpErrorResponse} from "@angular/common/http";
 import {MessageService} from "primeng";
 import {Injectable} from "@angular/core";
+import {TranslateService} from "@ngx-translate/core";
 
 @Injectable()
 export class LoginErrorHandler implements HttpResponseErrorHandler{
-  constructor(private messageService: MessageService) {
+  constructor(private messageService: MessageService, private translateService: TranslateService) {
   }
 
   matches(error: HttpErrorResponse): boolean {
@@ -13,6 +14,6 @@ export class LoginErrorHandler implements HttpResponseErrorHandler{
   }
 
   handle(error: HttpErrorResponse) {
-    this.messageService.add({severity: 'error', summary: 'Fehler', detail: 'Falscher Benutzername oder Passwort', life: 5000});
+    this.messageService.add({severity: 'error', summary: this.translateService.instant('toastMessages.error'), detail: this.translateService.instant('errors.login.wrongCredentials'), life: 5000});
   }
 }
