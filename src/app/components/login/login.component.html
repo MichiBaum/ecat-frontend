@@ -1,16 +1,20 @@
-<div class="p-grid p-dir-col p-justify-center">
-  <form [formGroup]="loginFormGroup">
-    <div class="p-col">
-      <label for="nameField">Benutzername</label>
-      <input type="text" pInputText formControlName="name" id="nameField">
-    </div>
+<div class="p-grid">
+  <div class="p-col-6 p-offset-2">
+    <div class="p-grid p-dir-col p-justify-center">
+      <form [formGroup]="loginFormGroup">
+        <div class="p-col">
+          <label for="nameField">Benutzername</label>
+          <input type="text" pInputText formControlName="name" id="nameField">
+        </div>
 
-    <div class="p-col">
-      <label for="passwordField">Passwort</label>
-      <input type="password" pPassword formControlName="password" id="passwordField" [feedback]="false"/>
+        <div class="p-col">
+          <label for="passwordField">Passwort</label>
+          <input type="password" pPassword formControlName="password" id="passwordField" [feedback]="false"/>
+        </div>
+      </form>
+      <div class="p-col">
+        <p-button label="login" (onClick)="login()"></p-button>
+      </div>
     </div>
-  </form>
-  <div class="p-col">
-    <p-button label="login" (onClick)="login()"></p-button>
   </div>
 </div>
