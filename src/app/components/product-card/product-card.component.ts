@@ -7,11 +7,12 @@ import {
   Output, Renderer2, ViewChild,
 } from '@angular/core';
 import {Product} from "../../models/product";
-import {ConfirmationService, MenuItem} from "primeng";
+import {ConfirmationService, ContextMenu, MenuItem} from "primeng";
 import {ProductService} from "../../services/product.service";
 import {AuthenticationService} from "../../services/authentication.service";
 import {ProductEditorService} from "../../services/product-editor.service";
 import {TranslateService} from "@ngx-translate/core";
+import {ContextmenuService} from "../../services/contextmenu.service";
 
 @Component({
   selector: 'app-product-card',
@@ -26,6 +27,7 @@ export class ProductCardComponent implements OnInit {
   @Output() deleteProduct = new EventEmitter();
   @ViewChild('container') containerElement: ElementRef;
   @ViewChild('imageContainer') imageContainer: ElementRef;
+  @ViewChild('contextMenu') contextMenu: ContextMenu;
   @HostBinding('class') get hostClasses(): string{
     return this.expanded ? 'p-col-12': this.classes;
   };
@@ -37,7 +39,13 @@ export class ProductCardComponent implements OnInit {
               private productEditorService: ProductEditorService,
               private confirmationService: ConfirmationService,
               private translateService: TranslateService,
+              public contextmenuService: ContextmenuService
   ) {
+    contextmenuService.closeContextMenuEmitter.subscribe(exceptionId => {
+      if(this.product.id !== exceptionId){
+        this.contextMenu.hide();
+      }
+    })
   }
 
   ngOnInit(): void {

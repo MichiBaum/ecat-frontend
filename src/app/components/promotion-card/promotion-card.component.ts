@@ -11,10 +11,11 @@ import {
 } from '@angular/core';
 import {Promotion} from "../../models/promotion";
 import {AuthenticationService} from "../../services/authentication.service";
-import {ConfirmationService, MenuItem} from "primeng";
+import {ConfirmationService, ContextMenu, MenuItem} from "primeng";
 import {PromotionEditorService} from "../../services/promotion-editor.service";
 import {PromotionService} from "../../services/promotion.service";
 import {TranslateService} from "@ngx-translate/core";
+import {ContextmenuService} from "../../services/contextmenu.service";
 
 @Component({
   selector: 'app-promotion-card',
@@ -29,6 +30,7 @@ export class PromotionCardComponent implements OnInit {
   @Output() deletePromotion = new EventEmitter();
   @ViewChild('container') containerElement: ElementRef;
   @ViewChild('imageContainer') imageContainer: ElementRef;
+  @ViewChild('contextMenu') contextMenu: ContextMenu;
   @HostBinding('class') get hostClasses(): string{
     return this.expanded ? 'p-col-12': this.classes;
   };
@@ -39,8 +41,15 @@ export class PromotionCardComponent implements OnInit {
               private promotionEditorService: PromotionEditorService,
               private promotionService: PromotionService,
               private translateService: TranslateService,
-              private confirmationService: ConfirmationService
-  ) { }
+              private confirmationService: ConfirmationService,
+              public contextmenuService: ContextmenuService
+  ) {
+    contextmenuService.closeContextMenuEmitter.subscribe(exceptionId => {
+      if(this.promotion.id !== exceptionId){
+        this.contextMenu.hide();
+      }
+    })
+  }
 
   ngOnInit(): void {
     this.promotionContextItems = [
