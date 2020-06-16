@@ -77,6 +77,9 @@ export class PromotionCardComponent implements OnInit {
     if(this.expanded == false){
       this.renderer2.setStyle(this.imageContainer.nativeElement, 'width', this.containerElement.nativeElement.offsetWidth + 'px');
       this.expanded = true;
+      setTimeout(() => {
+        window.scrollTo({top: this.containerElement.nativeElement.offsetTop, behavior: 'smooth'});
+      })
     }else{
       this.renderer2.setStyle(this.imageContainer.nativeElement, 'width', '100%');
       this.expanded = false;
