@@ -2,29 +2,21 @@
   display: block;
   text-align: left;
   margin-bottom: 2em;
-  label{
+  label {
     display: block;
     margin-bottom: 1em;
   }
-  input{
-    width: 420px;
-  }
-  textarea{
-    width: 420px;
-  }
-  p-dropdown{
-    min-width: 300px !important;
-  }
-  .ui-dropdown{
-    min-width: 420px !important;
-  }
-}
-.ui-calendar{
-  min-width: 420px !important;
 }
 .container{
   margin: 0.5rem;
 }
 .marginRight{
   margin-right: 0.5rem;
+}
+.input{
+  width: 100%;
+  min-width: 100%;
+}
+::ng-deep .ui-dropdown{
+  width: 100% !important;
 }

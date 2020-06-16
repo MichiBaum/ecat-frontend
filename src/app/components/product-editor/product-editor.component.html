@@ -1,25 +1,25 @@
-<p-dialog [(visible)]="showDialog" [modal]="true">
-  <div class="container p-grid p-justify-center">
-    <form [formGroup]="productForm">
+<p-dialog [(visible)]="showDialog" [modal]="true" [style]="{height: 'auto', width:'420px'}">
+  <div class="container">
+    <form [formGroup]="productForm" class="p-grid p-dir-col p-justify-center">
       <div class="formGroup p-col">
         <label>{{ 'productEditor.productFamilySelection' | translate }}</label>
-        <p-dropdown [options]="productFamilyItems" formControlName="productFamilyId"></p-dropdown>
+        <p-dropdown class="input" [options]="productFamilyItems" formControlName="productFamilyId"></p-dropdown>
       </div>
       <div class="formGroup p-col">
         <label for="nameField">{{ 'productEditor.productName' | translate }}</label>
-        <input type="text" pInputText formControlName="name" id="nameField">
+        <input class="input" type="text" pInputText formControlName="name" id="nameField">
       </div>
       <div class="formGroup p-col">
         <label for="descriptionField">{{ 'productEditor.productDescription' | translate }}</label>
-        <textarea type="text" pInputTextarea formControlName="description" id="descriptionField"></textarea>
+        <textarea class="input" type="text" pInputTextarea formControlName="description" id="descriptionField"></textarea>
       </div>
       <div class="formGroup p-col">
         <label for="articleNrField">{{ 'productEditor.articleNumber' | translate }}</label>
-        <input type="text" pInputText formControlName="articleNr" id="articleNrField">
+        <input class="input" type="text" pInputText formControlName="articleNr" id="articleNrField">
       </div>
       <div class="formGroup p-col">
         <label for="priceField">{{ 'productEditor.price' | translate }}</label>
-        <input type="number" pInputText formControlName="price" id="priceField">
+        <input class="input" type="number" pInputText formControlName="price" id="priceField">
       </div>
       <div class="formGroup p-col">
         <p-button label="{{ 'buttons.save' | translate }}" (onClick)="saveProduct()" class="marginRight"></p-button>
