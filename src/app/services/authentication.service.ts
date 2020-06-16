@@ -31,7 +31,10 @@ export class AuthenticationService {
 
   hasPermission(permission: string): boolean{
     return this.getPermissions().indexOf(permission) != -1;
+  }
 
+  hasAnyPermission(...permissions: string[]){
+    return this.getPermissions().some(permission => permissions.indexOf(permission) >= 0);
   }
 
   logout() {
