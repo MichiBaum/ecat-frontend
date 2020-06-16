@@ -3,6 +3,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {HttpResponseErrorHandler} from "./http-response-error-handler";
 import {TranslateService} from "@ngx-translate/core";
+import {environment} from "../../environments/environment";
 
 @Injectable()
 export class NotFoundErrorHandler implements HttpResponseErrorHandler{
@@ -14,12 +15,13 @@ export class NotFoundErrorHandler implements HttpResponseErrorHandler{
   }
 
   handle(error: HttpErrorResponse) {
-    if(error.error){
-      this.messageService.add({severity: 'error', summary: this.translateService.instant('toastMessages.error'), detail: error.error.message, life: 5000});
+    if(environment.generic_error_messages === true){
+      this.handleGeneric()
     }else{
-      this.messageService.add({severity: 'error', summary: this.translateService.instant('toastMessages.error'), detail: error.message, life: 5000});
+      this.handleNonGeneric(error);
     }
   }
+
   handleGeneric(){
     this.messageService.add({
       severity: 'error',
@@ -27,5 +29,13 @@ export class NotFoundErrorHandler implements HttpResponseErrorHandler{
       detail: this.translateService.instant('errors.notFoundErrorHandler.resourceNotFound'),
       life: 5000
     })
+  }
+
+  handleNonGeneric(error: HttpErrorResponse){
+    if(error.error){
+      this.messageService.add({severity: 'error', summary: this.translateService.instant('toastMessages.error'), detail: error.error.message, life: 5000});
+    }else{
+      this.messageService.add({severity: 'error', summary: this.translateService.instant('toastMessages.error'), detail: error.message, life: 5000});
+    }
   }
 }

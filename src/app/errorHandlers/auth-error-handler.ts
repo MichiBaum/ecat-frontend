@@ -3,6 +3,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {MessageService} from "primeng";
 import {Injectable} from "@angular/core";
 import {TranslateService} from "@ngx-translate/core";
+import {environment} from "../../environments/environment";
 
 @Injectable()
 export class AuthErrorHandler implements HttpResponseErrorHandler{
@@ -14,10 +15,10 @@ export class AuthErrorHandler implements HttpResponseErrorHandler{
   }
 
   handle(error: HttpErrorResponse) {
-    if(error.error){
-      this.messageService.add({severity: 'error', summary: this.translateService.instant('toastMessages.error'), detail: error.error.message, life: 5000});
+    if(environment.generic_error_messages === true){
+      this.handleGeneric()
     }else{
-      this.messageService.add({severity: 'error', summary: this.translateService.instant('toastMessages.error'), detail: error.message, life: 5000});
+      this.handleNonGeneric(error);
     }
   }
 
@@ -28,5 +29,13 @@ export class AuthErrorHandler implements HttpResponseErrorHandler{
       detail: this.translateService.instant('errors.authErrorHandler.forbidden'),
       life: 5000
     })
+  }
+
+  handleNonGeneric(error: HttpErrorResponse){
+    if(error.error){
+      this.messageService.add({severity: 'error', summary: this.translateService.instant('toastMessages.error'), detail: error.error.message, life: 5000});
+    }else{
+      this.messageService.add({severity: 'error', summary: this.translateService.instant('toastMessages.error'), detail: error.message, life: 5000});
+    }
   }
 }
