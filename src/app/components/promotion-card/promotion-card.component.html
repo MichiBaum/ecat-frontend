@@ -16,5 +16,5 @@
     </div>
   </div>
 </div>
-<p-contextMenu [target]="promotionCardImage" [model]="promotionContextItems" *ngIf="this.authService.isLoggedIn()"></p-contextMenu>
+<p-contextMenu [target]="promotionCardImage" [model]="promotionContextItems" *ngIf="this.authService.hasPermission('ADMINISTRATE')"></p-contextMenu>
 

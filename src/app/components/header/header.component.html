@@ -16,5 +16,5 @@
     </div>
   </div>
 </div>
-<app-admin-editor *ngIf="authenticationService.isLoggedIn()"></app-admin-editor>
+<app-admin-editor *ngIf="authenticationService.hasAnyPermission('ADMINISTRATE', 'ADMINISTRATE_ADMINS')"></app-admin-editor>
 

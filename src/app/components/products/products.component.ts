@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Product} from "../../models/product";
 import {ProductService} from "../../services/product.service";
+import {AuthenticationService} from "../../services/authentication.service";
 
 @Component({
   selector: 'app-products',
@@ -14,7 +15,7 @@ export class ProductsComponent implements OnInit {
 
   products: Product[] = [];
 
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductService, public authService: AuthenticationService) {
     this.productService.products.subscribe(
       (products) => this.products = products
     )

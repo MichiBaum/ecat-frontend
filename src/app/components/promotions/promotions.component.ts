@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Promotion} from "../../models/promotion";
 import {PromotionService} from "../../services/promotion.service";
+import {AuthenticationService} from "../../services/authentication.service";
 
 @Component({
   selector: 'app-promotions',
@@ -13,7 +14,7 @@ export class PromotionsComponent implements OnInit {
   newPromotions: Promotion[];
   normalPromotions: Promotion[];
 
-  constructor(private promotionService: PromotionService) { }
+  constructor(private promotionService: PromotionService, public authService: AuthenticationService) { }
 
   ngOnInit(): void {
     this.promotionService.getPromotions().subscribe(promotions => {
