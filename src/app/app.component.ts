@@ -14,7 +14,7 @@ export class AppComponent implements OnInit{
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.windowResizeListenerService.screenWidthEmitter.emit(event.target.innerWidth);
-    this.windowResizeListenerService.screenHeightEmitter.emit(window.innerHeight);
+    this.windowResizeListenerService.screenHeightEmitter.emit(event.target.innerHeight);
     console.log("Window res")
   }
 
