@@ -33,3 +33,6 @@
 .marginRight{
   margin-right: 0.5rem;
 }
+::ng-deep .input{
+  width: 100% !important;
+}
