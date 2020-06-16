@@ -1,4 +1,4 @@
-<p-dialog [(visible)]="showDialog" [modal]="true" [style]="{height: 'auto', width: '420px'}">
+<p-dialog [(visible)]="showDialog" [modal]="true" [style]="{height: 'auto', width: '420px'}" header="{{ 'adminEditor.adminEditor' | translate }}">
   <div class="container p-dir-col p-grid p-justify-center">
     <div class="formGroup p-col" *ngIf="authenticationService.hasPermission('ADMINISTRATE_ADMINS')">
       <label>{{ 'adminEditor.userSelection' | translate }}</label>

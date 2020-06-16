@@ -77,7 +77,8 @@
     "promotionDescription": "Aktionsbeschreibung",
     "startDate": "Startdatum",
     "endDate": "Enddatum",
-    "successfulSave": "Die Aktion wurde erfolgreich gespeichert"
+    "successfulSave": "Die Aktion wurde erfolgreich gespeichert",
+    "promotionEditor": "Aktionseditor"
   },
   "productEditor": {
     "productFamilySelection": "Produktfamilienauswahl",
@@ -85,7 +86,8 @@
     "productDescription": "Produktbeschreibung",
     "articleNumber": "Artikelnummer",
     "price": "Preis",
-    "successfulSave": "Das Produkt wurde erfolgreich gespeichert"
+    "successfulSave": "Das Produkt wurde erfolgreich gespeichert",
+    "productEditor": "Produkteditor"
   },
   "adminEditor": {
     "userSelection": "Benutzerauswahl",
@@ -94,7 +96,8 @@
     "newPassword": "Neues Passwort",
     "newPasswordConfirm": "Neues Passwort bestätigen",
     "successfulSave": "Der Benutzer wurde erfolgreich gespeichert",
-    "passwordMismatch": "Die Passwörter stimmen nicht überein"
+    "passwordMismatch": "Die Passwörter stimmen nicht überein",
+    "adminEditor": "Benutzermanager"
   },
   "buttons": {
     "save": "Speichern",
