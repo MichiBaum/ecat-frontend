@@ -11,7 +11,7 @@
       </div>
       <div class="formGroup p-col" *ngIf="authenticationService.hasPermission('ADMINISTRATE_ADMINS')">
         <label for="permissionsField">{{ 'adminEditor.permissions' | translate }}</label>
-        <p-multiSelect class="input" id="permissionsField" [options]="permissionsItems" formControlName="permissions"></p-multiSelect>
+        <p-multiSelect class="input" id="permissionsField" [options]="permissionsItems" formControlName="permissions" [maxSelectedLabels]="1"></p-multiSelect>
       </div>
       <div class="formGroup p-col">
         <label for="passwordField">{{ 'adminEditor.newPassword' | translate }}</label>
