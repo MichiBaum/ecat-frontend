@@ -75,7 +75,9 @@ export class ProductCardComponent implements OnInit {
     if(this.expanded == false){
       this.renderer2.setStyle(this.imageContainer.nativeElement, 'width', this.containerElement.nativeElement.offsetWidth + 'px');
       this.expanded = true;
-      window.scrollTo({top: this.containerElement.nativeElement.offsetTop + this.containerElement.nativeElement.offsetHeight, behavior: 'smooth'});
+      setTimeout(() => {
+        window.scrollTo({top: this.containerElement.nativeElement.offsetTop, behavior: 'smooth'});
+      })
     }else{
       this.renderer2.setStyle(this.imageContainer.nativeElement, 'width', '100%');
       this.expanded = false;
