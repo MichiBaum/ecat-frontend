@@ -21,6 +21,9 @@ h1{
   cursor: pointer;
   font-size: 7vw;
   display: inline;
+  &:focus{
+    outline: none !important;
+  }
 }
 ul{
   margin: 0;
