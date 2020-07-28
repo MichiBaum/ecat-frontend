@@ -7,6 +7,7 @@ import {ProductTypesService} from "../../services/product-types.service";
 import {FormControl, FormGroup} from "@angular/forms";
 import {ProductEditorService} from "../../services/product-editor.service";
 import {TranslateService} from "@ngx-translate/core";
+import {SaveProductDto} from "../../models/save-product-dto";
 
 @Component({
   selector: 'app-product-editor',
@@ -16,6 +17,7 @@ import {TranslateService} from "@ngx-translate/core";
 export class ProductEditorComponent implements OnInit {
 
   product: Product = {id: 0, name: '', description: '', articleNr: '', pictureName: '', price: null};
+  image: File;
   productFamilyItems: SelectItem[] = [];
   showDialog: boolean = false;
 
@@ -25,7 +27,8 @@ export class ProductEditorComponent implements OnInit {
     productFamilyId: new FormControl(),
     description: new FormControl(),
     articleNr: new FormControl(),
-    price: new FormControl()
+    price: new FormControl(),
+    image: new FormControl()
   });
 
   constructor(private productService: ProductService,
@@ -55,11 +58,19 @@ export class ProductEditorComponent implements OnInit {
   updateForm(){
     this.productForm.patchValue(this.product);
   }
+  updateImage(event){
+    this.productForm.get('image').setValue(event.target.files[0]);
+  }
   saveProduct() {
-    this.productService.saveProduct(this.productForm.getRawValue()).subscribe(data => {
+    this.productService.saveProduct(new SaveProductDto(this.productForm.getRawValue())).subscribe(data => {
       Object.assign(this.product, data);
-      this.showDialog = false;
-        this.messageService.add({severity:'success', summary:this.translateService.instant('toastMessages.success'), detail:this.translateService.instant('productEditor.successfulSave')});
+      this.messageService.add({severity:'success', summary:this.translateService.instant('toastMessages.success'), detail:this.translateService.instant('productEditor.successfulSave')});
+      const formData = new FormData();
+      formData.append('image', this.productForm.get('image').value);
+      this.productService.saveProductImage(formData, data.id).subscribe(() => {
+        this.messageService.add({severity:'success', summary:this.translateService.instant('toastMessages.success'), detail:this.translateService.instant('productEditor.successfulImageSave')});
+      },
+        (error => {}))
     },
       (error => {}))
   }

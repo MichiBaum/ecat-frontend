@@ -4,7 +4,7 @@ import {ProductEditorComponent} from "./product-editor.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {
     ConfirmDialogModule, DialogModule,
-    DropdownModule,
+    DropdownModule, FileUploadModule,
     InputTextareaModule,
     InputTextModule
 } from "primeng";
@@ -26,7 +26,8 @@ import {TranslateModule} from "@ngx-translate/core";
         ReactiveFormsModule,
         FormsModule,
         DialogModule,
-        TranslateModule
+        TranslateModule,
+        FileUploadModule
     ]
 })
 export class ProductEditorModule { }
