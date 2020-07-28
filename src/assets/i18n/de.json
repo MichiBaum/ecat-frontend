@@ -13,6 +13,9 @@
       },
       "id": {
         "notValid": "Id ist inkorrekt"
+      },
+      "image": {
+        "invalidType": "Dieser Bildtyp wird nicht unterstützt. Bitte nur PNG, JPEG oder JPG"
       }
     },
     "user": {
@@ -84,6 +87,7 @@
     "promotionEditor": "Aktionseditor"
   },
   "productEditor": {
+    "imageSelection": "Bildauswahl",
     "productFamilySelection": "Produktfamilienauswahl",
     "productName": "Produktname",
     "productDescription": "Produktbeschreibung",
