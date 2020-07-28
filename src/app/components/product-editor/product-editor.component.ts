@@ -59,7 +59,6 @@ export class ProductEditorComponent implements OnInit {
     this.productForm.patchValue(this.product);
   }
   updateImage(event){
-    console.log(event);
     this.productForm.get('image').setValue(event.files[0]);
   }
   saveProduct() {

@@ -21,7 +21,8 @@ export class PromotionEditorComponent{
     title: new FormControl(),
     description: new FormControl(),
     startDate: new FormControl(),
-    endDate: new FormControl()
+    endDate: new FormControl(),
+    image: new FormControl()
   });
 
   constructor(private promotionService: PromotionService,
@@ -42,11 +43,19 @@ export class PromotionEditorComponent{
   updateForm(){
     this.promotionForm.patchValue(this.promotion);
   }
+  updateImage(event){
+    this.promotionForm.get('image').setValue(event.files[0]);
+  }
   savePromotion() {
     this.promotionService.savePromotion(this.promotionForm.getRawValue()).subscribe(data => {
       Object.assign(this.promotion, data);
-      this.showDialog = false;
       this.messageService.add({severity: 'success', summary: this.translateService.instant('toastMessages.success'), detail: this.translateService.instant('promotionEditor.successfulSave')});
+      const formData = new FormData();
+      formData.append('image', this.promotionForm.get('image').value);
+      this.promotionService.savePromotionImage(formData, data.id).subscribe(() => {
+          this.messageService.add({severity:'success', summary:this.translateService.instant('toastMessages.success'), detail:this.translateService.instant('promotionEditor.successfulImageSave')});
+        },
+        (error => {}))
       },
       (error => {}))
   }

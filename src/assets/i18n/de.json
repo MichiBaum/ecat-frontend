@@ -79,11 +79,13 @@
   },
   "title": "Ecat Produktkatalog",
   "promotionEditor": {
+    "imageSelection": "Bildauswahl",
     "promotionName": "Aktionsname",
     "promotionDescription": "Aktionsbeschreibung",
     "startDate": "Startdatum",
     "endDate": "Enddatum",
     "successfulSave": "Die Aktion wurde erfolgreich gespeichert",
+    "successfulImageSave": "Das Aktionsbild wurde erfolgreich gespeichert",
     "promotionEditor": "Aktionseditor"
   },
   "productEditor": {

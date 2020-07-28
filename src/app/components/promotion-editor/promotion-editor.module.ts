@@ -1,11 +1,11 @@
 import {NgModule} from "@angular/core";
 import {PromotionEditorComponent} from "./promotion-editor.component";
 import {
-  CalendarModule,
-  DialogModule,
-  DropdownModule,
-  InputTextareaModule,
-  InputTextModule
+    CalendarModule,
+    DialogModule,
+    DropdownModule, FileUploadModule,
+    InputTextareaModule,
+    InputTextModule
 } from "primeng";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MillisecondDatePipe} from "../../customPipes/mili-date.pipe";
@@ -29,7 +29,8 @@ import {TranslateModule} from "@ngx-translate/core";
         CommonModule,
         ReactiveFormsModule,
         DialogModule,
-        TranslateModule
+        TranslateModule,
+        FileUploadModule
     ]
 })
 export class PromotionEditorModule { }

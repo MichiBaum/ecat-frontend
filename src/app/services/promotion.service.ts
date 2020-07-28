@@ -20,6 +20,10 @@ export class PromotionService {
     return this.apiService.postSingle<Promotion>(this.savePromotionsPath, promotion);
   }
 
+  savePromotionImage(formData: FormData, id: number) {
+    return this.apiService.postSingle('/promotions/image/' + id, formData);
+  }
+
   deletePromotion(promotionId: number){
     return this.apiService.deleteSingle(this.promotionsPath + '/' + promotionId);
   }

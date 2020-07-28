@@ -2,6 +2,10 @@
   <div class="container">
     <form [formGroup]="promotionForm" class="p-grid p-dir-col p-justify-center">
       <div class="formGroup p-col">
+        <label>{{ 'promotionEditor.imageSelection' | translate }}</label>
+        <p-fileUpload name="image[]" customUpload="true" (onSelect)="updateImage($event)"></p-fileUpload>
+      </div>
+      <div class="formGroup p-col">
         <label for="titleField">{{ 'promotionEditor.promotionName' | translate }}</label>
         <input class="input" type="text" pInputText formControlName="title" id="titleField">
       </div>
