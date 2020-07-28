@@ -42,6 +42,9 @@
       "family": {
         "notSet": "Keine Produktfamilie vorhanden",
         "notValid": "Produktfamilie ist inkorrekt"
+      },
+      "image": {
+        "invalidType": "Dieser Bildtyp wird nicht unterstützt. Bitte nur PNG, JPEG oder JPG"
       }
     },
     "loginErrorHandler": {
@@ -50,7 +53,7 @@
     "authErrorHandler": {
       "forbidden": "Verbotene Anfrage"
     },
-    "internalServerErrrorHandler": {
+    "internalServerErrorHandler": {
       "error": "Es ist ein Fehler aufgetreten"
     },
     "notFoundErrorHandler": {
@@ -87,6 +90,7 @@
     "articleNumber": "Artikelnummer",
     "price": "Preis",
     "successfulSave": "Das Produkt wurde erfolgreich gespeichert",
+    "successfulImageSave": "Das Produktbild wurde erfolgreich gespeichert",
     "productEditor": "Produkteditor"
   },
   "adminEditor": {

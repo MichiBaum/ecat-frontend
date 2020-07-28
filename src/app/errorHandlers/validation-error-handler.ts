@@ -14,13 +14,22 @@ export class ValidationErrorHandler implements HttpResponseErrorHandler{
   }
 
   handle(error: HttpErrorResponse) {
-    for(const errorMsg of error.error.validationErrors){
+    if(error.error.errorMsg){
       this.messageService.add({
         severity: 'error',
         summary: this.translateService.instant('toastMessages.error'),
-        detail: this.translateService.instant('errors.' + errorMsg),
+        detail: this.translateService.instant('errors.' + error.error.errorMsg),
         life: 5000
       });
+    }else{
+      for(const errorMsg of error.error.validationErrors){
+        this.messageService.add({
+          severity: 'error',
+          summary: this.translateService.instant('toastMessages.error'),
+          detail: this.translateService.instant('errors.' + errorMsg),
+          life: 5000
+        });
+      }
     }
   }
 
