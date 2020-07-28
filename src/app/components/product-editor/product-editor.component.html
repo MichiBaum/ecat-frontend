@@ -2,8 +2,8 @@
   <div class="container">
     <form [formGroup]="productForm" class="p-grid p-dir-col p-justify-center">
       <div class="formGroup p-col">
-        <label>{{ 'productEditor.productFamilySelection' | translate }}</label>
-        <input type="file" (change)="updateImage($event)">
+        <label>{{ 'productEditor.imageSelection' | translate }}</label>
+        <p-fileUpload name="image[]" customUpload="true" (onSelect)="updateImage($event)"></p-fileUpload>
       </div>
       <div class="formGroup p-col">
         <label>{{ 'productEditor.productFamilySelection' | translate }}</label>
