@@ -21,8 +21,8 @@ export class ProductService {
   saveProduct(saveProductDto: SaveProductDto): Observable<Product>{
     return this.apiService.postSingle<Product>('/products/save', saveProductDto);
   }
-  saveProductImage(formData: FormData, id: number) {
-    return this.apiService.postSingle('/products/image/' + id, formData);
+  saveProductImage(formData: FormData) {
+    return this.apiService.postSingle('/products/image', formData);
   }
 
   deleteProduct(productId: number): Observable<void>{

@@ -45,9 +45,6 @@
       "family": {
         "notSet": "Keine Produktfamilie vorhanden",
         "notValid": "Produktfamilie ist inkorrekt"
-      },
-      "image": {
-        "invalidType": "Dieser Bildtyp wird nicht unterstützt. Bitte nur PNG, JPEG oder JPG"
       }
     },
     "loginErrorHandler": {
