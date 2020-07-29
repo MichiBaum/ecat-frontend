@@ -13,7 +13,7 @@
       },
       "id": {
         "notValid": "Die ID ist inkorrekt"
-      },
+      }
     },
     "user": {
       "password": {
