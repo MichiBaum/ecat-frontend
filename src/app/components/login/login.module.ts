@@ -9,6 +9,7 @@ import {CommonModule} from "@angular/common";
     LoginComponent,
   ],
   exports: [
+    LoginComponent
   ],
   imports: [
     ReactiveFormsModule,
