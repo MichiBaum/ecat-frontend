@@ -5,6 +5,7 @@ import {MessageService} from "primeng";
 import {FormControl, FormGroup} from "@angular/forms";
 import {PromotionEditorService} from "../../services/promotion-editor.service";
 import {TranslateService} from "@ngx-translate/core";
+import {PromotionImage} from "../../models/promotion-image";
 
 @Component({
   selector: 'app-promotion-editor',
@@ -14,6 +15,7 @@ import {TranslateService} from "@ngx-translate/core";
 export class PromotionEditorComponent{
 
   promotion: Promotion = {id: 0, title: '', description: '', startDate: null, endDate: null};
+  promotionImage: PromotionImage = {id: 0, imageName: '', index: 0, promotionId: 0, image:null};
   showDialog: boolean = false;
 
   promotionForm = new FormGroup({
@@ -22,7 +24,6 @@ export class PromotionEditorComponent{
     description: new FormControl(),
     startDate: new FormControl(),
     endDate: new FormControl(),
-    image: new FormControl()
   });
 
   constructor(private promotionService: PromotionService,
@@ -33,6 +34,7 @@ export class PromotionEditorComponent{
   {
     this.promotionEditorService.promotionEmitter.subscribe(promotion => {
       this.promotion = promotion;
+      this.promotionImage.promotionId = promotion.id;
       this.updateForm();
     });
     this.promotionEditorService.showPromotionEditorEmitter.subscribe(showDialog => {
@@ -44,15 +46,14 @@ export class PromotionEditorComponent{
     this.promotionForm.patchValue(this.promotion);
   }
   updateImage(event){
-    this.promotionForm.get('image').setValue(event.files[0]);
+    this.promotionImage.image = event.files[0];
+    this.promotionImage.imageName = event.files[0].name;
   }
   savePromotion() {
     this.promotionService.savePromotion(this.promotionForm.getRawValue()).subscribe(data => {
       Object.assign(this.promotion, data);
       this.messageService.add({severity: 'success', summary: this.translateService.instant('toastMessages.success'), detail: this.translateService.instant('promotionEditor.successfulSave')});
-      const formData = new FormData();
-      formData.append('image', this.promotionForm.get('image').value);
-      this.promotionService.savePromotionImage(formData, data.id).subscribe(() => {
+      this.promotionService.savePromotionImage(this.getFormData(this.promotionImage)).subscribe(() => {
           this.messageService.add({severity:'success', summary:this.translateService.instant('toastMessages.success'), detail:this.translateService.instant('promotionEditor.successfulImageSave')});
         },
         (error => {}))
@@ -78,6 +79,16 @@ export class PromotionEditorComponent{
     }else {
       this.messageService.add({severity: 'error', summary: this.translateService.instant('errors.fields.empty'), detail: this.translateService.instant('errors.promotion.startDate.notSet')});
     }
+  }
+
+  private getFormData(promotionImage: PromotionImage): FormData{
+    const formData = new FormData();
+    formData.append('image', promotionImage.image);
+    formData.append('id', JSON.stringify(promotionImage.id));
+    formData.append('imageName', JSON.stringify(promotionImage.imageName));
+    formData.append('index', JSON.stringify(promotionImage.index));
+    formData.append('promotionId', JSON.stringify(promotionImage.promotionId));
+    return formData;
   }
 
 }

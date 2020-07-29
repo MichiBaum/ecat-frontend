@@ -20,8 +20,8 @@ export class PromotionService {
     return this.apiService.postSingle<Promotion>(this.savePromotionsPath, promotion);
   }
 
-  savePromotionImage(formData: FormData, id: number) {
-    return this.apiService.postSingle('/promotions/image/' + id, formData);
+  savePromotionImage(formData: FormData) {
+    return this.apiService.postSingle('/promotions/image', formData);
   }
 
   deletePromotion(promotionId: number){

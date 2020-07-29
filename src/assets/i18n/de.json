@@ -63,6 +63,25 @@
         "notValid": "Dieser Bildname kann nicht verwendet werden"
       }
     },
+    "promotionImage": {
+      "id": {
+        "notValid": "Die ID des Bilduploads ist inkorrekt"
+      },
+      "promotionId": {
+        "notValid": "Die ID der Aktion ist inkorrekt",
+        "empty": "Keine Aktions ID für den Bildupload vorhanden"
+      },
+      "index": {
+        "empty": "Das Bild besitzt keine angegebene Position in einer Bildreihenfolge"
+      },
+      "image": {
+        "empty": "Es ist kein Bild vorhanden",
+        "invalidType": "Dieser Bildtyp wird nicht unterstützt. Bitte nur PNG, JPEG oder JPG"
+      },
+      "imageName": {
+        "notValid": "Dieser Bildname kann nicht verwendet werden"
+      }
+    },
     "loginErrorHandler": {
       "wrongCredentials": "Falscher Benutzername oder falsches Passwort"
     },
@@ -97,7 +116,7 @@
     "promotionDescription": "Aktionsbeschreibung",
     "startDate": "Startdatum",
     "endDate": "Enddatum",
-    "successfulSave": "Die Aktion wurde erfolgreich gespeichert",
+    "successfulSave": "Die Aktionsinformationen wurden erfolgreich gespeichert",
     "successfulImageSave": "Das Aktionsbild wurde erfolgreich gespeichert",
     "promotionEditor": "Aktionseditor"
   },
