@@ -108,7 +108,7 @@
     "productDescription": "Produktbeschreibung",
     "articleNumber": "Artikelnummer",
     "price": "Preis",
-    "successfulSave": "Das Produkt wurde erfolgreich gespeichert",
+    "successfulSave": "Die Produktinformationen wurden erfolgreich gespeichert",
     "successfulImageSave": "Das Produktbild wurde erfolgreich gespeichert",
     "productEditor": "Produkteditor"
   },
