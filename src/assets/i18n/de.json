@@ -12,11 +12,8 @@
         "notSet": "Kein Aktionsname vorhanden"
       },
       "id": {
-        "notValid": "Id ist inkorrekt"
+        "notValid": "Die ID ist inkorrekt"
       },
-      "image": {
-        "invalidType": "Dieser Bildtyp wird nicht unterstützt. Bitte nur PNG, JPEG oder JPG"
-      }
     },
     "user": {
       "password": {
@@ -45,6 +42,25 @@
       "family": {
         "notSet": "Keine Produktfamilie vorhanden",
         "notValid": "Produktfamilie ist inkorrekt"
+      }
+    },
+    "productImage": {
+      "id": {
+        "notValid": "Die ID des Bilduploads ist inkorrekt"
+      },
+      "productId": {
+        "notValid": "Die ID des Produktes ist inkorrekt",
+        "empty": "Keine Produkt ID für den Bildupload vorhanden"
+      },
+      "index": {
+        "empty": "Das Bild besitzt keine angegebene Position in einer Bildreihenfolge"
+      },
+      "image": {
+        "empty": "Es ist kein Bild vorhanden",
+        "invalidType": "Dieser Bildtyp wird nicht unterstützt. Bitte nur PNG, JPEG oder JPG"
+      },
+      "imageName": {
+        "notValid": "Dieser Bildname kann nicht verwendet werden"
       }
     },
     "loginErrorHandler": {
