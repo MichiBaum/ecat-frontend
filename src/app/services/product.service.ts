@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {Router} from "@angular/router";
 import {ApiService} from "./api.service";
 import {SaveProductDto} from "../models/save-product-dto";
+import {ProductImage} from "../models/product-image";
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +22,12 @@ export class ProductService {
   saveProduct(saveProductDto: SaveProductDto): Observable<Product>{
     return this.apiService.postSingle<Product>('/products/save', saveProductDto);
   }
-  saveProductImage(formData: FormData) {
+  saveProductImage(formData: FormData): Observable<ProductImage> {
     return this.apiService.postSingle('/products/image', formData);
+  }
+
+  saveProductImageIndex(productImage: ProductImage){
+    return this.apiService.postSingle('/products/image' + productImage.id, productImage.index);
   }
 
   deleteProduct(productId: number): Observable<void>{
