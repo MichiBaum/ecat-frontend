@@ -9,6 +9,7 @@ import {
     InputTextModule
 } from "primeng";
 import {TranslateModule} from "@ngx-translate/core";
+import {CustomUploadModule} from "../custom-upload/custom-upload.module";
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {TranslateModule} from "@ngx-translate/core";
         FormsModule,
         DialogModule,
         TranslateModule,
-        FileUploadModule
+        FileUploadModule,
+        CustomUploadModule
     ]
 })
 export class ProductEditorModule { }

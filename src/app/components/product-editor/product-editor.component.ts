@@ -9,6 +9,7 @@ import {ProductEditorService} from "../../services/product-editor.service";
 import {TranslateService} from "@ngx-translate/core";
 import {SaveProductDto} from "../../models/save-product-dto";
 import {ProductImage} from "../../models/product-image";
+import {CustomUploadItem} from "../../models/custom-upload-item";
 
 @Component({
   selector: 'app-product-editor',
@@ -18,7 +19,8 @@ import {ProductImage} from "../../models/product-image";
 export class ProductEditorComponent implements OnInit {
 
   product: Product = {id: 0, name: '', description: '', articleNr: '', price: null};
-  productImage: ProductImage = {id: 0, imageName: '', index: 0, productId: 0, image:null};
+  productImages: ProductImage[] = [];
+  customUploadItems: CustomUploadItem[] = [];
   productFamilyItems: SelectItem[] = [];
   showDialog: boolean = false;
 
@@ -43,8 +45,7 @@ export class ProductEditorComponent implements OnInit {
     });
     this.productEditorService.productEmitter.subscribe(product => {
       this.product = product;
-      this.productImage.productId = product.id;
-      this.updateForm();
+      this.updateProductForm();
     })
 
   }
@@ -56,21 +57,16 @@ export class ProductEditorComponent implements OnInit {
       })
     });
   }
-  updateForm(){
+  updateProductForm(){
     this.productForm.patchValue(this.product);
-  }
-  updateImage(event){
-    this.productImage.image = event.files[0];
-    this.productImage.imageName = event.files[0].name;
   }
   saveProduct() {
     this.productService.saveProduct(new SaveProductDto(this.productForm.getRawValue())).subscribe(data => {
       Object.assign(this.product, data);
-      this.messageService.add({severity:'success', summary:this.translateService.instant('toastMessages.success'), detail:this.translateService.instant('productEditor.successfulSave')});
-      this.productService.saveProductImage(this.getFormData(this.productImage)).subscribe(() => {
-        this.messageService.add({severity:'success', summary:this.translateService.instant('toastMessages.success'), detail:this.translateService.instant('productEditor.successfulImageSave')});
-      },
-        (error => {}))
+      this.messageService.add({
+        severity:'success',
+        summary:this.translateService.instant('toastMessages.success'),
+        detail:this.translateService.instant('productEditor.successfulSave')});
     },
       (error => {}))
   }
@@ -86,7 +82,7 @@ export class ProductEditorComponent implements OnInit {
     }
   }
 
-  private getFormData(productImage: ProductImage): FormData{
+  private productImageToFormData(productImage: ProductImage): FormData{
     const formData = new FormData();
     formData.append('image', productImage.image);
     formData.append('id', JSON.stringify(productImage.id));
@@ -94,6 +90,46 @@ export class ProductEditorComponent implements OnInit {
     formData.append('index', JSON.stringify(productImage.index));
     formData.append('productId', JSON.stringify(productImage.productId));
     return formData;
+  }
+
+  updateProductImagesIndex(updatedIndexes: any){
+    for (let [key, value] of updatedIndexes){
+      let productImage = this.productImages.find(productImage => productImage.id == key);
+      productImage.index = value;
+      this.productService.saveProductImageIndex(productImage).subscribe(() => {}, error => {});
+    }
+  }
+
+  saveNewProductImage(productImageToSave: ProductImage){
+    this.productService.saveProductImage(this.productImageToFormData(productImageToSave)).subscribe(productImage => {
+      productImage.image = productImageToSave.image;
+      if(productImageToSave.id && productImage.id  !== 0){
+        let originalProductImage = this.productImages.find(productImage => productImage.id === productImageToSave.id);
+        Object.assign(originalProductImage, productImage);
+      }else{
+        this.productImages.push(productImage);
+        this.customUploadItems.push(this.productImageToCustomUploadItem(productImage));
+      }
+    },
+      error => {})
+  }
+
+  private customUploadItemToProductImage(customUploadItem: CustomUploadItem): ProductImage{
+    return {
+      id: customUploadItem.id,
+      index: customUploadItem.index,
+      image: customUploadItem.file,
+      imageName: customUploadItem.file.name,
+      productId: this.product.id
+    };
+  }
+
+  private productImageToCustomUploadItem(productImage: ProductImage): CustomUploadItem{
+    return {
+      id: productImage.id,
+      file: productImage.image,
+      index: productImage.index
+    }
   }
 
 }
