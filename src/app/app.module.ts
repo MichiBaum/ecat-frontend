@@ -33,6 +33,7 @@ import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {NotFoundErrorHandler} from "./errorHandlers/not-found-error-handler";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {CustomUploadModule} from "./components/custom-upload/custom-upload.module";
 
 const appRoutes: Routes = [
   {path: 'homepage', component: HomepageComponent},
@@ -77,7 +78,8 @@ const appRoutes: Routes = [
       },
       defaultLanguage: 'de'
     }),
-    FontAwesomeModule
+    FontAwesomeModule,
+    CustomUploadModule
   ],
   providers: [
     PromotionService,
