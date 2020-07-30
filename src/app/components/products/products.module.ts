@@ -9,8 +9,9 @@ import {ConfirmDialogModule} from "primeng";
   declarations: [
     ProductsComponent,
   ],
-  exports: [
-  ],
+    exports: [
+        ProductsComponent
+    ],
     imports: [
         ProductCardModule,
         CommonModule,
