@@ -1,0 +1,25 @@
+<div>
+  <p-orderList [value]="customUploadItems"
+               [listStyle]="{'height':'350px'}"
+               header="Translate Me"
+               (onReorder)="updateFileListIndex()"
+  >
+    <ng-template let-customUploadItem pTemplate="customUploadItem">
+      <div class="ui-helper-clearfix p-grid">
+        <div class="p-col">
+          <div style="font-size:14px">{{customUploadItem.file.name}}</div>
+        </div>
+        <div class="p-col">
+          <div style="font-size:14px">{{customUploadItem.file.size | fileSizePipe}}</div>
+        </div>
+        <div class="p-col">
+          <p-button class="marginRight" label="translate me" onClick="document.getElementById('previewLink').click()"></p-button>
+          <p-button icon="fa fa-times fa-2x" styleClass="ui-button-danger"></p-button>
+          <a target="_blank" [href]="getUrl(customUploadItem.file)" style="display: none" id="previewLink"></a>
+          <img [src]="getUrl(customUploadItem.file)" id="preview" style="display:inline-block;float: right;margin:2px 0 2px 2px;" width="48">
+        </div>
+      </div>
+    </ng-template>
+  </p-orderList>
+  <p-fileUpload #fileUpload multiple="true" auto="true" customUpload="true" (uploadHandler)="updateFileList($event)" maxFileSize="10000000" mode="basic" accept="image/jpeg, image/png"></p-fileUpload>
+</div>
