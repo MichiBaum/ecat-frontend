@@ -1,4 +1,13 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {
+  Component,
+  DoCheck,
+  EventEmitter,
+  Input,
+  IterableDiffer,
+  IterableDiffers,
+  Output, SecurityContext,
+  ViewChild
+} from '@angular/core';
 import {DomSanitizer} from "@angular/platform-browser";
 import {FileUpload} from "primeng";
 import {CustomUploadItem} from "../../models/custom-upload-item";
@@ -11,16 +20,28 @@ import {CustomUploadItem} from "../../models/custom-upload-item";
     class:'p-col'
   }
 })
-export class CustomUploadComponent implements OnInit {
+export class CustomUploadComponent implements DoCheck {
 
-  constructor(private domSanitizer: DomSanitizer) { }
+  constructor(private domSanitizer: DomSanitizer, private iterableDiffers: IterableDiffers) {
+    this.iterableDiffer = iterableDiffers.find([]).create(null);
 
+  }
+
+  iterableDiffer: IterableDiffer<CustomUploadItem>;
   @Input()customUploadItems: CustomUploadItem[] = [];
   @Output()addedCustomUploadItem = new EventEmitter();
   @Output()listReorder = new EventEmitter();
   @Output()removedCustomUploadItem = new EventEmitter();
   @ViewChild('fileUpload') fileUpload: FileUpload;
-  ngOnInit(): void {
+
+  ngDoCheck() {
+    let changes = this.iterableDiffer.diff(this.customUploadItems);
+
+    if(changes){
+      changes.forEachAddedItem(addedCustomUploadItem => {
+        addedCustomUploadItem.item.url = this.getUrl(addedCustomUploadItem.item.file);
+      })
+    }
   }
 
   updateCustomUploadItems(event){
@@ -61,5 +82,9 @@ export class CustomUploadComponent implements OnInit {
       return highestIndex + 1;
     }
     return 0;
+  }
+
+  openImagePreview(customUploadItem: CustomUploadItem){
+    window.open(this.domSanitizer.sanitize(SecurityContext.URL, customUploadItem.url), '_blank');
   }
 }
