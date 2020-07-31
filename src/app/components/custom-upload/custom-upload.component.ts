@@ -16,21 +16,22 @@ export class CustomUploadComponent implements OnInit {
   constructor(private domSanitizer: DomSanitizer) { }
 
   @Input()customUploadItems: CustomUploadItem[] = [];
-  @Output()newCustomUploadItem = new EventEmitter();
+  @Output()addedCustomUploadItem = new EventEmitter();
   @Output()listReorder = new EventEmitter();
+  @Output()removedCustomUploadItem = new EventEmitter();
   @ViewChild('fileUpload') fileUpload: FileUpload;
   ngOnInit(): void {
   }
 
-  updateFileList(event){
+  updateCustomUploadItems(event){
     let files = event.files;
     for(let i = 0; i < files.length; i++){
       let customUploadItem: CustomUploadItem = {id: 0, file: files[i], index: this.customUploadItems.length}
       this.fileUpload.clear();
-      this.newCustomUploadItem.emit(customUploadItem);
+      this.addedCustomUploadItem.emit(customUploadItem);
     }
   }
-  updateFileListIndex(){
+  updateCustomUploadItemsIndex(){
     let updatedIndexes = new Map();
     for (let i = 0; i < this.customUploadItems.length; i++){
       let customUploadItem = this.customUploadItems[i];
@@ -46,5 +47,11 @@ export class CustomUploadComponent implements OnInit {
     let reader = new FileReader();
     reader.readAsDataURL(file);
     return this.domSanitizer.bypassSecurityTrustUrl((window.URL.createObjectURL(file)));
+  }
+
+  removeCustomUploadItem(customUploadItem: CustomUploadItem){
+    let index = this.customUploadItems.indexOf(customUploadItem);
+    this.customUploadItems.splice(index, 1);
+    this.removedCustomUploadItem.emit(customUploadItem);
   }
 }

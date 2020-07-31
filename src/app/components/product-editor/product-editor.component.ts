@@ -114,7 +114,16 @@ export class ProductEditorComponent implements OnInit {
       error => {})
   }
 
-  private customUploadItemToProductImage(customUploadItem: CustomUploadItem): ProductImage{
+  deleteProductImage(productImage: ProductImage){
+    this.productService.deleteProductImage(productImage.id).subscribe(() => {
+      let productImageIndex = this.productImages.indexOf(productImage);
+      let customUploadItemIndex = this.customUploadItems.findIndex(customUploadItem => customUploadItem.id === productImage.id);
+      this.productImages.splice(productImageIndex, 1);
+      this.customUploadItems.splice(customUploadItemIndex, 1);
+    }, error => {});
+  }
+
+  customUploadItemToProductImage(customUploadItem: CustomUploadItem): ProductImage{
     return {
       id: customUploadItem.id,
       index: customUploadItem.index,
