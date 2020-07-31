@@ -26,7 +26,7 @@ export class CustomUploadComponent implements OnInit {
   updateCustomUploadItems(event){
     let files = event.files;
     for(let i = 0; i < files.length; i++){
-      let customUploadItem: CustomUploadItem = {id: 0, file: files[i], index: this.customUploadItems.length}
+      let customUploadItem: CustomUploadItem = {id: 0, file: files[i], index: this.getIndex()}
       this.fileUpload.clear();
       this.addedCustomUploadItem.emit(customUploadItem);
     }
@@ -53,5 +53,13 @@ export class CustomUploadComponent implements OnInit {
     let index = this.customUploadItems.indexOf(customUploadItem);
     this.customUploadItems.splice(index, 1);
     this.removedCustomUploadItem.emit(customUploadItem);
+  }
+
+  private getIndex(){
+    let highestIndex = Math.max.apply(Math, this.customUploadItems.map(function(customUploadItem) { return customUploadItem.index; }));
+    if(!isNaN(highestIndex) && isFinite(highestIndex)){
+      return highestIndex + 1;
+    }
+    return 0;
   }
 }

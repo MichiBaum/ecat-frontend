@@ -30,12 +30,12 @@ export class ProductService {
     return this.apiService.postSingle('/products/image/' + productImage.id, productImage.index);
   }
 
-  deleteProduct(productId: number): Observable<void>{
-    return this.apiService.deleteSingle('/products/' + productId);
-  }
-
   deleteProductImage(productImageId: number){
     return this.apiService.deleteSingle('/products/image/' + productImageId);
+  }
+
+  deleteProduct(productId: number): Observable<void>{
+    return this.apiService.deleteSingle('/products/' + productId);
   }
 
   search(searchtext?: string, withredirect?: boolean) {

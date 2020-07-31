@@ -6,6 +6,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {PromotionEditorService} from "../../services/promotion-editor.service";
 import {TranslateService} from "@ngx-translate/core";
 import {PromotionImage} from "../../models/promotion-image";
+import {CustomUploadItem} from "../../models/custom-upload-item";
 
 @Component({
   selector: 'app-promotion-editor',
@@ -15,7 +16,8 @@ import {PromotionImage} from "../../models/promotion-image";
 export class PromotionEditorComponent{
 
   promotion: Promotion = {id: 0, title: '', description: '', startDate: null, endDate: null};
-  promotionImage: PromotionImage = {id: 0, imageName: '', index: 0, promotionId: 0, image:null};
+  promotionImages: PromotionImage[] = [];
+  customUploadItems: CustomUploadItem[] = [];
   showDialog: boolean = false;
 
   promotionForm = new FormGroup({
@@ -34,7 +36,6 @@ export class PromotionEditorComponent{
   {
     this.promotionEditorService.promotionEmitter.subscribe(promotion => {
       this.promotion = promotion;
-      this.promotionImage.promotionId = promotion.id;
       this.updateForm();
     });
     this.promotionEditorService.showPromotionEditorEmitter.subscribe(showDialog => {
@@ -45,19 +46,14 @@ export class PromotionEditorComponent{
   updateForm(){
     this.promotionForm.patchValue(this.promotion);
   }
-  updateImage(event){
-    this.promotionImage.image = event.files[0];
-    this.promotionImage.imageName = event.files[0].name;
-  }
   savePromotion() {
     this.promotionService.savePromotion(this.promotionForm.getRawValue()).subscribe(data => {
       Object.assign(this.promotion, data);
-      this.messageService.add({severity: 'success', summary: this.translateService.instant('toastMessages.success'), detail: this.translateService.instant('promotionEditor.successfulSave')});
-      this.promotionService.savePromotionImage(this.getFormData(this.promotionImage)).subscribe(() => {
-          this.messageService.add({severity:'success', summary:this.translateService.instant('toastMessages.success'), detail:this.translateService.instant('promotionEditor.successfulImageSave')});
-        },
-        (error => {}))
-      },
+      this.messageService.add({
+        severity:'success',
+        summary:this.translateService.instant('toastMessages.success'),
+        detail:this.translateService.instant('promotionEditor.successfulSave')});
+    },
       (error => {}))
   }
 
@@ -81,7 +77,7 @@ export class PromotionEditorComponent{
     }
   }
 
-  private getFormData(promotionImage: PromotionImage): FormData{
+  private promotionImageToFormData(promotionImage: PromotionImage): FormData{
     const formData = new FormData();
     formData.append('image', promotionImage.image);
     formData.append('id', JSON.stringify(promotionImage.id));
@@ -89,6 +85,55 @@ export class PromotionEditorComponent{
     formData.append('index', JSON.stringify(promotionImage.index));
     formData.append('promotionId', JSON.stringify(promotionImage.promotionId));
     return formData;
+  }
+
+  updatePromotionImagesIndex(updatedIndexes: any){
+    for (let [key, value] of updatedIndexes){
+      let promotionImage = this.promotionImages.find(productImage => productImage.id == key);
+      promotionImage.index = value;
+      this.promotionService.savePromotionImageIndex(promotionImage).subscribe(() => {}, error => {});
+    }
+  }
+
+  saveNewPromotionImage(promotionImageToSave: PromotionImage){
+    this.promotionService.savePromotionImage(this.promotionImageToFormData(promotionImageToSave)).subscribe(promotionImage => {
+        promotionImage.image = promotionImageToSave.image;
+        if(promotionImageToSave.id && promotionImage.id !== 0){
+          let originalPromotionImage = this.promotionImages.find(promotionImage => promotionImage.id === promotionImageToSave.id);
+          Object.assign(originalPromotionImage, promotionImage);
+        }else{
+          this.promotionImages.push(promotionImage);
+          this.customUploadItems.push(this.promotionImageToCustomUploadItem(promotionImage));
+        }
+      },
+      error => {})
+  }
+
+  deletePromotionImage(promotionImage: PromotionImage){
+    this.promotionService.deletePromotionImage(promotionImage.id).subscribe(() => {
+      let promotionImageIndex = this.promotionImages.indexOf(promotionImage);
+      let customUploadItemIndex = this.customUploadItems.findIndex(customUploadItem => customUploadItem.id === promotionImage.id);
+      this.promotionImages.splice(promotionImageIndex, 1);
+      this.customUploadItems.splice(customUploadItemIndex, 1);
+    }, error => {});
+  }
+
+  customUploadItemToPromotionImage(customUploadItem: CustomUploadItem): PromotionImage{
+    return {
+      id: customUploadItem.id,
+      index: customUploadItem.index,
+      image: customUploadItem.file,
+      imageName: customUploadItem.file.name,
+      promotionId: this.promotion.id
+    };
+  }
+
+  private promotionImageToCustomUploadItem(promotionImage: PromotionImage): CustomUploadItem{
+    return {
+      id: promotionImage.id,
+      file: promotionImage.image,
+      index: promotionImage.index
+    }
   }
 
 }

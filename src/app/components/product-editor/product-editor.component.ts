@@ -103,7 +103,7 @@ export class ProductEditorComponent implements OnInit {
   saveNewProductImage(productImageToSave: ProductImage){
     this.productService.saveProductImage(this.productImageToFormData(productImageToSave)).subscribe(productImage => {
       productImage.image = productImageToSave.image;
-      if(productImageToSave.id && productImage.id  !== 0){
+      if(productImageToSave.id && productImageToSave.id !== 0){
         let originalProductImage = this.productImages.find(productImage => productImage.id === productImageToSave.id);
         Object.assign(originalProductImage, productImage);
       }else{

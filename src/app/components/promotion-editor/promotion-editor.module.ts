@@ -11,6 +11,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MillisecondDatePipe} from "../../customPipes/mili-date.pipe";
 import {CommonModule} from "@angular/common";
 import {TranslateModule} from "@ngx-translate/core";
+import {CustomUploadModule} from "../custom-upload/custom-upload.module";
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {TranslateModule} from "@ngx-translate/core";
         ReactiveFormsModule,
         DialogModule,
         TranslateModule,
-        FileUploadModule
+        FileUploadModule,
+        CustomUploadModule
     ]
 })
 export class PromotionEditorModule { }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Promotion} from "../models/promotion";
 import {Observable} from "rxjs";
 import {ApiService} from "./api.service";
+import {PromotionImage} from "../models/promotion-image";
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +21,16 @@ export class PromotionService {
     return this.apiService.postSingle<Promotion>(this.savePromotionsPath, promotion);
   }
 
-  savePromotionImage(formData: FormData) {
+  savePromotionImage(formData: FormData): Observable<PromotionImage> {
     return this.apiService.postSingle('/promotions/image', formData);
+  }
+
+  savePromotionImageIndex(promotionImage: PromotionImage){
+    return this.apiService.postSingle('/promotions/image/' + promotionImage.id, promotionImage.index);
+  }
+
+  deletePromotionImage(promotionImageId: number){
+    return this.apiService.deleteSingle('/promotions/image/' + promotionImageId);
   }
 
   deletePromotion(promotionId: number){

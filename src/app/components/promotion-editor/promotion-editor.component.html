@@ -3,7 +3,11 @@
     <form [formGroup]="promotionForm" class="p-grid p-dir-col p-justify-center">
       <div class="formGroup p-col">
         <label>{{ 'promotionEditor.imageSelection' | translate }}</label>
-        <p-fileUpload name="image[]" customUpload="true" (onSelect)="updateImage($event)"></p-fileUpload>
+        <app-custom-upload [customUploadItems]="customUploadItems"
+                           (listReorder)="updatePromotionImagesIndex($event)"
+                           (addedCustomUploadItem)="saveNewPromotionImage(customUploadItemToPromotionImage($event))"
+                           (removedCustomUploadItem)="deletePromotionImage(customUploadItemToPromotionImage($event))"
+        ></app-custom-upload>
       </div>
       <div class="formGroup p-col">
         <label for="titleField">{{ 'promotionEditor.promotionName' | translate }}</label>
