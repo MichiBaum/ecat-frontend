@@ -9,8 +9,9 @@ import {
   ViewChild
 } from '@angular/core';
 import {DomSanitizer} from "@angular/platform-browser";
-import {FileUpload} from "primeng";
+import {FileUpload, MessageService} from "primeng";
 import {CustomUploadItem} from "../../models/custom-upload-item";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-custom-upload',
@@ -22,7 +23,12 @@ import {CustomUploadItem} from "../../models/custom-upload-item";
 })
 export class CustomUploadComponent implements DoCheck {
 
-  constructor(private domSanitizer: DomSanitizer, private iterableDiffers: IterableDiffers) {
+  constructor(
+    private domSanitizer: DomSanitizer,
+    private iterableDiffers: IterableDiffers,
+    private messageService: MessageService,
+    private translateService: TranslateService
+  ) {
     this.iterableDiffer = iterableDiffers.find([]).create(null);
 
   }
@@ -47,9 +53,11 @@ export class CustomUploadComponent implements DoCheck {
   updateCustomUploadItems(event){
     let files = event.files;
     for(let i = 0; i < files.length; i++){
-      let customUploadItem: CustomUploadItem = {id: 0, file: files[i], index: this.getIndex()}
+      if(this.validateFile(files[i])){
+        let customUploadItem: CustomUploadItem = {id: 0, file: files[i], index: this.getIndex()};
+        this.addedCustomUploadItem.emit(customUploadItem);
+      }
       this.fileUpload.clear();
-      this.addedCustomUploadItem.emit(customUploadItem);
     }
   }
   updateCustomUploadItemsIndex(){
@@ -84,5 +92,27 @@ export class CustomUploadComponent implements DoCheck {
 
   openImagePreview(customUploadItem: CustomUploadItem){
     window.open(this.domSanitizer.sanitize(SecurityContext.URL, customUploadItem.url), '_blank');
+  }
+
+  private validateFile(file: File): boolean{
+    let valid = true;
+    if(file.type !== 'image/png' && file.type !== 'image/jpeg'){
+      this.messageService.add({
+        severity:'error',
+        summary:this.translateService.instant('toastMessages.error'),
+        detail:this.translateService.instant('errors.customUpload.invalidFileType')});
+      valid = false;
+    }
+    if(file.size > 10000000){
+      this.messageService.add({
+        severity:'error',
+        summary:this.translateService.instant('toastMessages.error'),
+        detail:this.translateService.instant('errors.customUpload.invalidFileSize')});
+      valid = false;
+    }
+    return valid;
+  }
+  test(event){
+    console.log(event);
   }
 }

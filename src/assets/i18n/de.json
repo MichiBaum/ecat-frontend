@@ -96,6 +96,10 @@
     },
     "fields": {
       "empty": "Leeres Feld"
+    },
+    "customUpload": {
+      "invalidFileType": "Dieser Bildtyp wird nicht unterstützt. Bitte nur PNG, JPEG oder JPG",
+      "invalidFileSize": "Die Grösse der Datei ist zu gross (Max 10MB)"
     }
   },
   "navigation": {

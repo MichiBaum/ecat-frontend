@@ -20,5 +20,5 @@
       </div>
     </ng-template>
   </p-orderList>
-  <p-fileUpload chooseLabel="{{ 'customUpload.chooseFile' | translate }}" #fileUpload multiple="true" auto="true" customUpload="true" (uploadHandler)="updateCustomUploadItems($event)" maxFileSize="10000000" mode="basic" accept="image/jpeg, image/png"></p-fileUpload>
+  <p-fileUpload accept="image/png, image/jpeg" chooseLabel="{{ 'customUpload.chooseFile' | translate }}" #fileUpload multiple="true" customUpload="true" (onSelect)="updateCustomUploadItems($event)" mode="basic"></p-fileUpload>
 </div>
