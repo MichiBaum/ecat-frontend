@@ -3,7 +3,7 @@
     <form [formGroup]="productForm" class="p-grid p-dir-col p-justify-center">
       <div class="formGroup p-col">
         <label>{{ 'productEditor.imageSelection' | translate }}</label>
-        <app-custom-upload [customUploadItems]="customUploadItems"
+        <app-custom-upload [customUploadItems]="productImages"
                            (listReorder)="updateProductImagesIndex($event)"
                            (addedCustomUploadItem)="saveNewProductImage(customUploadItemToProductImage($event))"
                            (removedCustomUploadItem)="deleteProductImage(customUploadItemToProductImage($event))"

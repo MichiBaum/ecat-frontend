@@ -18,7 +18,6 @@ export class PromotionEditorComponent{
 
   promotion: Promotion = {id: 0, title: '', description: '', startDate: null, endDate: null};
   promotionImages: PromotionImage[] = [];
-  customUploadItems: CustomUploadItem[] = [];
   showDialog: boolean = false;
 
   promotionForm = new FormGroup({
@@ -81,7 +80,7 @@ export class PromotionEditorComponent{
 
   private promotionImageToFormData(promotionImage: PromotionImage): FormData{
     const formData = new FormData();
-    formData.append('image', promotionImage.image);
+    formData.append('image', promotionImage.file);
     formData.append('id', JSON.stringify(promotionImage.id));
     formData.append('imageName', JSON.stringify(promotionImage.imageName));
     formData.append('index', JSON.stringify(promotionImage.index));
@@ -99,13 +98,12 @@ export class PromotionEditorComponent{
 
   saveNewPromotionImage(promotionImageToSave: PromotionImage){
     this.promotionService.savePromotionImage(this.promotionImageToFormData(promotionImageToSave)).subscribe(promotionImage => {
-        promotionImage.image = this.imageService.base64ImageToFile(promotionImage.image, promotionImage.imageType, promotionImage.imageName);
+        promotionImage.file = this.imageService.base64ImageToFile(promotionImage.file, promotionImage.mimeType, promotionImage.imageName);
         if(promotionImageToSave.id && promotionImage.id !== 0){
           let originalPromotionImage = this.promotionImages.find(promotionImage => promotionImage.id === promotionImageToSave.id);
           Object.assign(originalPromotionImage, promotionImage);
         }else{
           this.promotionImages.push(promotionImage);
-          this.customUploadItems.push(this.promotionImageToCustomUploadItem(promotionImage));
         }
       },
       error => {})
@@ -114,9 +112,7 @@ export class PromotionEditorComponent{
   deletePromotionImage(promotionImage: PromotionImage){
     this.promotionService.deletePromotionImage(promotionImage.id).subscribe(() => {
       let promotionImageIndex = this.promotionImages.indexOf(promotionImage);
-      let customUploadItemIndex = this.customUploadItems.findIndex(customUploadItem => customUploadItem.id === promotionImage.id);
       this.promotionImages.splice(promotionImageIndex, 1);
-      this.customUploadItems.splice(customUploadItemIndex, 1);
     }, error => {});
   }
 
@@ -124,18 +120,9 @@ export class PromotionEditorComponent{
     return {
       id: customUploadItem.id,
       index: customUploadItem.index,
-      image: customUploadItem.file,
+      file: customUploadItem.file,
       imageName: customUploadItem.file.name,
       promotionId: this.promotion.id
     };
   }
-
-  private promotionImageToCustomUploadItem(promotionImage: PromotionImage): CustomUploadItem{
-    return {
-      id: promotionImage.id,
-      file: promotionImage.image,
-      index: promotionImage.index
-    }
-  }
-
 }

@@ -21,7 +21,6 @@ export class ProductEditorComponent implements OnInit {
 
   product: Product = {id: 0, name: '', description: '', articleNr: '', price: null};
   productImages: ProductImage[] = [];
-  customUploadItems: CustomUploadItem[] = [];
   productFamilyItems: SelectItem[] = [];
   showDialog: boolean = false;
 
@@ -86,7 +85,7 @@ export class ProductEditorComponent implements OnInit {
 
   private productImageToFormData(productImage: ProductImage): FormData{
     const formData = new FormData();
-    formData.append('image', productImage.image);
+    formData.append('image', productImage.file);
     formData.append('id', JSON.stringify(productImage.id));
     formData.append('imageName', JSON.stringify(productImage.imageName));
     formData.append('index', JSON.stringify(productImage.index));
@@ -104,13 +103,12 @@ export class ProductEditorComponent implements OnInit {
 
   saveNewProductImage(productImageToSave: ProductImage){
     this.productService.saveProductImage(this.productImageToFormData(productImageToSave)).subscribe(productImage => {
-      productImage.image = this.imageService.base64ImageToFile(productImage.image, productImage.imageType, productImage.imageName);
+      productImage.file = this.imageService.base64ImageToFile(productImage.file, productImage.mimeType, productImage.imageName);
       if(productImageToSave.id && productImageToSave.id !== 0){
         let originalProductImage = this.productImages.find(productImage => productImage.id === productImageToSave.id);
         Object.assign(originalProductImage, productImage);
       }else{
         this.productImages.push(productImage);
-        this.customUploadItems.push(this.productImageToCustomUploadItem(productImage));
       }
     },
       error => {})
@@ -119,9 +117,7 @@ export class ProductEditorComponent implements OnInit {
   deleteProductImage(productImage: ProductImage){
     this.productService.deleteProductImage(productImage.id).subscribe(() => {
       let productImageIndex = this.productImages.indexOf(productImage);
-      let customUploadItemIndex = this.customUploadItems.findIndex(customUploadItem => customUploadItem.id === productImage.id);
       this.productImages.splice(productImageIndex, 1);
-      this.customUploadItems.splice(customUploadItemIndex, 1);
     }, error => {});
   }
 
@@ -129,17 +125,9 @@ export class ProductEditorComponent implements OnInit {
     return {
       id: customUploadItem.id,
       index: customUploadItem.index,
-      image: customUploadItem.file,
+      file: customUploadItem.file,
       imageName: customUploadItem.file.name,
       productId: this.product.id
     };
-  }
-
-  private productImageToCustomUploadItem(productImage: ProductImage): CustomUploadItem{
-    return {
-      id: productImage.id,
-      file: productImage.image,
-      index: productImage.index
-    }
   }
 }

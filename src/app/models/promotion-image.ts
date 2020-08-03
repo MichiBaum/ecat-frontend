@@ -1,8 +1,10 @@
-export interface PromotionImage {
+import {CustomUploadItem} from "./custom-upload-item";
+
+export interface PromotionImage extends CustomUploadItem{
   id: number;
+  index: number;
+  file: any;
   promotionId: number;
   imageName: string;
-  index: number;
-  image: any;
-  imageType?: string;
+  mimeType?: string;
 }

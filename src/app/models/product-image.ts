@@ -1,8 +1,10 @@
-export interface ProductImage {
+import {CustomUploadItem} from "./custom-upload-item";
+
+export interface ProductImage extends CustomUploadItem{
   id: number;
+  index: number;
+  file: any;
   productId: number;
   imageName: string;
-  index: number;
-  image: any;
-  imageType?: string;
+  mimeType?: string;
 }
