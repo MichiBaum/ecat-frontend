@@ -10,6 +10,7 @@ import {TranslateService} from "@ngx-translate/core";
 import {SaveProductDto} from "../../models/save-product-dto";
 import {ProductImage} from "../../models/product-image";
 import {CustomUploadItem} from "../../models/custom-upload-item";
+import {ImageService} from "../../services/image.service";
 
 @Component({
   selector: 'app-product-editor',
@@ -38,7 +39,8 @@ export class ProductEditorComponent implements OnInit {
               private confirmService: ConfirmationService,
               private productEditorService: ProductEditorService,
               private messageService: MessageService,
-              private translateService: TranslateService)
+              private translateService: TranslateService,
+              private imageService: ImageService)
   {
     this.productEditorService.showProductEditorEmitter.subscribe(showDialog => {
       this.showDialog = showDialog;
@@ -102,7 +104,7 @@ export class ProductEditorComponent implements OnInit {
 
   saveNewProductImage(productImageToSave: ProductImage){
     this.productService.saveProductImage(this.productImageToFormData(productImageToSave)).subscribe(productImage => {
-      productImage.image = productImageToSave.image;
+      productImage.image = this.imageService.base64ImageToFile(productImage.image, productImage.imageType, productImage.imageName);
       if(productImageToSave.id && productImageToSave.id !== 0){
         let originalProductImage = this.productImages.find(productImage => productImage.id === productImageToSave.id);
         Object.assign(originalProductImage, productImage);
@@ -140,5 +142,4 @@ export class ProductEditorComponent implements OnInit {
       index: productImage.index
     }
   }
-
 }

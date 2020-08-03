@@ -3,5 +3,6 @@ export interface PromotionImage {
   promotionId: number;
   imageName: string;
   index: number;
-  image: File;
+  image: any;
+  imageType?: string;
 }

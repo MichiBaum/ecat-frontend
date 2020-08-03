@@ -71,8 +71,6 @@ export class CustomUploadComponent implements DoCheck {
   }
 
   removeCustomUploadItem(customUploadItem: CustomUploadItem){
-    let index = this.customUploadItems.indexOf(customUploadItem);
-    this.customUploadItems.splice(index, 1);
     this.removedCustomUploadItem.emit(customUploadItem);
   }
 

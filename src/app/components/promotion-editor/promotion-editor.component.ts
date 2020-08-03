@@ -7,6 +7,7 @@ import {PromotionEditorService} from "../../services/promotion-editor.service";
 import {TranslateService} from "@ngx-translate/core";
 import {PromotionImage} from "../../models/promotion-image";
 import {CustomUploadItem} from "../../models/custom-upload-item";
+import {ImageService} from "../../services/image.service";
 
 @Component({
   selector: 'app-promotion-editor',
@@ -31,7 +32,8 @@ export class PromotionEditorComponent{
   constructor(private promotionService: PromotionService,
               private messageService: MessageService,
               private promotionEditorService: PromotionEditorService,
-              private translateService: TranslateService
+              private translateService: TranslateService,
+              private imageService: ImageService
   )
   {
     this.promotionEditorService.promotionEmitter.subscribe(promotion => {
@@ -97,7 +99,7 @@ export class PromotionEditorComponent{
 
   saveNewPromotionImage(promotionImageToSave: PromotionImage){
     this.promotionService.savePromotionImage(this.promotionImageToFormData(promotionImageToSave)).subscribe(promotionImage => {
-        promotionImage.image = promotionImageToSave.image;
+        promotionImage.image = this.imageService.base64ImageToFile(promotionImage.image, promotionImage.imageType, promotionImage.imageName);
         if(promotionImageToSave.id && promotionImage.id !== 0){
           let originalPromotionImage = this.promotionImages.find(promotionImage => promotionImage.id === promotionImageToSave.id);
           Object.assign(originalPromotionImage, promotionImage);
