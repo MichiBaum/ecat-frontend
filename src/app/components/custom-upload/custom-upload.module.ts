@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CustomUploadComponent } from './custom-upload.component';
 import {ButtonModule, FileUploadModule, OrderListModule} from "primeng";
 import {FileSizePipe} from "../../customPipes/file-size.pipe";
+import {TranslateModule} from "@ngx-translate/core";
 
 
 
@@ -11,11 +12,12 @@ import {FileSizePipe} from "../../customPipes/file-size.pipe";
   exports: [
     CustomUploadComponent
   ],
-  imports: [
-    CommonModule,
-    ButtonModule,
-    OrderListModule,
-    FileUploadModule,
-  ]
+    imports: [
+        CommonModule,
+        ButtonModule,
+        OrderListModule,
+        FileUploadModule,
+        TranslateModule,
+    ]
 })
 export class CustomUploadModule { }

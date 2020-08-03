@@ -141,6 +141,10 @@
     "passwordMismatch": "Die Passwörter stimmen nicht überein",
     "adminEditor": "Benutzermanager"
   },
+  "customUpload": {
+    "preview": "Vorschau",
+    "chooseFile": "Datei auswählen"
+  },
   "buttons": {
     "save": "Speichern",
     "delete": "Löschen",
