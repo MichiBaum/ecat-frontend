@@ -47,7 +47,6 @@ export class CustomUploadComponent implements DoCheck {
       changes.forEachAddedItem(addedCustomUploadItem => {
         addedCustomUploadItem.item.url = this.getUrl(addedCustomUploadItem.item.file);
       })
-      console.log(this.customUploadItems);
     }
   }
 
