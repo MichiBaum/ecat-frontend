@@ -55,11 +55,11 @@
       "index": {
         "empty": "Das Bild besitzt keine angegebene Position in einer Bildreihenfolge"
       },
-      "image": {
+      "file": {
         "empty": "Es ist kein Bild vorhanden",
         "invalidType": "Dieser Bildtyp wird nicht unterstützt. Bitte nur PNG, JPEG oder JPG"
       },
-      "imageName": {
+      "fileName": {
         "notValid": "Dieser Bildname kann nicht verwendet werden"
       }
     },
@@ -74,11 +74,11 @@
       "index": {
         "empty": "Das Bild besitzt keine angegebene Position in einer Bildreihenfolge"
       },
-      "image": {
+      "file": {
         "empty": "Es ist kein Bild vorhanden",
         "invalidType": "Dieser Bildtyp wird nicht unterstützt. Bitte nur PNG, JPEG oder JPG"
       },
-      "imageName": {
+      "fileName": {
         "notValid": "Dieser Bildname kann nicht verwendet werden"
       }
     },
