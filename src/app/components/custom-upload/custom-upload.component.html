@@ -7,7 +7,7 @@
     <ng-template let-customUploadItem pTemplate="customUploadItem">
       <div class="ui-helper-clearfix p-grid">
         <div class="p-col">
-          <div style="font-size:14px">{{customUploadItem.file.name}}</div>
+          <div style="font-size:14px">{{customUploadItem.fileName}}</div>
         </div>
         <div class="p-col">
           <div style="font-size:14px">{{customUploadItem.file.size | fileSizePipe}}</div>
@@ -20,5 +20,5 @@
       </div>
     </ng-template>
   </p-orderList>
-  <p-fileUpload accept="image/png, image/jpeg" chooseLabel="{{ 'customUpload.chooseFile' | translate }}" #fileUpload multiple="true" customUpload="true" (onSelect)="updateCustomUploadItems($event)" mode="basic"></p-fileUpload>
+  <p-fileUpload accept="image/png, image/jpeg" chooseLabel="{{ 'customUpload.chooseFile' | translate }}" #fileUpload multiple="true" customUpload="true" (onSelect)="emitNewFiles($event)" mode="basic"></p-fileUpload>
 </div>

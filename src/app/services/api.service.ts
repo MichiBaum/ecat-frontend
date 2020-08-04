@@ -39,6 +39,19 @@ export class ApiService {
     );
   }
 
+  getFile(path: String, errorHandler: HttpResponseErrorHandler = this.defaultErrorHandler): Observable<any>{
+    return this.http.get(`${environment.api_url}${path}`, {responseType:"blob"}).pipe(
+      catchError(error => {
+        if(errorHandler.matches(error)){
+          errorHandler.handle(error);
+        }else{
+          this.defaultErrorHandler.handle(error)
+        }
+        throw error;
+      })
+    );
+  }
+
   postSingle<T>(path: String, object: any, errorHandler: HttpResponseErrorHandler = this.defaultErrorHandler): Observable<T>{
     return this.http.post<T>(`${environment.api_url}${path}`, object).pipe(
       catchError(error => {

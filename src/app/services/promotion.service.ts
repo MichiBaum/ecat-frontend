@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import {Promotion} from "../models/promotion";
 import {Observable} from "rxjs";
 import {ApiService} from "./api.service";
-import {PromotionImage} from "../models/promotion-image";
+import {SavePromotionImageDto} from "../models/save-promotion-image-dto";
+import {ReturnPromotionImageDto} from "../models/return-promotion-image-dto";
 
 @Injectable({
   providedIn: 'root'
@@ -21,16 +22,20 @@ export class PromotionService {
     return this.apiService.postSingle<Promotion>(this.savePromotionsPath, promotion);
   }
 
-  savePromotionImage(formData: FormData): Observable<PromotionImage> {
+  savePromotionImage(formData: FormData): Observable<ReturnPromotionImageDto> {
     return this.apiService.postSingle('/promotions/image', formData);
   }
 
-  savePromotionImageIndex(promotionImage: PromotionImage){
+  savePromotionImageIndex(promotionImage: SavePromotionImageDto){
     return this.apiService.postSingle('/promotions/image/' + promotionImage.id, promotionImage.index);
   }
 
   deletePromotionImage(promotionImageId: number){
     return this.apiService.deleteSingle('/promotions/image/' + promotionImageId);
+  }
+
+  getPromotionImageFile(promotionImageId: number): Observable<File>{
+    return this.apiService.getFile('/promotions/image/' + promotionImageId);
   }
 
   deletePromotion(promotionId: number){

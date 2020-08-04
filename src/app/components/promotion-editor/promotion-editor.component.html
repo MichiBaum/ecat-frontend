@@ -3,10 +3,10 @@
     <form [formGroup]="promotionForm" class="p-grid p-dir-col p-justify-center">
       <div class="formGroup p-col">
         <label>{{ 'promotionEditor.imageSelection' | translate }}</label>
-        <app-custom-upload [customUploadItems]="promotionImages"
+        <app-custom-upload [customUploadItems]="savePromotionImageDtos"
                            (listReorder)="updatePromotionImagesIndex($event)"
-                           (addedCustomUploadItem)="saveNewPromotionImage(customUploadItemToPromotionImage($event))"
-                           (removedCustomUploadItem)="deletePromotionImage(customUploadItemToPromotionImage($event))"
+                           (addedCustomUploadItem)="saveNewPromotionImage(customUploadItemToSavePromotionImageDto($event))"
+                           (removedCustomUploadItem)="deletePromotionImage(customUploadItemToSavePromotionImageDto($event))"
         ></app-custom-upload>
       </div>
       <div class="formGroup p-col">

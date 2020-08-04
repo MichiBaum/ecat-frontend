@@ -8,9 +8,8 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {ProductEditorService} from "../../services/product-editor.service";
 import {TranslateService} from "@ngx-translate/core";
 import {SaveProductDto} from "../../models/save-product-dto";
-import {ProductImage} from "../../models/product-image";
+import {SaveProductImageDto} from "../../models/save-product-image-dto";
 import {CustomUploadItem} from "../../models/custom-upload-item";
-import {ImageService} from "../../services/image.service";
 
 @Component({
   selector: 'app-product-editor',
@@ -20,7 +19,7 @@ import {ImageService} from "../../services/image.service";
 export class ProductEditorComponent implements OnInit {
 
   product: Product = {id: 0, name: '', description: '', articleNr: '', price: null};
-  productImages: ProductImage[] = [];
+  saveProductImageDtos: SaveProductImageDto[] = [];
   productFamilyItems: SelectItem[] = [];
   showDialog: boolean = false;
 
@@ -38,8 +37,7 @@ export class ProductEditorComponent implements OnInit {
               private confirmService: ConfirmationService,
               private productEditorService: ProductEditorService,
               private messageService: MessageService,
-              private translateService: TranslateService,
-              private imageService: ImageService)
+              private translateService: TranslateService)
   {
     this.productEditorService.showProductEditorEmitter.subscribe(showDialog => {
       this.showDialog = showDialog;
@@ -83,11 +81,11 @@ export class ProductEditorComponent implements OnInit {
     }
   }
 
-  private productImageToFormData(productImage: ProductImage): FormData{
+  private productImageToFormData(productImage: SaveProductImageDto): FormData{
     const formData = new FormData();
-    formData.append('image', productImage.file);
+    formData.append('file', productImage.file);
     formData.append('id', JSON.stringify(productImage.id));
-    formData.append('imageName', JSON.stringify(productImage.imageName));
+    formData.append('fileName', productImage.fileName);
     formData.append('index', JSON.stringify(productImage.index));
     formData.append('productId', JSON.stringify(productImage.productId));
     return formData;
@@ -95,38 +93,44 @@ export class ProductEditorComponent implements OnInit {
 
   updateProductImagesIndex(updatedIndexes: any){
     for (let [key, value] of updatedIndexes){
-      let productImage = this.productImages.find(productImage => productImage.id == key);
-      productImage.index = value;
-      this.productService.saveProductImageIndex(productImage).subscribe(() => {}, error => {});
+      let saveProductImageDto = this.saveProductImageDtos.find(productImage => productImage.id == key);
+      saveProductImageDto.index = value;
+      this.productService.saveProductImageIndex(saveProductImageDto).subscribe(() => {}, error => {});
     }
   }
 
-  saveNewProductImage(productImageToSave: ProductImage){
-    this.productService.saveProductImage(this.productImageToFormData(productImageToSave)).subscribe(productImage => {
-      productImage.file = this.imageService.base64ImageToFile(productImage.file, productImage.mimeType, productImage.imageName);
-      if(productImageToSave.id && productImageToSave.id !== 0){
-        let originalProductImage = this.productImages.find(productImage => productImage.id === productImageToSave.id);
-        Object.assign(originalProductImage, productImage);
-      }else{
-        this.productImages.push(productImage);
-      }
+  saveNewProductImage(productImageToSave: SaveProductImageDto){
+    this.productService.saveProductImage(this.productImageToFormData(productImageToSave)).subscribe(returnProductImageDto => {
+      this.productService.getProductImageFile(returnProductImageDto.id).subscribe(file => {
+        if(productImageToSave.id && productImageToSave.id !== 0){
+          let originalProductImage = this.saveProductImageDtos.find(productImage => productImage.id === productImageToSave.id);
+          Object.assign(originalProductImage, returnProductImageDto);
+        }else{
+          this.saveProductImageDtos.push({
+            id: returnProductImageDto.id,
+            file: file,
+            fileName: returnProductImageDto.fileName,
+            index: returnProductImageDto.index,
+            productId:this.product.id});
+        }
+      }, error => {});
     },
       error => {})
   }
 
-  deleteProductImage(productImage: ProductImage){
-    this.productService.deleteProductImage(productImage.id).subscribe(() => {
-      let productImageIndex = this.productImages.indexOf(productImage);
-      this.productImages.splice(productImageIndex, 1);
+  deleteProductImage(saveProductImageDto: SaveProductImageDto){
+    this.productService.deleteProductImage(saveProductImageDto.id).subscribe(() => {
+      let productImageIndex = this.saveProductImageDtos.indexOf(saveProductImageDto);
+      this.saveProductImageDtos.splice(productImageIndex, 1);
     }, error => {});
   }
 
-  customUploadItemToProductImage(customUploadItem: CustomUploadItem): ProductImage{
+  customUploadItemToSaveProductImageDto(customUploadItem: CustomUploadItem): SaveProductImageDto{
     return {
       id: customUploadItem.id,
       index: customUploadItem.index,
       file: customUploadItem.file,
-      imageName: customUploadItem.file.name,
+      fileName: customUploadItem.file.name,
       productId: this.product.id
     };
   }

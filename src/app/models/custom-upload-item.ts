@@ -2,8 +2,9 @@ import {SafeUrl} from "@angular/platform-browser";
 
 export interface CustomUploadItem {
   id: number;
-  file: any;
+  file: File;
   index: number;
+  fileName?: string,
   url?: SafeUrl;
 
 }
