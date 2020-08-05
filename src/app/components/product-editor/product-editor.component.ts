@@ -10,6 +10,8 @@ import {TranslateService} from "@ngx-translate/core";
 import {SaveProductDto} from "../../models/save-product-dto";
 import {SaveProductImageDto} from "../../models/save-product-image-dto";
 import {CustomUploadItem} from "../../models/custom-upload-item";
+import {ReturnProductImageDto} from "../../models/return-product-image-dto";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-product-editor',
@@ -19,7 +21,7 @@ import {CustomUploadItem} from "../../models/custom-upload-item";
 export class ProductEditorComponent implements OnInit {
 
   product: Product = {id: 0, name: '', description: '', articleNr: '', price: null};
-  saveProductImageDtos: SaveProductImageDto[] = [];
+  returnProductImageDtos: ReturnProductImageDto[] = [];
   productFamilyItems: SelectItem[] = [];
   showDialog: boolean = false;
 
@@ -81,47 +83,31 @@ export class ProductEditorComponent implements OnInit {
     }
   }
 
-  private productImageToFormData(productImage: SaveProductImageDto): FormData{
-    const formData = new FormData();
-    formData.append('file', productImage.file);
-    formData.append('id', JSON.stringify(productImage.id));
-    formData.append('fileName', productImage.fileName);
-    formData.append('index', JSON.stringify(productImage.index));
-    formData.append('productId', JSON.stringify(productImage.productId));
-    return formData;
-  }
-
   updateProductImagesIndex(updatedIndexes: any){
     for (let [key, value] of updatedIndexes){
-      let saveProductImageDto = this.saveProductImageDtos.find(productImage => productImage.id == key);
-      saveProductImageDto.index = value;
-      this.productService.saveProductImageIndex(saveProductImageDto).subscribe(() => {}, error => {});
+      let returnProductImageDto = this.returnProductImageDtos.find(saveProductImageDto => saveProductImageDto.id === key);
+      this.productService.saveProductImageIndex(returnProductImageDto.id, value);
     }
   }
 
-  saveNewProductImage(productImageToSave: SaveProductImageDto){
-    this.productService.saveProductImage(this.productImageToFormData(productImageToSave)).subscribe(returnProductImageDto => {
-      this.productService.getProductImageFile(returnProductImageDto.id).subscribe(file => {
-        if(productImageToSave.id && productImageToSave.id !== 0){
-          let originalProductImage = this.saveProductImageDtos.find(productImage => productImage.id === productImageToSave.id);
-          Object.assign(originalProductImage, returnProductImageDto);
-        }else{
-          this.saveProductImageDtos.push({
-            id: returnProductImageDto.id,
-            file: file,
-            fileName: returnProductImageDto.fileName,
-            index: returnProductImageDto.index,
-            productId:this.product.id});
-        }
-      }, error => {});
-    },
-      error => {})
+  saveNewProductImage(saveProductImageDto: SaveProductImageDto){
+    this.productService.saveProductImage(saveProductImageDto).subscribe(returnProductImageDto => {
+      if(saveProductImageDto.id && saveProductImageDto.id !== 0) {
+        let originalReturnProductImageDto = this.returnProductImageDtos.find(
+          returnProductImageDtoPredicate => returnProductImageDtoPredicate.id === saveProductImageDto.id);
+        Object.assign(originalReturnProductImageDto, returnProductImageDto);
+      }else{
+        this.returnProductImageDtos.push(returnProductImageDto);
+      }
+    })
   }
 
-  deleteProductImage(saveProductImageDto: SaveProductImageDto){
-    this.productService.deleteProductImage(saveProductImageDto.id).subscribe(() => {
-      let productImageIndex = this.saveProductImageDtos.indexOf(saveProductImageDto);
-      this.saveProductImageDtos.splice(productImageIndex, 1);
+  deleteProductImage(id: number){
+    console.log(id);
+    this.productService.deleteProductImage(id).subscribe(() => {
+      let returnProductImageDtoIndex = this.returnProductImageDtos.findIndex(
+        returnProductImageDtoPredicate => returnProductImageDtoPredicate.id === id);
+      this.returnProductImageDtos.splice(returnProductImageDtoIndex, 1);
     }, error => {});
   }
 
@@ -130,8 +116,20 @@ export class ProductEditorComponent implements OnInit {
       id: customUploadItem.id,
       index: customUploadItem.index,
       file: customUploadItem.file,
-      fileName: customUploadItem.file.name,
+      fileName: customUploadItem.fileName,
       productId: this.product.id
     };
   }
+
+  // returnProductImageDtoToSaveProductImageDto(returnProductImageDto: ReturnProductImageDto): Observable<SaveProductImageDto>{
+  //   this.productService.getProductImageFile(returnProductImageDto.id).subscribe(file => {
+  //     return {
+  //       id: returnProductImageDto.id,
+  //       file: file,
+  //       fileName: returnProductImageDto.fileName,
+  //       index: returnProductImageDto.index,
+  //       productId:this.product.id
+  //     }
+  //   })
+  // }
 }

@@ -1,6 +1,6 @@
 import {CustomUploadItem} from "./custom-upload-item";
 
-export interface SaveProductImageDto extends CustomUploadItem{
+export interface SaveProductImageDto{
   id: number;
   index: number;
   file: any;

@@ -1,24 +1,21 @@
-<div>
+<div class="container">
   <p-orderList [value]="customUploadItems"
                [listStyle]="{'height':'350px'}"
                header="Translate Me"
                (onReorder)="updateCustomUploadItemsIndex()"
   >
     <ng-template let-customUploadItem pTemplate="customUploadItem">
-      <div class="ui-helper-clearfix p-grid">
-        <div class="p-col">
-          <div style="font-size:14px">{{customUploadItem.fileName}}</div>
-        </div>
-        <div class="p-col">
-          <div style="font-size:14px">{{customUploadItem.file.size | fileSizePipe}}</div>
+      <div class="ui-helper-clearfix p-grid p-dir-col elementContainer">
+        <div class="p-col fileNameContainer">
+          <p style="font-size:14px">{{customUploadItem.fileName}}</p>
         </div>
         <div class="p-col">
           <p-button class="marginRight" label="{{ 'customUpload.preview' | translate }}" (onClick)="openImagePreview(customUploadItem)"></p-button>
-          <p-button icon="fa fa-times fa-2x" styleClass="ui-button-danger" (onClick)="removedCustomUploadItem.emit(customUploadItem)"></p-button>
-          <img [src]="customUploadItem.url" id="preview" style="display:inline-block;float: right;margin:2px 0 2px 2px;" width="48">
+          <p-button icon="fa fa-times fa-2x" styleClass="ui-button-danger" (onClick)="removedCustomUploadItem.emit(customUploadItem.id)"></p-button>
+          <img [src]="customUploadItem.url" id="preview" style="display:inline-block;float: right;margin:2px 0 2px 2px; width: 48px">
         </div>
       </div>
     </ng-template>
   </p-orderList>
-  <p-fileUpload accept="image/png, image/jpeg" chooseLabel="{{ 'customUpload.chooseFile' | translate }}" #fileUpload multiple="true" customUpload="true" (onSelect)="emitNewFiles($event)" mode="basic"></p-fileUpload>
+  <p-fileUpload accept="image/png, image/jpeg" chooseLabel="{{ 'customUpload.chooseFile' | translate }}" #fileUpload multiple="true" customUpload="true" (onSelect)="emitNewCustomUploadItem($event)" mode="basic"></p-fileUpload>
 </div>

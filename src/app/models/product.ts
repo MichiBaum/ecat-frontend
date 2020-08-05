@@ -1,3 +1,5 @@
+import {ReturnProductImageDto} from "./return-product-image-dto";
+
 export interface Product {
   id: number;
   name: string;
@@ -5,4 +7,5 @@ export interface Product {
   description: string;
   price: number;
   productFamilyId?: number;
+  returnProductImageDtos?: ReturnProductImageDto[];
 }

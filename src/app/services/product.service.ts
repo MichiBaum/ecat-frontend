@@ -23,20 +23,30 @@ export class ProductService {
   saveProduct(saveProductDto: SaveProductDto): Observable<Product>{
     return this.apiService.postSingle<Product>('/products/save', saveProductDto);
   }
-  saveProductImage(formData: FormData): Observable<ReturnProductImageDto> {
-    return this.apiService.postSingle('/products/image', formData);
+  saveProductImage(saveProductImageDto: SaveProductImageDto): Observable<ReturnProductImageDto> {
+    return this.apiService.postSingle('/products/image', this.saveProductImageDtoToFormData(saveProductImageDto));
   }
 
-  saveProductImageIndex(productImage: SaveProductImageDto){
-    return this.apiService.postSingle('/products/image/' + productImage.id, productImage.index);
+  private saveProductImageDtoToFormData(saveProductImageDto: SaveProductImageDto): FormData{
+    const formData = new FormData();
+    formData.append('file', saveProductImageDto.file);
+    formData.append('id', JSON.stringify(saveProductImageDto.id));
+    formData.append('fileName', saveProductImageDto.fileName);
+    formData.append('index', JSON.stringify(saveProductImageDto.index));
+    formData.append('productId', JSON.stringify(saveProductImageDto.productId));
+    return formData;
   }
 
-  deleteProductImage(productImageId: number){
-    return this.apiService.deleteSingle('/products/image/' + productImageId);
+  saveProductImageIndex(productImageId: number, productImageIndex: number){
+    return this.apiService.postSingle('/products/image/' + productImageId, productImageIndex);
   }
 
-  getProductImageFile(productImageId: number): Observable<File>{
-    return this.apiService.getFile('/products/image/' + productImageId);
+  deleteProductImage(saveProductImageDtoId: number){
+    return this.apiService.deleteSingle('/products/image/' + saveProductImageDtoId);
+  }
+
+  getProductImageFile(saveProductImageDtoId: number): Observable<File>{
+    return this.apiService.getFile('/products/image/' + saveProductImageDtoId);
   }
 
   deleteProduct(productId: number): Observable<void>{

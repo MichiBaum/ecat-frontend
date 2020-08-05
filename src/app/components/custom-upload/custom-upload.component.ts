@@ -17,11 +17,8 @@ import {TranslateService} from "@ngx-translate/core";
   selector: 'app-custom-upload',
   templateUrl: './custom-upload.component.html',
   styleUrls: ['./custom-upload.component.scss'],
-  host: {
-    class:'p-col'
-  }
 })
-export class CustomUploadComponent implements DoCheck {
+export class CustomUploadComponent {
 
   constructor(
     private domSanitizer: DomSanitizer,
@@ -35,27 +32,17 @@ export class CustomUploadComponent implements DoCheck {
 
   iterableDiffer: IterableDiffer<CustomUploadItem>;
   @Input()customUploadItems: CustomUploadItem[] = [];
-  @Output()addedCustomUploadItem = new EventEmitter();
+  @Output()newCustomUploadItem = new EventEmitter();
   @Output()listReorder = new EventEmitter();
   @Output()removedCustomUploadItem = new EventEmitter();
   @ViewChild('fileUpload') fileUpload: FileUpload;
 
-  ngDoCheck() {
-    let changes = this.iterableDiffer.diff(this.customUploadItems);
-
-    if(changes){
-      changes.forEachAddedItem(addedCustomUploadItem => {
-        addedCustomUploadItem.item.url = this.getUrl(addedCustomUploadItem.item.file);
-      })
-    }
-  }
-
-  emitNewFiles(event){
+  emitNewCustomUploadItem(event){
     let files = event.files;
     for(let i = 0; i < files.length; i++){
       if(this.validateFile(files[i])){
-        let customUploadItem: CustomUploadItem = {id: 0, file: files[i], index: this.getIndex()};
-        this.addedCustomUploadItem.emit(customUploadItem);
+        let customUploadItem: CustomUploadItem = {id: 0, file: files[i], index: this.getIndex(), fileName: files[i].name};
+        this.newCustomUploadItem.emit(customUploadItem);
       }
       this.fileUpload.clear();
     }
@@ -70,16 +57,6 @@ export class CustomUploadComponent implements DoCheck {
       }
     }
     this.listReorder.emit(updatedIndexes);
-  }
-
-  getUrl(file: File){
-    let reader = new FileReader();
-    reader.readAsDataURL(file);
-    return this.domSanitizer.bypassSecurityTrustUrl((window.URL.createObjectURL(file)));
-  }
-
-  removeCustomUploadItem(customUploadItem: CustomUploadItem){
-    this.removedCustomUploadItem.emit(customUploadItem);
   }
 
   private getIndex(){
@@ -111,8 +88,5 @@ export class CustomUploadComponent implements DoCheck {
       valid = false;
     }
     return valid;
-  }
-  test(event){
-    console.log(event);
   }
 }

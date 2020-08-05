@@ -6,6 +6,7 @@
     display: block;
     margin-bottom: 1em;
   }
+  max-width: 100%;
 }
 .container{
   margin: 0.5rem;
@@ -19,4 +20,7 @@
 }
 ::ng-deep .ui-dropdown{
   width: 100% !important;
+}
+::ng-deep .ui-dialog{
+  width: 70%;
 }

@@ -1,3 +1,22 @@
 .marginRight{
   margin-right: 1rem;
 }
+.fileNameContainer{
+  p{
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  max-width: 100%;
+}
+.elementContainer{
+  max-width: 100%;
+}
+::ng-deep .ui-orderlist{
+  max-width: 100% !important;
+}
+::ng-deep .ui-orderlist-item{
+  max-width: 100%;
+}
+.container{
+  max-width: 100%;
+}
