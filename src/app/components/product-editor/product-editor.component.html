@@ -1,7 +1,6 @@
 <p-dialog [(visible)]="showDialog" [modal]="true" header="{{ 'productEditor.productEditor' | translate }}">
   <div class="container p-grid p-dir-col p-justify-center">
     <div class="formGroup p-col">
-      <label>{{ 'productEditor.imageSelection' | translate }}</label>
       <app-custom-upload [customUploadItems]="returnProductImageDtos"
                          (listReorder)="updateProductImagesIndex($event)"
                          (newCustomUploadItem)="saveNewProductImage(customUploadItemToSaveProductImageDto($event))"

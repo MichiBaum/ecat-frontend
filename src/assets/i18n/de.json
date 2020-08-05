@@ -147,7 +147,8 @@
   },
   "customUpload": {
     "preview": "Vorschau",
-    "chooseFile": "Datei auswählen"
+    "chooseFile": "Datei auswählen",
+    "title": "Bildauswahl"
   },
   "buttons": {
     "save": "Speichern",

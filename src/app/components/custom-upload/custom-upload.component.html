@@ -1,7 +1,7 @@
 <div class="container">
   <p-orderList [value]="customUploadItems"
                [listStyle]="{'height':'350px'}"
-               header="Translate Me"
+               header="{{'customUpload.title' | translate}}"
                (onReorder)="updateCustomUploadItemsIndex()"
   >
     <ng-template let-customUploadItem pTemplate="customUploadItem">
