@@ -5,7 +5,7 @@
         <label>{{ 'promotionEditor.imageSelection' | translate }}</label>
         <app-custom-upload [customUploadItems]="savePromotionImageDtos"
                            (listReorder)="updatePromotionImagesIndex($event)"
-                           (addedCustomUploadItem)="saveNewPromotionImage(customUploadItemToSavePromotionImageDto($event))"
+                           (newCustomUploadItem)="saveNewPromotionImage(customUploadItemToSavePromotionImageDto($event))"
                            (removedCustomUploadItem)="deletePromotionImage(customUploadItemToSavePromotionImageDto($event))"
         ></app-custom-upload>
       </div>

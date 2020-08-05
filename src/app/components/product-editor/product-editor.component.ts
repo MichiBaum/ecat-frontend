@@ -11,7 +11,6 @@ import {SaveProductDto} from "../../models/save-product-dto";
 import {SaveProductImageDto} from "../../models/save-product-image-dto";
 import {CustomUploadItem} from "../../models/custom-upload-item";
 import {ReturnProductImageDto} from "../../models/return-product-image-dto";
-import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-product-editor',
@@ -46,6 +45,7 @@ export class ProductEditorComponent implements OnInit {
     });
     this.productEditorService.productEmitter.subscribe(product => {
       this.product = product;
+      this.returnProductImageDtos = product.returnProductImageDtos;
       this.updateProductForm();
     })
 
@@ -120,16 +120,4 @@ export class ProductEditorComponent implements OnInit {
       productId: this.product.id
     };
   }
-
-  // returnProductImageDtoToSaveProductImageDto(returnProductImageDto: ReturnProductImageDto): Observable<SaveProductImageDto>{
-  //   this.productService.getProductImageFile(returnProductImageDto.id).subscribe(file => {
-  //     return {
-  //       id: returnProductImageDto.id,
-  //       file: file,
-  //       fileName: returnProductImageDto.fileName,
-  //       index: returnProductImageDto.index,
-  //       productId:this.product.id
-  //     }
-  //   })
-  // }
 }

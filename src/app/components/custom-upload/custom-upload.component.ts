@@ -1,6 +1,5 @@
 import {
   Component,
-  DoCheck,
   EventEmitter,
   Input,
   IterableDiffer,
