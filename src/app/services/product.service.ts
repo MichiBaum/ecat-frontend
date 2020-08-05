@@ -45,10 +45,6 @@ export class ProductService {
     return this.apiService.deleteSingle('/products/image/' + saveProductImageDtoId);
   }
 
-  getProductImageFile(saveProductImageDtoId: number): Observable<File>{
-    return this.apiService.getFile('/products/image/' + saveProductImageDtoId);
-  }
-
   deleteProduct(productId: number): Observable<void>{
     return this.apiService.deleteSingle('/products/' + productId);
   }
