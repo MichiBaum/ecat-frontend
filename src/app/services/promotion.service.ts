@@ -22,12 +22,22 @@ export class PromotionService {
     return this.apiService.postSingle<Promotion>(this.savePromotionsPath, promotion);
   }
 
-  savePromotionImage(formData: FormData): Observable<ReturnPromotionImageDto> {
-    return this.apiService.postSingle('/promotions/image', formData);
+  savePromotionImage(savePromotionImageDto: SavePromotionImageDto): Observable<ReturnPromotionImageDto> {
+    return this.apiService.postSingle('/promotions/image', this.savePromotionImageDtoToFormData(savePromotionImageDto));
   }
 
-  savePromotionImageIndex(promotionImage: SavePromotionImageDto){
-    return this.apiService.postSingle('/promotions/image/' + promotionImage.id, promotionImage.index);
+  private savePromotionImageDtoToFormData(promotionImage: SavePromotionImageDto): FormData{
+    const formData = new FormData();
+    formData.append('file', promotionImage.file);
+    formData.append('id', JSON.stringify(promotionImage.id));
+    formData.append('fileName', promotionImage.fileName);
+    formData.append('index', JSON.stringify(promotionImage.index));
+    formData.append('promotionId', JSON.stringify(promotionImage.promotionId));
+    return formData;
+  }
+
+  savePromotionImageIndex(promotionImageId: number, promotionImageIndex: number){
+    return this.apiService.postSingle('/promotions/image/' + promotionImageId, promotionImageIndex);
   }
 
   deletePromotionImage(promotionImageId: number){

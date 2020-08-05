@@ -7,6 +7,7 @@ import {PromotionEditorService} from "../../services/promotion-editor.service";
 import {TranslateService} from "@ngx-translate/core";
 import {SavePromotionImageDto} from "../../models/save-promotion-image-dto";
 import {CustomUploadItem} from "../../models/custom-upload-item";
+import {ReturnPromotionImageDto} from "../../models/return-promotion-image-dto";
 
 @Component({
   selector: 'app-promotion-editor',
@@ -16,7 +17,7 @@ import {CustomUploadItem} from "../../models/custom-upload-item";
 export class PromotionEditorComponent{
 
   promotion: Promotion = {id: 0, title: '', description: '', startDate: null, endDate: null};
-  savePromotionImageDtos: SavePromotionImageDto[] = [];
+  returnPromotionImageDtos: ReturnPromotionImageDto[] = [];
   showDialog: boolean = false;
 
   promotionForm = new FormGroup({
@@ -35,6 +36,7 @@ export class PromotionEditorComponent{
   {
     this.promotionEditorService.promotionEmitter.subscribe(promotion => {
       this.promotion = promotion;
+      this.returnPromotionImageDtos = promotion.returnPromotionImageDtos;
       this.updateForm();
     });
     this.promotionEditorService.showPromotionEditorEmitter.subscribe(showDialog => {
@@ -76,47 +78,30 @@ export class PromotionEditorComponent{
     }
   }
 
-  private promotionImageToFormData(promotionImage: SavePromotionImageDto): FormData{
-    const formData = new FormData();
-    formData.append('file', promotionImage.file);
-    formData.append('id', JSON.stringify(promotionImage.id));
-    formData.append('fileName', promotionImage.fileName);
-    formData.append('index', JSON.stringify(promotionImage.index));
-    formData.append('promotionId', JSON.stringify(promotionImage.promotionId));
-    return formData;
-  }
-
   updatePromotionImagesIndex(updatedIndexes: any){
     for (let [key, value] of updatedIndexes){
-      let savePromotionImageDto = this.savePromotionImageDtos.find(productImage => productImage.id == key);
-      savePromotionImageDto.index = value;
-      this.promotionService.savePromotionImageIndex(savePromotionImageDto).subscribe(() => {}, error => {});
+      let returnPromotionImageDto = this.returnPromotionImageDtos.find(returnPromotionImageDtoPredicate => returnPromotionImageDtoPredicate.id == key);
+      this.promotionService.savePromotionImageIndex(returnPromotionImageDto.id, value).subscribe(() => {}, error => {});
     }
   }
 
   saveNewPromotionImage(savePromotionImageDto: SavePromotionImageDto){
-    this.promotionService.savePromotionImage(this.promotionImageToFormData(savePromotionImageDto)).subscribe(returnPromotionImageDto => {
-        this.promotionService.getPromotionImageFile(returnPromotionImageDto.id).subscribe(file => {
-          if(savePromotionImageDto.id && returnPromotionImageDto.id !== 0){
-            let originalPromotionImage = this.savePromotionImageDtos.find(promotionImage => promotionImage.id === savePromotionImageDto.id);
-            Object.assign(originalPromotionImage, returnPromotionImageDto);
-          }else{
-            this.savePromotionImageDtos.push({
-              id: returnPromotionImageDto.id,
-              file: file,
-              fileName: returnPromotionImageDto.fileName,
-              index: returnPromotionImageDto.index,
-              promotionId: this.promotion.id});
-          }
-        }, error => {})
-      },
-      error => {})
+    this.promotionService.savePromotionImage(savePromotionImageDto).subscribe(returnPromotionImageDto => {
+        if(savePromotionImageDto.id && returnPromotionImageDto.id !== 0){
+          let originalReturnPromotionImageDto = this.returnPromotionImageDtos.find(
+            returnPromotionImageDtoPredicate => returnPromotionImageDtoPredicate.id === savePromotionImageDto.id);
+          Object.assign(originalReturnPromotionImageDto, returnPromotionImageDto);
+        }else {
+          this.returnPromotionImageDtos.push(returnPromotionImageDto);
+        }
+      }, error => {})
   }
 
-  deletePromotionImage(savePromotionImageDto: SavePromotionImageDto){
-    this.promotionService.deletePromotionImage(savePromotionImageDto.id).subscribe(() => {
-      let promotionImageIndex = this.savePromotionImageDtos.indexOf(savePromotionImageDto);
-      this.savePromotionImageDtos.splice(promotionImageIndex, 1);
+  deletePromotionImage(id: number){
+    this.promotionService.deletePromotionImage(id).subscribe(() => {
+      let returnPromotionImageDtoIndex = this.returnPromotionImageDtos.findIndex(
+        returnPromotionImageDtoPredicate => returnPromotionImageDtoPredicate.id === id);
+      this.returnPromotionImageDtos.splice(returnPromotionImageDtoIndex, 1);
     }, error => {});
   }
 

@@ -1,6 +1,7 @@
 <div #container class="container p-grid p-dir-row">
   <div #imageContainer class="p-col-fixed imageContainer" style="width: 100%">
-    <img #promotionCardImage src="assets/images/{{promotion.pictureName}}">
+    <img *ngIf="promotion.returnPromotionImageDtos[0]" src="{{promotion.returnPromotionImageDtos[0].url}}">
+    <img *ngIf="!promotion.returnPromotionImageDtos[0]" src="assets/images/Test.png">
   </div>
   <div class="p-col dynamicContainer">
     <div class="content">
@@ -16,5 +17,5 @@
     </div>
   </div>
 </div>
-<p-contextMenu #contextMenu (onShow)="contextmenuService.closeAllExcept(promotion.id)" [target]="promotionCardImage" [model]="promotionContextItems" *ngIf="this.authService.hasPermission('ADMINISTRATE')"></p-contextMenu>
+<p-contextMenu #contextMenu (onShow)="contextmenuService.closeAllExcept(promotion.id)" [target]="imageContainer" [model]="promotionContextItems" *ngIf="this.authService.hasPermission('ADMINISTRATE')"></p-contextMenu>
 

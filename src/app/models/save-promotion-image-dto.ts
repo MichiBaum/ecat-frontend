@@ -1,6 +1,4 @@
-import {CustomUploadItem} from "./custom-upload-item";
-
-export interface SavePromotionImageDto extends CustomUploadItem{
+export interface SavePromotionImageDto{
   id: number;
   index: number;
   file: any;

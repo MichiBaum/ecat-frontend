@@ -86,7 +86,7 @@ export class ProductEditorComponent implements OnInit {
   updateProductImagesIndex(updatedIndexes: any){
     for (let [key, value] of updatedIndexes){
       let returnProductImageDto = this.returnProductImageDtos.find(saveProductImageDto => saveProductImageDto.id === key);
-      this.productService.saveProductImageIndex(returnProductImageDto.id, value);
+      this.productService.saveProductImageIndex(returnProductImageDto.id, value).subscribe(() => {}, error => {});
     }
   }
 
@@ -99,11 +99,11 @@ export class ProductEditorComponent implements OnInit {
       }else{
         this.returnProductImageDtos.push(returnProductImageDto);
       }
-    })
+    },
+      error => {})
   }
 
   deleteProductImage(id: number){
-    console.log(id);
     this.productService.deleteProductImage(id).subscribe(() => {
       let returnProductImageDtoIndex = this.returnProductImageDtos.findIndex(
         returnProductImageDtoPredicate => returnProductImageDtoPredicate.id === id);
