@@ -1,7 +1,7 @@
 <div #container class="container p-grid p-dir-row">
   <div #imageContainer class="p-col-fixed imageContainer" style="width: 100%">
     <img *ngIf="product.returnProductImageDtos[0]" src="{{product.returnProductImageDtos[0].url}}">
-    <img *ngIf="!product.returnProductImageDtos[0]" src="">
+    <img *ngIf="!product.returnProductImageDtos[0]" src="/assets/images/Test.png">
   </div>
   <div class="p-col dynamicContainer">
     <div class="content">
