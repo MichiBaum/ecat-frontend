@@ -43,8 +43,8 @@ export class CustomUploadComponent {
         let customUploadItem: CustomUploadItem = {id: 0, file: files[i], index: this.getIndex(), fileName: files[i].name};
         this.newCustomUploadItem.emit(customUploadItem);
       }
-      this.fileUpload.clear();
     }
+    this.fileUpload.clear();
   }
   updateCustomUploadItemsIndex(){
     let updatedIndexes = new Map();
