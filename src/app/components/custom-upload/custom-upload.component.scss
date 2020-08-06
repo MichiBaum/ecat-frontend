@@ -21,6 +21,8 @@
   background-color: white !important;
   color: black !important;
   box-shadow: inset 0 0 0 0.2em #8dcdff !important;
+  -webkit-box-shadow: inset 0 0 0 0.2em #8dcdff !important;
+  -moz-box-shadow: inset 0 0 0 0.2em #8dcdff !important;
 }
 .container{
   max-width: 100%;
