@@ -24,6 +24,7 @@ import {ContextmenuService} from "../../services/contextmenu.service";
 
 })
 export class PromotionCardComponent implements OnInit {
+  loading: boolean = true;
   expanded: boolean = false;
   @Input() promotion: Promotion;
   @Input() classes: string;

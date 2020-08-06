@@ -1,7 +1,8 @@
 <div #container class="container p-grid p-dir-row">
   <div #imageContainer class="p-col-fixed imageContainer" style="width: 100%">
-    <img *ngIf="product.returnProductImageDtos[0]" src="{{product.returnProductImageDtos[0].url}}">
-    <img *ngIf="!product.returnProductImageDtos[0]" src="/assets/images/Test.png">
+    <img *ngIf="product.returnProductImageDtos[0]" [hidden]="loading" src="{{product.returnProductImageDtos[0].url}}" (load)="loading = false">
+    <p-progressSpinner [style]="{width: '100%', paddingTop: '75%'}" *ngIf="loading"></p-progressSpinner>
+    <img *ngIf="!product.returnProductImageDtos[0]" [hidden]="loading" src="/assets/images/Test.png" (load)="loading = false">
   </div>
   <div class="p-col dynamicContainer">
     <div class="content">

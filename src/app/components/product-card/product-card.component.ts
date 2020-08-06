@@ -21,6 +21,7 @@ import {ContextmenuService} from "../../services/contextmenu.service";
 })
 export class ProductCardComponent implements OnInit {
   expanded: boolean = false;
+  loading: boolean = true;
   @HostBinding('class.p-col-12') breakPointClassFullWidth = true;
   @Input() product: Product;
   @Input() classes: string;
