@@ -15,7 +15,12 @@
   max-width: 100% !important;
 }
 ::ng-deep .ui-orderlist-item{
-  max-width: 100%;
+  max-width: 100% !important;
+}
+::ng-deep .ui-state-highlight{
+  background-color: white !important;
+  color: black !important;
+  box-shadow: inset 0 0 0 0.2em #8dcdff !important;
 }
 .container{
   max-width: 100%;
