@@ -94,6 +94,9 @@
     "notFoundErrorHandler": {
       "resourceNotFound": "Die angefragte Ressource konnte nicht gefunden werden"
     },
+    "validationErrorHandler": {
+      "badRequest": "Schlechte Anfrage"
+    },
     "fields": {
       "empty": "Leeres Feld"
     },

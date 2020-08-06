@@ -21,7 +21,7 @@ export class ValidationErrorHandler implements HttpResponseErrorHandler{
         detail: this.translateService.instant('errors.' + error.error.errorMsg),
         life: 5000
       });
-    }else{
+    }else if (error.error.validationErrors){
       for(const errorMsg of error.error.validationErrors){
         this.messageService.add({
           severity: 'error',
@@ -30,6 +30,13 @@ export class ValidationErrorHandler implements HttpResponseErrorHandler{
           life: 5000
         });
       }
+    }else{
+      this.messageService.add({
+        severity: 'error',
+        summary: this.translateService.instant('toastMessages.error'),
+        detail: this.translateService.instant('validationErrorHandler.badRequest'),
+        life: 5000
+      });
     }
   }
 
