@@ -6,7 +6,10 @@ import {AuthenticationService} from "../../services/authentication.service";
 @Component({
   selector: 'app-promotions',
   templateUrl: './promotions.component.html',
-  styleUrls: ['./promotions.component.scss']
+  styleUrls: ['./promotions.component.scss'],
+  host: {
+    class:'p-col'
+  }
 })
 export class PromotionsComponent implements OnInit {
 
