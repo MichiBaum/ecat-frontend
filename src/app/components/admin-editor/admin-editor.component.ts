@@ -43,7 +43,7 @@ export class AdminEditorComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if(this.authenticationService.hasPermission('ADMINISTRATE_ADMINS')){
+    if(this.authenticationService.hasPermission('ADMINISTRATE_USERS')){
       forkJoin([
         this.userService.getUsers(),
         this.permissionService.getPermissions()

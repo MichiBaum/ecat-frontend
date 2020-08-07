@@ -9,10 +9,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProductsComponent } from './components/products/products.component';
 import {PromotionService} from "./services/promotion.service";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
-import { PromotionEditorComponent } from './components/promotion-editor/promotion-editor.component';
 import { LoginComponent } from './components/login/login.component';
 import {httpInterceptProviders} from "./httpInterceptors/HttpInteceptProviders";
-import {PermissionGuard} from "./guards/permission.guard";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {DefaultErrorHandler} from "./errorHandlers/default-error-handler";
 import {AuthErrorHandler} from "./errorHandlers/auth-error-handler";
@@ -38,7 +36,6 @@ import {CustomUploadModule} from "./components/custom-upload/custom-upload.modul
 const appRoutes: Routes = [
   {path: 'homepage', component: HomepageComponent},
   {path: 'products', component: ProductsComponent},
-  {path: 'admin/promotionEditor', component: PromotionEditorComponent, canActivate: [PermissionGuard], data: {requiredPermission: 'ADMINISTRATE'}},
   {path: 'login', component: LoginComponent},
   {path: '**', redirectTo:"/homepage"},
 ];

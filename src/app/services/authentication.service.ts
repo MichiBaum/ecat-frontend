@@ -33,7 +33,7 @@ export class AuthenticationService {
     return this.getPermissions().indexOf(permission) != -1;
   }
 
-  hasAnyPermission(...permissions: string[]){
+  hasAnyPermission(...permissions: string[]): boolean{
     return this.getPermissions().some(permission => permissions.indexOf(permission) >= 0);
   }
 

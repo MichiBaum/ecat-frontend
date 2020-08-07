@@ -7,5 +7,5 @@
   >
   </app-product-card>
 </div>
-<app-product-editor *ngIf="authService.hasPermission('ADMINISTRATE')"></app-product-editor>
-<p-confirmDialog *ngIf="authService.hasPermission('ADMINISTRATE')"></p-confirmDialog>
+<app-product-editor *ngIf="authService.hasPermission('ADMINISTRATE_PRODUCTS')"></app-product-editor>
+<p-confirmDialog *ngIf="authService.hasPermission('ADMINISTRATE_PRODUCTS')"></p-confirmDialog>

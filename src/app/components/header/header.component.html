@@ -4,7 +4,7 @@
       <p-button icon="fa fa-bars" (onClick)="navigationService.sideBarEmitter.emit(true)" *ngIf="screenWidth < 1200"></p-button>
       <div class="ui-inputgroup p-col" *ngIf="screenWidth > 1199">
         <span class="ui-inputgroup-addon"><i class="fa fa-search" style="line-height: 1.25;"></i></span>
-        <input [(ngModel)]="searchtext" type="text" pInputText placeholder="Suche" (keydown)="onSearch($event)" style="width: 100%">
+        <input [(ngModel)]="searchtext" type="text" pInputText placeholder="Suche" (keydown)="onSearch($event)" style="width: 100%" autocomplete="off">
       </div>
     </div>
     <div class="p-col grow p-grid p-align-center p-justify-center" id="titleContainer">
@@ -16,5 +16,5 @@
     </div>
   </div>
 </div>
-<app-admin-editor *ngIf="authenticationService.hasAnyPermission('ADMINISTRATE', 'ADMINISTRATE_ADMINS')"></app-admin-editor>
+<app-admin-editor *ngIf="authenticationService.hasAnyPermission('ADMINISTRATE_OWN_USER', 'ADMINISTRATE_USERS')"></app-admin-editor>
 

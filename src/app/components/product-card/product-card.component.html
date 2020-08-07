@@ -22,5 +22,5 @@
     </div>
   </div>
 </div>
-<p-contextMenu #contextMenu (onShow)="contextmenuService.closeAllExcept(product.id)" [target]="imageContainer" [model]="productContextItems" *ngIf="this.authService.hasPermission('ADMINISTRATE')"></p-contextMenu>
+<p-contextMenu #contextMenu (onShow)="contextmenuService.closeAllExcept(product.id)" [target]="imageContainer" [model]="productContextItems" *ngIf="this.authService.hasPermission('ADMINISTRATE_PRODUCTS')"></p-contextMenu>
 

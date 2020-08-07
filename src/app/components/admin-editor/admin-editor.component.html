@@ -1,6 +1,6 @@
 <p-dialog [(visible)]="showDialog" [modal]="true" [style]="{height: 'auto', width: '420px'}" header="{{ 'adminEditor.adminEditor' | translate }}">
   <div class="container p-dir-col p-grid p-justify-center">
-    <div class="formGroup p-col" *ngIf="authenticationService.hasPermission('ADMINISTRATE_ADMINS')">
+    <div class="formGroup p-col" *ngIf="authenticationService.hasPermission('ADMINISTRATE_USERS')">
       <label>{{ 'adminEditor.userSelection' | translate }}</label>
       <p-dropdown class="input" [options]="usersItems" [(ngModel)]="selectedUser" (onChange)="adminForm.patchValue($event.value)"></p-dropdown>
     </div>
@@ -9,7 +9,7 @@
         <label for="nameField">{{ 'adminEditor.name' | translate}}</label>
         <input class="input" type="text" pInputText formControlName="name" id="nameField">
       </div>
-      <div class="formGroup p-col" *ngIf="authenticationService.hasPermission('ADMINISTRATE_ADMINS')">
+      <div class="formGroup p-col" *ngIf="authenticationService.hasPermission('ADMINISTRATE_USERS')">
         <label for="permissionsField">{{ 'adminEditor.permissions' | translate }}</label>
         <p-multiSelect class="input" id="permissionsField" [options]="permissionsItems" formControlName="permissions" [maxSelectedLabels]="1"></p-multiSelect>
       </div>
