@@ -14,7 +14,6 @@ import {httpInterceptProviders} from "./httpInterceptors/HttpInteceptProviders";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {DefaultErrorHandler} from "./errorHandlers/default-error-handler";
 import {AuthErrorHandler} from "./errorHandlers/auth-error-handler";
-import {LoginErrorHandler} from "./errorHandlers/login-error-handler";
 import {ValidationErrorHandler} from "./errorHandlers/validation-error-handler";
 import {InternalServerErrorHandler} from "./errorHandlers/internal-server-error-handler";
 import {FooterModule} from "./components/footer/footer.module";
@@ -86,7 +85,6 @@ const appRoutes: Routes = [
     ConfirmationService,
     DefaultErrorHandler,
     AuthErrorHandler,
-    LoginErrorHandler,
     ValidationErrorHandler,
     InternalServerErrorHandler,
     NotFoundErrorHandler

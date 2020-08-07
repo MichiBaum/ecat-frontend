@@ -16,13 +16,24 @@ export class AuthErrorHandler implements HttpResponseErrorHandler{
 
   handle(error: HttpErrorResponse) {
     if(environment.generic_error_messages === true){
-      this.handleGeneric()
+      this.handleGeneric(error)
     }else{
       this.handleNonGeneric(error);
     }
   }
 
-  handleGeneric(){
+  handleGeneric(error: HttpErrorResponse){
+    if(error.error && error.error.message){
+      if(this.translateService.instant(error.error.message) !== error.error.message){
+        this.messageService.add({
+          severity: 'error',
+          summary: this.translateService.instant('toastMessages.error'),
+          detail: this.translateService.instant(this.translateService.instant(error.error.message)),
+          life: 5000
+        })
+        return;
+      }
+    }
     this.messageService.add({
       severity: 'error',
       summary: this.translateService.instant('toastMessages.error'),

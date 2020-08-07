@@ -82,7 +82,7 @@
         "notValid": "Dieser Bildname kann nicht verwendet werden"
       }
     },
-    "loginErrorHandler": {
+    "login": {
       "wrongCredentials": "Falscher Benutzername oder falsches Passwort"
     },
     "authErrorHandler": {
