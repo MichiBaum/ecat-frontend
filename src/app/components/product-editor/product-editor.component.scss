@@ -17,9 +17,12 @@
 .input{
   width: 100%;
   min-width: 100%;
+  max-width: 100%;
 }
 ::ng-deep .ui-dropdown{
   width: 100% !important;
+  max-width: 100% !important;
+  display: block !important;
 }
 ::ng-deep .ui-dialog{
   width: 70%;
