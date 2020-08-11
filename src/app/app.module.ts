@@ -34,7 +34,10 @@ import {CustomUploadModule} from "./components/custom-upload/custom-upload.modul
 
 const appRoutes: Routes = [
   {path: 'homepage', component: HomepageComponent},
-  {path: 'products', component: ProductsComponent},
+  {path: 'products/:productGroup/:productClass/:productFamily', component: ProductsComponent},
+  {path: 'products/:productGroup/:productClass', component: ProductsComponent},
+  {path: 'products/:productGroup', component: ProductsComponent},
+  {path: 'search/:searchText', component: ProductsComponent},
   {path: 'login', component: LoginComponent},
   {path: '**', redirectTo:"/homepage"},
 ];

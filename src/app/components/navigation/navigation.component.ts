@@ -3,10 +3,9 @@ import {ProductTypesService} from "../../services/product-types.service";
 import {ProductGroup} from "../../models/product-group";
 import {ProductClass} from "../../models/product-class";
 import {ProductFamily} from "../../models/product-family";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {WindowResizeListenerService} from "../../services/window-resize-listener.service";
 import {ProductService} from "../../services/product.service";
-import {ProductType} from "../../models/product-type.enum";
 import {NavigationService} from "../../services/navigation.service";
 import {CustomMenuItem} from "../../models/customMenuItem";
 
@@ -29,7 +28,8 @@ export class NavigationComponent implements OnInit {
     private router: Router,
     private windowResizeListenerService: WindowResizeListenerService,
     private productService: ProductService,
-    private navigationService: NavigationService
+    private navigationService: NavigationService,
+    private route: ActivatedRoute
   ) {
     this.windowResizeListenerService.screenWidthEmitter.subscribe(
       (screenWidthEmit: number) => {
@@ -59,54 +59,42 @@ export class NavigationComponent implements OnInit {
 
   private convertProductGroupToTreenode(productGroup: ProductGroup): CustomMenuItem{
     let items: CustomMenuItem[] = [];
+    let productGroupUrl = this.getUrlString(productGroup);
     productGroup.productClasses.forEach(productClass => {
-        items.push(this.convertProductClassToTreenode(productClass));
+        items.push(this.convertProductClassToTreenode(productClass, productGroupUrl));
       }
     );
     return {
       label: productGroup.name,
       command: () =>{
-        this.searchProducts(ProductType.PRODUCT_GROUP, productGroup.id);
+        this.router.navigate(['products', productGroupUrl])
       },
       items: items
     }
   }
 
-  private convertProductClassToTreenode(productClass: ProductClass): CustomMenuItem{
+  private convertProductClassToTreenode(productClass: ProductClass, productGroupUrl: string): CustomMenuItem{
     let items: CustomMenuItem[] = [];
+    let productClassUrl = this.getUrlString(productClass);
     productClass.productFamilies.forEach(productFamily => {
-        items.push(this.convertProductFamilyToTreenode(productFamily));
+        items.push(this.convertProductFamilyToTreenode(productFamily, productGroupUrl, productClassUrl));
       }
     );
     return {
       label: productClass.name,
       command: () =>{
-        this.searchProducts(ProductType.PRODUCT_CLASS, productClass.id);
+        this.router.navigate(['products/', productGroupUrl, productClassUrl])
       },
       items: items
     }
   }
 
-  private convertProductFamilyToTreenode(productFamily: ProductFamily): CustomMenuItem{
+  private convertProductFamilyToTreenode(productFamily: ProductFamily, productGroupUrl: string, productClassUrl: string): CustomMenuItem{
     return{
       label: productFamily.name,
       command: () =>{
-        this.searchProducts(ProductType.PRODUCT_FAMILY, productFamily.id);
+        this.router.navigate(['products/', productGroupUrl, productClassUrl, this.getUrlString(productFamily)])
       }
-    }
-  }
-
-  searchProducts(productType: ProductType, id: number) {
-    switch (productType) {
-      case ProductType.PRODUCT_CLASS:
-        this.productService.searchProductClass(id, true);
-        break;
-      case ProductType.PRODUCT_FAMILY:
-        this.productService.searchProductFamily(id, true);
-        break;
-      case ProductType.PRODUCT_GROUP:
-        this.productService.searchProductGroup(id, true);
-        break;
     }
   }
 
@@ -114,5 +102,11 @@ export class NavigationComponent implements OnInit {
     if(event.key === "Enter" || this.searchtext?.length > 4){
       this.productService.search(this.searchtext || "", true)
     }
+  }
+
+  private getUrlString(productTypeObject: any){
+    let replacedString = productTypeObject.name.replace(/ /g, '-');
+
+    return replacedString + '-' + productTypeObject.id;
   }
 }

@@ -54,7 +54,7 @@ export class ProductService {
     this.apiService.getAll<Product>(`${path}`, {params: {"searchtext": searchtext}}).subscribe(
       (products) => {
         if (withredirect) {
-          this.router.navigate(['/products']).then(() => {
+          this.router.navigate(['/search', searchtext]).then(() => {
             this.products.emit(products as Product[])
           });
         } else {
