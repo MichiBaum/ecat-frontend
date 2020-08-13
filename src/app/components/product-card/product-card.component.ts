@@ -23,6 +23,7 @@ export class ProductCardComponent implements OnInit {
   expanded: boolean = false;
   showDescription: boolean = false;
   loading: boolean = true;
+  animationTimeout;
   @Input() product: Product;
   @Input() classes: string;
   @Output() deleteProduct = new EventEmitter();
@@ -81,21 +82,25 @@ export class ProductCardComponent implements OnInit {
   }
 
   expand(){
-    if(this.expanded == false){
-      this.renderer2.setStyle(this.imageContainer.nativeElement, 'width', this.containerElement.nativeElement.offsetWidth + 'px');
-      this.expanded = true;
-      //set timeout to wait until transition is finished
-      setTimeout(() => {
-        this.showDescription = true;
-        window.scrollTo({top: this.containerElement.nativeElement.offsetTop, behavior: 'smooth'});
-      }, 1000)
-    }else{
-      this.expanded = false;
-      this.showDescription = false;
-      //set timeout to wait until transition is finished
-      setTimeout(() => {
-        this.renderer2.setStyle(this.imageContainer.nativeElement, 'width', '100%');
-      }, 1000)
+    if(!this.animationTimeout){
+      if(this.expanded == false){
+        this.expanded = true;
+        this.renderer2.setStyle(this.imageContainer.nativeElement, 'width', this.containerElement.nativeElement.offsetWidth + 'px');
+        this.animationTimeout = setTimeout(() => {
+          this.showDescription = true;
+          window.scrollTo({top: this.containerElement.nativeElement.offsetTop, behavior: 'smooth'});
+          clearTimeout(this.animationTimeout);
+          this.animationTimeout = null;
+        }, 1000)
+      }else {
+        this.expanded = false;
+        this.showDescription = false;
+        this.animationTimeout = setTimeout(() => {
+          this.renderer2.setStyle(this.imageContainer.nativeElement, 'width', '100%');
+          clearTimeout(this.animationTimeout);
+          this.animationTimeout = null;
+        }, 1000)
+      }
     }
   }
 }

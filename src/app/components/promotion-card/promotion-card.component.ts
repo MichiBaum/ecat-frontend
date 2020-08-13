@@ -26,6 +26,8 @@ import {ContextmenuService} from "../../services/contextmenu.service";
 export class PromotionCardComponent implements OnInit {
   loading: boolean = true;
   expanded: boolean = false;
+  showDescription: boolean = false;
+  animationTimeout;
   @Input() promotion: Promotion;
   @Input() classes: string;
   @Output() deletePromotion = new EventEmitter();
@@ -84,16 +86,25 @@ export class PromotionCardComponent implements OnInit {
   }
 
   expand(){
-    if(this.expanded == false){
-      this.renderer2.setStyle(this.imageContainer.nativeElement, 'width', this.containerElement.nativeElement.offsetWidth + 'px');
-      this.expanded = true;
-      setTimeout(() => {
-        window.scrollTo({top: this.containerElement.nativeElement.offsetTop, behavior: 'smooth'});
-      })
-    }else{
-      this.renderer2.setStyle(this.imageContainer.nativeElement, 'width', '100%');
-      this.expanded = false;
+    if(!this.animationTimeout){
+      if(this.expanded == false){
+        this.expanded = true;
+        this.renderer2.setStyle(this.imageContainer.nativeElement, 'width', this.containerElement.nativeElement.offsetWidth + 'px');
+        this.animationTimeout = setTimeout(() => {
+          this.showDescription = true;
+          window.scrollTo({top: this.containerElement.nativeElement.offsetTop, behavior: 'smooth'});
+          clearTimeout(this.animationTimeout);
+          this.animationTimeout = null;
+        }, 1000)
+      }else {
+        this.expanded = false;
+        this.showDescription = false;
+        this.animationTimeout = setTimeout(() => {
+          this.renderer2.setStyle(this.imageContainer.nativeElement, 'width', '100%');
+          clearTimeout(this.animationTimeout);
+          this.animationTimeout = null;
+        }, 1000)
+      }
     }
   }
-
 }
