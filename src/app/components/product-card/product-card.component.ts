@@ -21,8 +21,8 @@ import {ContextmenuService} from "../../services/contextmenu.service";
 })
 export class ProductCardComponent implements OnInit {
   expanded: boolean = false;
+  showDescription: boolean = false;
   loading: boolean = true;
-  @HostBinding('class.p-col-12') breakPointClassFullWidth = true;
   @Input() product: Product;
   @Input() classes: string;
   @Output() deleteProduct = new EventEmitter();
@@ -40,7 +40,7 @@ export class ProductCardComponent implements OnInit {
               private productEditorService: ProductEditorService,
               private confirmationService: ConfirmationService,
               private translateService: TranslateService,
-              public contextmenuService: ContextmenuService
+              public contextmenuService: ContextmenuService,
   ) {
     contextmenuService.closeContextMenuEmitter.subscribe(exceptionId => {
       if(this.product.id !== exceptionId){
@@ -84,13 +84,18 @@ export class ProductCardComponent implements OnInit {
     if(this.expanded == false){
       this.renderer2.setStyle(this.imageContainer.nativeElement, 'width', this.containerElement.nativeElement.offsetWidth + 'px');
       this.expanded = true;
+      //set timeout to wait until transition is finished
       setTimeout(() => {
+        this.showDescription = true;
         window.scrollTo({top: this.containerElement.nativeElement.offsetTop, behavior: 'smooth'});
-      })
+      }, 1000)
     }else{
-      this.renderer2.setStyle(this.imageContainer.nativeElement, 'width', '100%');
       this.expanded = false;
+      this.showDescription = false;
+      //set timeout to wait until transition is finished
+      setTimeout(() => {
+        this.renderer2.setStyle(this.imageContainer.nativeElement, 'width', '100%');
+      }, 1000)
     }
   }
-
 }

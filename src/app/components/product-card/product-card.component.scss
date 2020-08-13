@@ -35,3 +35,6 @@ img{
   max-height: 2.4em;
   font-weight: bold;
 }
+:host{
+  transition: width 1s;
+}
