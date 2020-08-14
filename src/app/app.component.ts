@@ -15,12 +15,16 @@ export class AppComponent implements OnInit{
   onResize(event) {
     this.windowResizeListenerService.screenWidthEmitter.emit(event.target.innerWidth);
     this.windowResizeListenerService.screenHeightEmitter.emit(event.target.innerHeight);
+    this.windowResizeListenerService.setLastScreenWidth(event.target.innerWidth);
+    this.windowResizeListenerService.setLastScreenHeight(event.target.innerHeight);
     console.log("Window res")
   }
 
   ngOnInit(){
     this.windowResizeListenerService.screenWidthEmitter.emit(window.innerWidth);
     this.windowResizeListenerService.screenHeightEmitter.emit(window.innerHeight);
+    this.windowResizeListenerService.setLastScreenWidth(window.innerWidth);
+    this.windowResizeListenerService.setLastScreenHeight(window.innerHeight);
     console.log("Win siz");
   }
 

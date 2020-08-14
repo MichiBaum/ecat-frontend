@@ -20,7 +20,7 @@ export class NavigationComponent implements OnInit {
   productGroups: ProductGroup[] = [];
   screenWidth: number;
   screenHeight: number;
-  searchtext: string;
+  searchText: string;
   displaySideBar: boolean = false;
 
   constructor(
@@ -29,7 +29,6 @@ export class NavigationComponent implements OnInit {
     private windowResizeListenerService: WindowResizeListenerService,
     private productService: ProductService,
     private navigationService: NavigationService,
-    private route: ActivatedRoute
   ) {
     this.windowResizeListenerService.screenWidthEmitter.subscribe(
       (screenWidthEmit: number) => {
@@ -99,8 +98,8 @@ export class NavigationComponent implements OnInit {
   }
 
   onSearch(event: KeyboardEvent) {
-    if(event.key === "Enter" || this.searchtext?.length > 4){
-      this.productService.search(this.searchtext || "", true)
+    if(event.key === "Enter" || this.searchText?.length > 4){
+      this.productService.search(this.searchText || "", true)
     }
   }
 

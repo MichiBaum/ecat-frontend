@@ -13,6 +13,7 @@ import {AuthenticationService} from "../../services/authentication.service";
 import {ProductEditorService} from "../../services/product-editor.service";
 import {TranslateService} from "@ngx-translate/core";
 import {ContextmenuService} from "../../services/contextmenu.service";
+import {WindowResizeListenerService} from "../../services/window-resize-listener.service";
 
 @Component({
   selector: 'app-product-card',
@@ -24,8 +25,9 @@ export class ProductCardComponent implements OnInit {
   showDescription: boolean = false;
   loading: boolean = true;
   animationTimeout;
+  screenWidth: number;
+  classes: string = 'p-sm-6 p-xl-3 p-col-12';
   @Input() product: Product;
-  @Input() classes: string;
   @Output() deleteProduct = new EventEmitter();
   @ViewChild('container') containerElement: ElementRef;
   @ViewChild('imageContainer') imageContainer: ElementRef;
@@ -42,7 +44,13 @@ export class ProductCardComponent implements OnInit {
               private confirmationService: ConfirmationService,
               private translateService: TranslateService,
               public contextmenuService: ContextmenuService,
+              private windowResizeListenerService: WindowResizeListenerService
   ) {
+    this.windowResizeListenerService.screenWidthEmitter.subscribe(
+      (screenWidthEmit: number) => {
+        this.screenWidth = screenWidthEmit;
+      }
+    )
     contextmenuService.closeContextMenuEmitter.subscribe(exceptionId => {
       if(this.product.id !== exceptionId){
         this.contextMenu.hide();
@@ -51,6 +59,7 @@ export class ProductCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.screenWidth = this.windowResizeListenerService.getLastScreenWidth();
     this.productContextItems = [
       {
         label: this.translateService.instant('navigation.new'),
@@ -82,6 +91,17 @@ export class ProductCardComponent implements OnInit {
   }
 
   expand(){
+    if(this.screenWidth < 576){
+      this.expandDownwards();
+    }else{
+      this.expandSideways();
+    }
+  }
+  expandDownwards(){
+    this.expanded = !this.expanded;
+    this.showDescription = !this.showDescription;
+  }
+  expandSideways(){
     if(!this.animationTimeout){
       if(this.expanded == false){
         this.expanded = true;

@@ -2,8 +2,8 @@
   <app-promotion-card
     *ngFor="let newPromotion of newPromotions"
     [promotion]="newPromotion"
-    [classes]="'p-col'"
     (deletePromotion)="onDeletePromotion($event)"
+    [newPromotion]="true"
   >
 
   </app-promotion-card>
@@ -12,7 +12,6 @@
  <app-promotion-card
    *ngFor="let normalPromotion of normalPromotions"
    [promotion]="normalPromotion"
-   [classes]="'p-col-6 p-lg-3'"
    (deletePromotion)="onDeletePromotion($event)"
  >
 

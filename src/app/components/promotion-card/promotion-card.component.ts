@@ -16,6 +16,7 @@ import {PromotionEditorService} from "../../services/promotion-editor.service";
 import {PromotionService} from "../../services/promotion.service";
 import {TranslateService} from "@ngx-translate/core";
 import {ContextmenuService} from "../../services/contextmenu.service";
+import {WindowResizeListenerService} from "../../services/window-resize-listener.service";
 
 @Component({
   selector: 'app-promotion-card',
@@ -28,14 +29,15 @@ export class PromotionCardComponent implements OnInit {
   expanded: boolean = false;
   showDescription: boolean = false;
   animationTimeout;
+  screenWidth: number;
+  @Input()newPromotion: boolean = false;
   @Input() promotion: Promotion;
-  @Input() classes: string;
   @Output() deletePromotion = new EventEmitter();
   @ViewChild('container') containerElement: ElementRef;
   @ViewChild('imageContainer') imageContainer: ElementRef;
   @ViewChild('contextMenu') contextMenu: ContextMenu;
   @HostBinding('class') get hostClasses(): string{
-    return this.expanded ? 'p-col-12': this.classes;
+    return this.expanded ? 'p-col-12': this.newPromotion ? 'p-col-12 p-lg-6' : 'p-col-6 p-lg-3';
   };
   promotionContextItems: MenuItem[];
 
@@ -45,8 +47,14 @@ export class PromotionCardComponent implements OnInit {
               private promotionService: PromotionService,
               private translateService: TranslateService,
               private confirmationService: ConfirmationService,
-              public contextmenuService: ContextmenuService
+              public contextmenuService: ContextmenuService,
+              private windowResizeListenerService: WindowResizeListenerService
   ) {
+    this.windowResizeListenerService.screenWidthEmitter.subscribe(
+      (screenWidthEmit: number) => {
+        this.screenWidth = screenWidthEmit;
+      }
+    )
     contextmenuService.closeContextMenuEmitter.subscribe(exceptionId => {
       if(this.promotion.id !== exceptionId){
         this.contextMenu.hide();
@@ -55,6 +63,7 @@ export class PromotionCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.screenWidth = this.windowResizeListenerService.getLastScreenWidth();
     this.promotionContextItems = [
       {
         label: this.translateService.instant('navigation.new'),
@@ -86,6 +95,17 @@ export class PromotionCardComponent implements OnInit {
   }
 
   expand(){
+    if(this.screenWidth < 992 && this.newPromotion){
+      this.expandDownwards();
+    }else{
+      this.expandSideways();
+    }
+  }
+  expandDownwards(){
+    this.expanded = !this.expanded;
+    this.showDescription = !this.showDescription;
+  }
+  expandSideways(){
     if(!this.animationTimeout){
       if(this.expanded == false){
         this.expanded = true;
