@@ -22,7 +22,8 @@ img{
   align-items: center;
 }
 .content{
-  flex: 1;
+  flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
 }
 /* styles for '...' */
 .headerContainer {
