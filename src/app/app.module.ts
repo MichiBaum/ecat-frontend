@@ -31,6 +31,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {CustomUploadModule} from "./components/custom-upload/custom-upload.module";
 import {PromotionsComponent} from "./components/promotions/promotions.component";
 import {PromotionsModule} from "./components/promotions/promotions.module";
+import {StickyfilldirectiveModule} from "./directives/stickyfilldirective/stickyfilldirective.module";
 
 const appRoutes: Routes = [
   {path: 'homepage', component: PromotionsComponent},
@@ -78,7 +79,8 @@ const appRoutes: Routes = [
       defaultLanguage: 'de'
     }),
     FontAwesomeModule,
-    CustomUploadModule
+    CustomUploadModule,
+    StickyfilldirectiveModule
   ],
   providers: [
     PromotionService,

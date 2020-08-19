@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="slidemenuContainer" *ngIf="screenWidth > 1199">
+  <div class="slidemenuContainer" *ngIf="screenWidth > 1199" appStickyfill>
     <app-customSlideMenu class="slidemenu" [model]="menuItem" [menuWidth]="250" [viewportHeight]="650" [style]="{'width': '250px', 'border': 'none'}"></app-customSlideMenu>
   </div>
   <p-sidebar [(visible)]="displaySideBar" [blockScroll]="true" [style]="{'width': '100%'}" *ngIf="screenWidth < 1200">

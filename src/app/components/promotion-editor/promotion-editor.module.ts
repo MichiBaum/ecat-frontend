@@ -8,15 +8,14 @@ import {
     InputTextModule
 } from "primeng";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {MillisecondDatePipe} from "../../customPipes/mili-date.pipe";
 import {CommonModule} from "@angular/common";
 import {TranslateModule} from "@ngx-translate/core";
 import {CustomUploadModule} from "../custom-upload/custom-upload.module";
+import {MilliDatePipeModule} from "../../customPipes/milliDatePipe/milli-date-pipe.module";
 
 @NgModule({
   declarations: [
     PromotionEditorComponent,
-    MillisecondDatePipe
   ],
     exports: [
         PromotionEditorComponent
@@ -32,7 +31,8 @@ import {CustomUploadModule} from "../custom-upload/custom-upload.module";
         DialogModule,
         TranslateModule,
         FileUploadModule,
-        CustomUploadModule
+        CustomUploadModule,
+        MilliDatePipeModule
     ]
 })
 export class PromotionEditorModule { }

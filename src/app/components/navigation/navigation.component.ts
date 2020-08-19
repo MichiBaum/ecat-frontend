@@ -3,7 +3,7 @@ import {ProductTypesService} from "../../services/product-types.service";
 import {ProductGroup} from "../../models/product-group";
 import {ProductClass} from "../../models/product-class";
 import {ProductFamily} from "../../models/product-family";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {WindowResizeListenerService} from "../../services/window-resize-listener.service";
 import {ProductService} from "../../services/product.service";
 import {NavigationService} from "../../services/navigation.service";

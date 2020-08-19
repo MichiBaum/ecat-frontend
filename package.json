@@ -40,6 +40,7 @@
     "rxjs": "^6.5.4",
     "smoothscroll-polyfill": "^0.4.4",
     "stickybits": "^3.7.7",
+    "stickyfilljs": "^2.1.0",
     "tslib": "^1.10.0",
     "web-animations-js": "^2.3.2",
     "zone.js": "~0.10.2"

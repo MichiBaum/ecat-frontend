@@ -13,6 +13,7 @@ import {RouterModule} from "@angular/router";
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {CustomSlideMenuModule} from "../custom-slidemenu/custom-slide-menu.component";
+import {StickyfilldirectiveModule} from "../../directives/stickyfilldirective/stickyfilldirective.module";
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import {CustomSlideMenuModule} from "../custom-slidemenu/custom-slide-menu.compo
     MegaMenuModule,
     SlideMenuModule,
     CustomSlideMenuModule,
+    StickyfilldirectiveModule
   ]
 })
 export class NavigationModule { }
