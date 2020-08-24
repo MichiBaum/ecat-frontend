@@ -15,12 +15,12 @@
       </div>
       <div class="formGroup p-col">
         <label for="passwordField">{{ 'adminEditor.newPassword' | translate }}</label>
-        <input class="input" type="password" pInputText formControlName="password" id="passwordField">
+        <input class="input" type="password" pInputText formControlName="password" id="passwordField" autocomplete="off">
       </div>
     </form>
     <div class="formGroup p-col">
       <label for="confirmPasswordField">{{ 'adminEditor.newPasswordConfirm' | translate }}</label>
-      <input class="input" type="password" pInputText id="confirmPasswordField">
+      <input class="input" type="password" pInputText id="confirmPasswordField" autocomplete="off">
     </div>
     <div class="formGroup p-col">
       <p-button label="{{ 'buttons.save' | translate }}" (onClick)="saveUser()" class="marginRight"></p-button>
