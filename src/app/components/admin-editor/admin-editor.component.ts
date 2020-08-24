@@ -55,6 +55,7 @@ export class AdminEditorComponent implements OnInit {
           this.permissionsItems.push(this.convertPermissionToSelectItem(permission));
         })
         this.userService.getUser().subscribe(user => {
+          user.password = '';
           this.selectedUser = user;
           this.ownUser = user;
           this.adminForm.patchValue(this.selectedUser);
@@ -62,6 +63,7 @@ export class AdminEditorComponent implements OnInit {
       })
     }
     this.userService.getUser().subscribe(user => {
+      user.password = '';
       this.selectedUser = user;
       this.ownUser = user;
       this.adminForm.patchValue(this.selectedUser);
@@ -98,9 +100,11 @@ export class AdminEditorComponent implements OnInit {
 
   resetFormToLastState(){
     this.adminForm.patchValue(this.selectedUser);
+    (<HTMLInputElement>document.getElementById('confirmPasswordField')).value = '';
   }
 
   convertUserToSelectItem(user: User): SelectItem{
+    user.password = '';
     return {
       label: user.name,
       value: user
