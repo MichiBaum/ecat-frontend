@@ -1,6 +1,7 @@
 .container{
   min-height: 100vh;
   //IE11
+  z-index: 9999;
   display: -ms-grid;
   -ms-grid-columns: 1fr;
   -ms-grid-rows: auto 1fr auto;
