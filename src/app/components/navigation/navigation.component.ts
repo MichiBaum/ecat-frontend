@@ -104,7 +104,7 @@ export class NavigationComponent implements OnInit {
   }
 
   private getUrlString(productTypeObject: any){
-    let replacedString = productTypeObject.name.replace(/ /g, '-');
+    let replacedString = productTypeObject.name.replace(/[^a-zA-Z]/g, '%');
 
     return replacedString + '-' + productTypeObject.id;
   }
