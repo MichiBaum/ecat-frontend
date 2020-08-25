@@ -13,11 +13,16 @@ import {ReturnProductImageDto} from "../models/return-product-image-dto";
 export class ProductService {
 
   @Output() products: EventEmitter<Product[]> = new EventEmitter<Product[]>();
+  @Output() newProduct: EventEmitter<Product> = new EventEmitter<Product>();
 
   constructor(private router: Router, private apiService: ApiService) { }
 
   getProducts(): Observable<Product[]>{
     return this.apiService.getAll<Product>('/products');
+  }
+
+  emitNewProduct(product: Product){
+    this.newProduct.emit(product);
   }
 
   saveProduct(saveProductDto: SaveProductDto): Observable<Product>{

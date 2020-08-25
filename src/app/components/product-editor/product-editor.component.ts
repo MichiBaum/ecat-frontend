@@ -63,11 +63,15 @@ export class ProductEditorComponent implements OnInit {
   }
   saveProduct() {
     this.productService.saveProduct(new SaveProductDto(this.productForm.getRawValue())).subscribe(data => {
+      if(this.product.id || this.product.id === 0){
+        this.productService.emitNewProduct(data);
+      }
       Object.assign(this.product, data);
       this.messageService.add({
         severity:'success',
         summary:this.translateService.instant('toastMessages.success'),
-        detail:this.translateService.instant('productEditor.successfulSave')});
+        detail:this.translateService.instant('productEditor.successfulSave')
+      });
     },
       (error => {}))
   }
