@@ -1,3 +1,6 @@
+.form{
+  max-width: 100%;
+}
 .formGroup{
   display: block;
   text-align: left;
@@ -16,6 +19,12 @@ form{
 }
 ::ng-deep .ui-dropdown{
   width: 100% !important;
+  max-width: 100% !important;
+  display: block !important;
+}
+::ng-deep .ui-dropdown-label{
+  text-overflow: ellipsis !important;
+  overflow: hidden !important;
 }
 ::ng-deep .ui-multiselect{
   width: 100% !important;

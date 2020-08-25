@@ -7,7 +7,7 @@
                          (removedCustomUploadItem)="deleteProductImage($event)"
       ></app-custom-upload>
     </div>
-    <form [formGroup]="productForm">
+    <form [formGroup]="productForm" class="form">
       <div class="formGroup p-col">
         <label>{{ 'productEditor.productFamilySelection' | translate }}</label>
         <p-dropdown class="input" [options]="productFamilyItems" formControlName="productFamilyId"></p-dropdown>

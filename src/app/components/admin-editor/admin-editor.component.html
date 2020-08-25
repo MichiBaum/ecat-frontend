@@ -4,7 +4,7 @@
       <label>{{ 'adminEditor.userSelection' | translate }}</label>
       <p-dropdown class="input" [options]="usersItems" [(ngModel)]="selectedUser" (onChange)="adminForm.patchValue($event.value)"></p-dropdown>
     </div>
-    <form [formGroup]="adminForm" class="p-col p-dir-col p-grid p-justify-center">
+    <form [formGroup]="adminForm" class="p-col p-dir-col p-grid p-justify-center form">
       <div class="formGroup p-col">
         <label for="nameField">{{ 'adminEditor.name' | translate}}</label>
         <input class="input" type="text" pInputText formControlName="name" id="nameField">

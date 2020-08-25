@@ -7,7 +7,7 @@
                          (removedCustomUploadItem)="deletePromotionImage($event)"
       ></app-custom-upload>
     </div>
-    <form [formGroup]="promotionForm">
+    <form [formGroup]="promotionForm" class="form">
       <div class="formGroup p-col">
         <label for="titleField">{{ 'promotionEditor.promotionName' | translate }}</label>
         <input class="input" type="text" pInputText formControlName="title" id="titleField">
