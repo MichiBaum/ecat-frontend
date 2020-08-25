@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {LoginService} from "../../services/login.service";
 import {User} from "../../models/user";
@@ -14,12 +14,9 @@ import {Router} from "@angular/router";
     class:'p-col'
   }
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   constructor(private loginService: LoginService, private messageService: MessageService, private authenticationService: AuthenticationService, private router: Router) { }
-
-  ngOnInit(): void {
-  }
 
   loginFormGroup = new FormGroup(
     {

@@ -36,7 +36,7 @@ export class CustomUploadComponent {
   @Output()removedCustomUploadItem = new EventEmitter();
   @ViewChild('fileUpload') fileUpload: FileUpload;
 
-  emitNewCustomUploadItem(event){
+  emitNewCustomUploadItems(event){
     let files = event.files;
     for(let i = 0; i < files.length; i++){
       if(this.validateFile(files[i])){

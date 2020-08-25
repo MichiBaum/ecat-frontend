@@ -55,6 +55,7 @@ export class AdminEditorComponent implements OnInit {
           this.permissionsItems.push(this.convertPermissionToSelectItem(permission));
         })
         this.userService.getUser().subscribe(user => {
+          //set blank password for password reset
           user.password = '';
           this.selectedUser = user;
           this.ownUser = user;
@@ -63,6 +64,7 @@ export class AdminEditorComponent implements OnInit {
       })
     }
     this.userService.getUser().subscribe(user => {
+      //set blank password for password reset
       user.password = '';
       this.selectedUser = user;
       this.ownUser = user;
@@ -72,7 +74,11 @@ export class AdminEditorComponent implements OnInit {
 
   saveUser() {
     if(!this.passwordsMatch()){
-      this.messageService.add({severity:'error', summary:this.translateService.instant('toastMessages.error'), detail:this.translateService.instant('adminEditor.passwordMismatch')});
+      this.messageService.add({
+        severity: 'error',
+        summary: this.translateService.instant('toastMessages.error'),
+        detail: this.translateService.instant('adminEditor.passwordMismatch')
+      });
     }else{
       this.userService.saveUser(this.adminForm.getRawValue()).subscribe(user => {
           if(this.ownUser.id == user.id){
@@ -85,7 +91,11 @@ export class AdminEditorComponent implements OnInit {
             this.usersItems.find(userItem => userItem.value.id === user.id).label = user.name;
           }
           this.adminForm.patchValue(this.selectedUser);
-          this.messageService.add({severity:'success', summary:this.translateService.instant('toastMessages.success'), detail:this.translateService.instant('adminEditor.successfulSave')});
+          this.messageService.add({
+            severity:'success',
+            summary: this.translateService.instant('toastMessages.success'),
+            detail: this.translateService.instant('adminEditor.successfulSave')
+          });
         },
         (error => {}))
     }
@@ -104,6 +114,7 @@ export class AdminEditorComponent implements OnInit {
   }
 
   convertUserToSelectItem(user: User): SelectItem{
+    //set blank password for password reset
     user.password = '';
     return {
       label: user.name,

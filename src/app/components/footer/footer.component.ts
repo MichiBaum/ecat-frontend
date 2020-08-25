@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {WindowResizeListenerService} from "../../services/window-resize-listener.service";
 
 @Component({
@@ -6,7 +6,7 @@ import {WindowResizeListenerService} from "../../services/window-resize-listener
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss']
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent {
 
   screenWidth: number;
 
@@ -17,8 +17,4 @@ export class FooterComponent implements OnInit {
       }
     )
   }
-
-  ngOnInit(): void {
-  }
-
 }
