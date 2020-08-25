@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {EventEmitter, Injectable, Output} from '@angular/core';
 import {Promotion} from "../models/promotion";
 import {Observable} from "rxjs";
 import {ApiService} from "./api.service";
@@ -10,9 +10,15 @@ import {ReturnPromotionImageDto} from "../models/return-promotion-image-dto";
 })
 export class PromotionService {
 
+  @Output() newPromotion: EventEmitter<Promotion> = new EventEmitter<Promotion>();
+
   private promotionsPath: string = '/promotions';
   private savePromotionsPath: string = '/promotions/save';
   constructor(private apiService: ApiService) { }
+
+  emitNewPromotion(promotion: Promotion){
+    this.newPromotion.emit(promotion);
+  }
 
   getPromotions(): Observable<Promotion[]> {
     return this.apiService.getAll<Promotion>(this.promotionsPath);

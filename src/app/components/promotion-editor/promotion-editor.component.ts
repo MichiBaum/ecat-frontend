@@ -48,8 +48,11 @@ export class PromotionEditorComponent{
     this.promotionForm.patchValue(this.promotion);
   }
   savePromotion() {
-    this.promotionService.savePromotion(this.promotionForm.getRawValue()).subscribe(data => {
-      Object.assign(this.promotion, data);
+    this.promotionService.savePromotion(this.promotionForm.getRawValue()).subscribe(promotion => {
+      if(!this.promotion.id || this.promotion.id === 0){
+        this.promotionService.emitNewPromotion(promotion);
+      }
+      Object.assign(this.promotion, promotion);
       this.messageService.add({
         severity:'success',
         summary:this.translateService.instant('toastMessages.success'),

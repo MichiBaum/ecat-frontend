@@ -63,7 +63,7 @@ export class ProductEditorComponent implements OnInit {
   }
   saveProduct() {
     this.productService.saveProduct(new SaveProductDto(this.productForm.getRawValue())).subscribe(data => {
-      if(this.product.id || this.product.id === 0){
+      if(!this.product.id || this.product.id === 0){
         this.productService.emitNewProduct(data);
       }
       Object.assign(this.product, data);

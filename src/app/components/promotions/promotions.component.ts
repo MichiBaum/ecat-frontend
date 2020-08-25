@@ -26,6 +26,12 @@ export class PromotionsComponent implements OnInit {
       this.newPromotions = promotions.slice(0, 2);
       this.normalPromotions = promotions.slice(2);
     })
+    this.promotionService.newPromotion.subscribe((newPromotion) => {
+      this.promotions.push(newPromotion);
+      this.promotions.sort((a, b) => a.startDate > b.startDate ? 1 : -1);
+      this.newPromotions = this.promotions.slice(0, 2);
+      this.normalPromotions = this.promotions.slice(2);
+    })
   }
   onDeletePromotion(promotionId: number){
     this.promotions.splice(this.promotions.findIndex(promotion => promotion.id == promotionId),1);
