@@ -1,0 +1,12 @@
+<div #container [ngClass]="{'ui-slidemenu ui-widget ui-widget-content ui-corner-all':true, 'ui-slidemenu-dynamic ui-shadow':popup}"
+     [class]="styleClass" [ngStyle]="style" (click)="onClick($event)"
+     [@overlayAnimation]="{value: 'visible', params: {showTransitionParams: showTransitionOptions, hideTransitionParams: hideTransitionOptions}}" [@.disabled]="popup !== true" (@overlayAnimation.start)="onOverlayAnimationStart($event)" *ngIf="!popup || visible">
+  <div class="ui-slidemenu-wrapper" [style.height]="left ? viewportHeight + 'px' : 'auto'">
+    <div #backward class="ui-slidemenu-backward ui-widget-header ui-corner-all" [style.display]="left ? 'block' : 'none'" (click)="goBack()">
+      <span class="ui-slidemenu-backward-icon pi pi-fw pi-caret-left"></span><span>{{backLabel}}</span>
+    </div>
+    <div #slideMenuContent class="ui-slidemenu-content">
+      <app-custom-slide-menusub [item]="model" root="root" [index]="0" [menuWidth]="menuWidth" [effectDuration]="effectDuration" [easing]="easing"></app-custom-slide-menusub>
+    </div>
+  </div>
+</div>

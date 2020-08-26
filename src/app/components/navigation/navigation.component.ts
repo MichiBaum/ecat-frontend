@@ -7,7 +7,7 @@ import {Router} from "@angular/router";
 import {WindowResizeListenerService} from "../../services/window-resize-listener.service";
 import {ProductService} from "../../services/product.service";
 import {NavigationService} from "../../services/navigation.service";
-import {CustomMenuItem} from "../../models/customMenuItem";
+import {MenuItem} from "primeng";
 
 @Component({
   selector: 'app-navigation',
@@ -16,7 +16,7 @@ import {CustomMenuItem} from "../../models/customMenuItem";
 })
 export class NavigationComponent implements OnInit {
 
-  menuItem: CustomMenuItem = {items: []};
+  menuItems: MenuItem[] = [];
   productGroups: ProductGroup[] = [];
   screenWidth: number;
   screenHeight: number;
@@ -49,15 +49,14 @@ export class NavigationComponent implements OnInit {
   ngOnInit(): void {
     this.productTypesService.getGroups().subscribe(data => {
       this.productGroups = data;
-      this.menuItem = {items: []};
       this.productGroups.forEach(productGroup => {
-        this.menuItem.items.push(this.convertProductGroupToTreenode(productGroup));
+        this.menuItems.push(this.convertProductGroupToTreenode(productGroup));
       });
     })
   }
 
-  private convertProductGroupToTreenode(productGroup: ProductGroup): CustomMenuItem{
-    let items: CustomMenuItem[] = [];
+  private convertProductGroupToTreenode(productGroup: ProductGroup): MenuItem{
+    let items: MenuItem[] = [];
     let productGroupUrl = this.getUrlString(productGroup);
     productGroup.productClasses.forEach(productClass => {
         items.push(this.convertProductClassToTreenode(productClass, productGroupUrl));
@@ -72,8 +71,8 @@ export class NavigationComponent implements OnInit {
     }
   }
 
-  private convertProductClassToTreenode(productClass: ProductClass, productGroupUrl: string): CustomMenuItem{
-    let items: CustomMenuItem[] = [];
+  private convertProductClassToTreenode(productClass: ProductClass, productGroupUrl: string): MenuItem{
+    let items: MenuItem[] = [];
     let productClassUrl = this.getUrlString(productClass);
     productClass.productFamilies.forEach(productFamily => {
         items.push(this.convertProductFamilyToTreenode(productFamily, productGroupUrl, productClassUrl));
@@ -88,7 +87,7 @@ export class NavigationComponent implements OnInit {
     }
   }
 
-  private convertProductFamilyToTreenode(productFamily: ProductFamily, productGroupUrl: string, productClassUrl: string): CustomMenuItem{
+  private convertProductFamilyToTreenode(productFamily: ProductFamily, productGroupUrl: string, productClassUrl: string): MenuItem{
     return{
       label: productFamily.name,
       command: () =>{

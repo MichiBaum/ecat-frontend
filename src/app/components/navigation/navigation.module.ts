@@ -12,8 +12,8 @@ import {
 import {RouterModule} from "@angular/router";
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
-import {CustomSlideMenuModule} from "../custom-slidemenu/custom-slide-menu.component";
 import {StickyfilldirectiveModule} from "../../directives/stickyfilldirective/stickyfilldirective.module";
+import {CustomSlideMenuModule} from "../custom-slide-menu/custom-slide-menu.module";
 
 @NgModule({
   declarations: [
@@ -22,19 +22,19 @@ import {StickyfilldirectiveModule} from "../../directives/stickyfilldirective/st
   exports: [
     NavigationComponent
   ],
-  imports: [
-    ButtonModule,
-    SidebarModule,
-    TreeModule,
-    InputTextModule,
-    RouterModule,
-    CommonModule,
-    FormsModule,
-    BreadcrumbModule,
-    MegaMenuModule,
-    SlideMenuModule,
-    CustomSlideMenuModule,
-    StickyfilldirectiveModule
-  ]
+    imports: [
+        ButtonModule,
+        SidebarModule,
+        TreeModule,
+        InputTextModule,
+        RouterModule,
+        CommonModule,
+        FormsModule,
+        BreadcrumbModule,
+        MegaMenuModule,
+        SlideMenuModule,
+        StickyfilldirectiveModule,
+        CustomSlideMenuModule
+    ]
 })
 export class NavigationModule { }
