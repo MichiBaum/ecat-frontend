@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {Promotion} from "../../models/promotion";
 import {PromotionService} from "../../services/promotion.service";
-import {MessageService} from "primeng";
+import {Calendar, MessageService} from "primeng";
 import {FormControl, FormGroup} from "@angular/forms";
 import {PromotionEditorService} from "../../services/promotion-editor.service";
 import {TranslateService} from "@ngx-translate/core";
@@ -16,6 +16,8 @@ import {ReturnPromotionImageDto} from "../../models/return-promotion-image-dto";
 })
 export class PromotionEditorComponent{
 
+  @ViewChild('calendar1') calendar1: Calendar;
+  @ViewChild('calendar2') calendar2: Calendar;
   promotion: Promotion = {id: 0, title: '', description: '', startDate: null, endDate: null};
   returnPromotionImageDtos: ReturnPromotionImageDto[] = [];
   showDialog: boolean = false;
@@ -116,5 +118,9 @@ export class PromotionEditorComponent{
       fileName: customUploadItem.file.name,
       promotionId: this.promotion.id
     };
+  }
+  hideCalendars(){
+    this.calendar1.hideOverlay();
+    this.calendar2.hideOverlay();
   }
 }

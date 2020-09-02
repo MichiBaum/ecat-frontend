@@ -1,4 +1,4 @@
-<p-dialog [(visible)]="showDialog" [modal]="true" header="{{ 'promotionEditor.promotionEditor' | translate }}">
+<p-dialog [(visible)]="showDialog" [modal]="true" header="{{ 'promotionEditor.promotionEditor' | translate }}" (onHide)="hideCalendars()">
   <div class="container p-grid p-dir-col p-justify-center">
     <div class="formGroup p-col">
       <app-custom-upload [customUploadItems]="returnPromotionImageDtos"
@@ -19,12 +19,12 @@
       <div class="formGroup p-col">
         <label>{{ 'promotionEditor.startDate' | translate }}</label>
         <!--        [ngModelOptions]="{standalone: true}" makes date display as text inside input-->
-        <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" [readonlyInput]="true" [ngModel]="promotionForm.get('startDate').value | millisecondDate" (onSelect)="updateStartDate($event)" [ngModelOptions]="{standalone: true}" dateFormat="dd.mm.yy"></p-calendar>
+        <p-calendar #calendar1 [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" [readonlyInput]="true" [ngModel]="promotionForm.get('startDate').value | millisecondDate" (onSelect)="updateStartDate($event)" [ngModelOptions]="{standalone: true}" dateFormat="dd.mm.yy"></p-calendar>
       </div>
       <div class="formGroup p-col">
         <label>{{ 'promotionEditor.endDate' | translate }}</label>
         <!--        [ngModelOptions]="{standalone: true}" makes date display as text inside input-->
-        <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" [readonlyInput]="true" [ngModel]="promotionForm.get('endDate').value | millisecondDate" (onSelect)="updateEndDate($event)" [ngModelOptions]="{standalone: true}" dateFormat="dd.mm.yy"></p-calendar>
+        <p-calendar #calendar2 [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" [readonlyInput]="true" [ngModel]="promotionForm.get('endDate').value | millisecondDate" (onSelect)="updateEndDate($event)" [ngModelOptions]="{standalone: true}" dateFormat="dd.mm.yy"></p-calendar>
       </div>
       <div class="formGroup p-col">
         <p-button label="{{ 'buttons.save' | translate }}" (onClick)="savePromotion()" class="marginRight"></p-button>

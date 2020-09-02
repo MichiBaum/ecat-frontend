@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {ConfirmationService, MessageService, SelectItem} from "primeng";
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {ConfirmationService, Dropdown, MessageService, SelectItem} from "primeng";
 import {Product} from "../../models/product";
 import {ProductService} from "../../services/product.service";
 import {ProductFamily} from "../../models/product-family";
@@ -19,6 +19,7 @@ import {ReturnProductImageDto} from "../../models/return-product-image-dto";
 })
 export class ProductEditorComponent implements OnInit {
 
+  @ViewChild('dropdown') dropdown: Dropdown;
   product: Product = {id: 0, name: '', description: '', articleNr: '', price: null};
   returnProductImageDtos: ReturnProductImageDto[] = [];
   productFamilyItems: SelectItem[] = [];

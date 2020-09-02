@@ -1,8 +1,8 @@
-<p-dialog [(visible)]="showDialog" [modal]="true" [style]="{height: 'auto', width: '420px'}" header="{{ 'adminEditor.adminEditor' | translate }}">
+<p-dialog #dialog [(visible)]="showDialog" [modal]="true" [style]="{height: 'auto', width: '420px'}" header="{{ 'adminEditor.adminEditor' | translate }}" (onHide)="closeDropdowns($event)">
   <div class="container p-dir-col p-grid p-justify-center">
     <div class="formGroup p-col" *ngIf="authenticationService.hasPermission('ADMINISTRATE_USERS')">
       <label>{{ 'adminEditor.userSelection' | translate }}</label>
-      <p-dropdown class="input" [options]="usersItems" [(ngModel)]="selectedUser" (onChange)="adminForm.patchValue($event.value)"></p-dropdown>
+      <p-dropdown #dropdown class="input" [options]="usersItems" [(ngModel)]="selectedUser" (onChange)="adminForm.patchValue($event.value)"></p-dropdown>
     </div>
     <form [formGroup]="adminForm" class="p-col p-dir-col p-grid p-justify-center form">
       <div class="formGroup p-col">
@@ -11,7 +11,7 @@
       </div>
       <div class="formGroup p-col" *ngIf="authenticationService.hasPermission('ADMINISTRATE_USERS') && selectedUser && selectedUser.id !== ownUser.id">
         <label for="permissionsField">{{ 'adminEditor.permissions' | translate }}</label>
-        <p-multiSelect class="input" id="permissionsField" [options]="permissionsItems" formControlName="permissions" [maxSelectedLabels]="1"></p-multiSelect>
+        <p-multiSelect #multiSelect class="input" id="permissionsField" [options]="permissionsItems" formControlName="permissions" [maxSelectedLabels]="1"></p-multiSelect>
       </div>
       <div class="formGroup p-col">
         <label for="passwordField">{{ 'adminEditor.newPassword' | translate }}</label>

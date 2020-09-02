@@ -1,4 +1,4 @@
-<p-dialog [(visible)]="showDialog" [modal]="true" header="{{ 'productEditor.productEditor' | translate }}">
+<p-dialog [(visible)]="showDialog" [modal]="true" header="{{ 'productEditor.productEditor' | translate }}" (onHide)="this.dropdown.hide($event)">
   <div class="container p-grid p-dir-col p-justify-center">
     <div class="formGroup p-col">
       <app-custom-upload [customUploadItems]="returnProductImageDtos"
@@ -10,7 +10,7 @@
     <form [formGroup]="productForm" class="form">
       <div class="formGroup p-col">
         <label>{{ 'productEditor.productFamilySelection' | translate }}</label>
-        <p-dropdown class="input" [options]="productFamilyItems" formControlName="productFamilyId"></p-dropdown>
+        <p-dropdown #dropdown class="input" [options]="productFamilyItems" formControlName="productFamilyId"></p-dropdown>
       </div>
       <div class="formGroup p-col">
         <label for="nameField">{{ 'productEditor.productName' | translate }}</label>

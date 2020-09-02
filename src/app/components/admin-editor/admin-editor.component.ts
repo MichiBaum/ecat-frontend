@@ -3,7 +3,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {UserService} from "../../services/user.service";
 import {AuthenticationService} from "../../services/authentication.service";
 import {User} from "../../models/user";
-import {MessageService, MultiSelect, SelectItem} from "primeng";
+import {Dropdown, MessageService, MultiSelect, SelectItem} from "primeng";
 import {AdminEditorService} from "../../services/admin-editor.service";
 import {Permission} from "../../models/permission";
 import {PermissionService} from "../../services/permission.service";
@@ -17,7 +17,8 @@ import {TranslateService} from "@ngx-translate/core";
   styleUrls: ['./admin-editor.component.scss']
 })
 export class AdminEditorComponent implements OnInit {
-  @ViewChild('multiSelect') multiSelect: MultiSelect
+  @ViewChild('multiSelect') multiSelect: MultiSelect;
+  @ViewChild('dropdown') dropdown: Dropdown;
   selectedUser: User;
   ownUser: User;
   usersItems: SelectItem[] = [{label: 'Neu', value: {id: null, name: 'Neuer Admin', permissions: [], password: ''}}];
@@ -131,6 +132,12 @@ export class AdminEditorComponent implements OnInit {
 
   passwordsMatch(): boolean{
     return this.adminForm.get('password').value == (<HTMLInputElement>document.getElementById('confirmPasswordField')).value;
+  }
+  closeDropdowns(event){
+    if(this.multiSelect){
+      this.multiSelect.hide();
+    }
+    this.dropdown.hide(event);
   }
 
 }
