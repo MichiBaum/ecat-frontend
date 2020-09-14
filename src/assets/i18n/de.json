@@ -31,7 +31,8 @@
     },
     "product": {
       "articleNr": {
-        "notSet": "Keine Artikelnummer vorhanden"
+        "notSet": "Keine Artikelnummer vorhanden",
+        "lengthLimit": "Die Artikelnummer ist zu lang"
       },
       "name": {
         "notSet": "Kein Produktname vorhanden"
