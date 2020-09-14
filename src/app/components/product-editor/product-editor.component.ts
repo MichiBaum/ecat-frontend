@@ -46,7 +46,11 @@ export class ProductEditorComponent implements OnInit {
     });
     this.productEditorService.productEmitter.subscribe(product => {
       this.product = product;
-      this.returnProductImageDtos = product.returnProductImageDtos;
+      if(product.returnProductImageDtos){
+        product.returnProductImageDtos.forEach(returnProductImageDto => {
+          this.returnProductImageDtos.push(returnProductImageDto);
+        })
+      }
       this.updateProductForm();
     })
 
@@ -63,16 +67,14 @@ export class ProductEditorComponent implements OnInit {
     this.productForm.patchValue(this.product);
   }
   saveProduct() {
-    this.productService.saveProduct(new SaveProductDto(this.productForm.getRawValue())).subscribe(data => {
-      if(!this.product.id || this.product.id === 0){
-        this.productService.emitNewProduct(data);
-      }
-      Object.assign(this.product, data);
+    this.productService.saveProduct(new SaveProductDto(this.productForm.getRawValue())).subscribe(product => {
+      Object.assign(this.product, product);
       this.messageService.add({
         severity:'success',
         summary:this.translateService.instant('toastMessages.success'),
         detail:this.translateService.instant('productEditor.successfulSave')
       });
+      this.updateProductForm();
     },
       (error => {}))
   }

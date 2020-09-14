@@ -16,10 +16,6 @@ export class PromotionService {
   private savePromotionsPath: string = '/promotions/save';
   constructor(private apiService: ApiService) { }
 
-  emitNewPromotion(promotion: Promotion){
-    this.newPromotion.emit(promotion);
-  }
-
   getPromotions(): Observable<Promotion[]> {
     return this.apiService.getAll<Promotion>(this.promotionsPath);
   }

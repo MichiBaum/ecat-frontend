@@ -38,7 +38,11 @@ export class PromotionEditorComponent{
   {
     this.promotionEditorService.promotionEmitter.subscribe(promotion => {
       this.promotion = promotion;
-      this.returnPromotionImageDtos = promotion.returnPromotionImageDtos;
+      if(promotion.returnPromotionImageDtos){
+        promotion.returnPromotionImageDtos.forEach(returnPromotionImageDto => {
+          this.returnPromotionImageDtos.push(returnPromotionImageDto);
+        })
+      }
       this.updateForm();
     });
     this.promotionEditorService.showPromotionEditorEmitter.subscribe(showDialog => {
@@ -51,14 +55,13 @@ export class PromotionEditorComponent{
   }
   savePromotion() {
     this.promotionService.savePromotion(this.promotionForm.getRawValue()).subscribe(promotion => {
-      if(!this.promotion.id || this.promotion.id === 0){
-        this.promotionService.emitNewPromotion(promotion);
-      }
       Object.assign(this.promotion, promotion);
       this.messageService.add({
         severity:'success',
         summary:this.translateService.instant('toastMessages.success'),
-        detail:this.translateService.instant('promotionEditor.successfulSave')});
+        detail:this.translateService.instant('promotionEditor.successfulSave')
+      });
+      this.updateForm();
     },
       (error => {}))
   }
