@@ -1,7 +1,7 @@
 <p-dialog [(visible)]="showDialog" [modal]="true" header="{{ 'promotionEditor.promotionEditor' | translate }}" (onHide)="hideCalendars()">
   <div class="container p-grid p-dir-col p-justify-center">
     <div class="formGroup p-col">
-      <app-custom-upload [customUploadItems]="returnPromotionImageDtos"
+      <app-custom-upload [customUploadItems]="promotion.returnPromotionImageDtos"
                          (listReorder)="updatePromotionImagesIndex($event)"
                          (newCustomUploadItem)="saveNewPromotionImage(customUploadItemToSavePromotionImageDto($event))"
                          (removedCustomUploadItem)="deletePromotionImage($event)"

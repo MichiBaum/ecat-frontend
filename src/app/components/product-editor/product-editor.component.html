@@ -1,7 +1,7 @@
 <p-dialog [(visible)]="showDialog" [modal]="true" header="{{ 'productEditor.productEditor' | translate }}" (onHide)="this.dropdown.hide($event)">
   <div class="container p-grid p-dir-col p-justify-center">
     <div class="formGroup p-col">
-      <app-custom-upload [customUploadItems]="returnProductImageDtos"
+      <app-custom-upload [customUploadItems]="product.returnProductImageDtos"
                          (listReorder)="updateProductImagesIndex($event)"
                          (newCustomUploadItem)="saveNewProductImage(customUploadItemToSaveProductImageDto($event))"
                          (removedCustomUploadItem)="deleteProductImage($event)"

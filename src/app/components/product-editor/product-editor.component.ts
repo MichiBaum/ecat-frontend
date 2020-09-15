@@ -10,7 +10,6 @@ import {TranslateService} from "@ngx-translate/core";
 import {SaveProductDto} from "../../models/save-product-dto";
 import {SaveProductImageDto} from "../../models/save-product-image-dto";
 import {CustomUploadItem} from "../../models/custom-upload-item";
-import {ReturnProductImageDto} from "../../models/return-product-image-dto";
 
 @Component({
   selector: 'app-product-editor',
@@ -21,7 +20,6 @@ export class ProductEditorComponent implements OnInit {
 
   @ViewChild('dropdown') dropdown: Dropdown;
   product: Product = {id: 0, name: '', description: '', articleNr: '', price: null};
-  returnProductImageDtos: ReturnProductImageDto[] = [];
   productFamilyItems: SelectItem[] = [];
   showDialog: boolean = false;
 
@@ -46,10 +44,8 @@ export class ProductEditorComponent implements OnInit {
     });
     this.productEditorService.productEmitter.subscribe(product => {
       this.product = product;
-      if(product.returnProductImageDtos){
-        product.returnProductImageDtos.forEach(returnProductImageDto => {
-          this.returnProductImageDtos.push(returnProductImageDto);
-        })
+      if(!product.returnProductImageDtos){
+        this.product.returnProductImageDtos = [];
       }
       this.updateProductForm();
     })
@@ -92,7 +88,7 @@ export class ProductEditorComponent implements OnInit {
 
   updateProductImagesIndex(updatedIndexes: any){
     for (let [key, value] of updatedIndexes){
-      let returnProductImageDto = this.returnProductImageDtos.find(saveProductImageDto => saveProductImageDto.id === key);
+      let returnProductImageDto = this.product.returnProductImageDtos.find(saveProductImageDto => saveProductImageDto.id === key);
       this.productService.saveProductImageIndex(returnProductImageDto.id, value).subscribe(() => {}, error => {});
     }
   }
@@ -100,11 +96,11 @@ export class ProductEditorComponent implements OnInit {
   saveNewProductImage(saveProductImageDto: SaveProductImageDto){
     this.productService.saveProductImage(saveProductImageDto).subscribe(returnProductImageDto => {
       if(saveProductImageDto.id && saveProductImageDto.id !== 0) {
-        let originalReturnProductImageDto = this.returnProductImageDtos.find(
+        let originalReturnProductImageDto = this.product.returnProductImageDtos.find(
           returnProductImageDtoPredicate => returnProductImageDtoPredicate.id === saveProductImageDto.id);
         Object.assign(originalReturnProductImageDto, returnProductImageDto);
       }else{
-        this.returnProductImageDtos.push(returnProductImageDto);
+        this.product.returnProductImageDtos.push(returnProductImageDto);
       }
     },
       error => {})
@@ -112,9 +108,9 @@ export class ProductEditorComponent implements OnInit {
 
   deleteProductImage(id: number){
     this.productService.deleteProductImage(id).subscribe(() => {
-      let returnProductImageDtoIndex = this.returnProductImageDtos.findIndex(
+      let returnProductImageDtoIndex = this.product.returnProductImageDtos.findIndex(
         returnProductImageDtoPredicate => returnProductImageDtoPredicate.id === id);
-      this.returnProductImageDtos.splice(returnProductImageDtoIndex, 1);
+      this.product.returnProductImageDtos.splice(returnProductImageDtoIndex, 1);
     }, error => {});
   }
 

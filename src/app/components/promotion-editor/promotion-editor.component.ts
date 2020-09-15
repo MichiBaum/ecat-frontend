@@ -7,7 +7,6 @@ import {PromotionEditorService} from "../../services/promotion-editor.service";
 import {TranslateService} from "@ngx-translate/core";
 import {SavePromotionImageDto} from "../../models/save-promotion-image-dto";
 import {CustomUploadItem} from "../../models/custom-upload-item";
-import {ReturnPromotionImageDto} from "../../models/return-promotion-image-dto";
 
 @Component({
   selector: 'app-promotion-editor',
@@ -19,7 +18,6 @@ export class PromotionEditorComponent{
   @ViewChild('calendar1') calendar1: Calendar;
   @ViewChild('calendar2') calendar2: Calendar;
   promotion: Promotion = {id: 0, title: '', description: '', startDate: null, endDate: null};
-  returnPromotionImageDtos: ReturnPromotionImageDto[] = [];
   showDialog: boolean = false;
 
   promotionForm = new FormGroup({
@@ -38,10 +36,8 @@ export class PromotionEditorComponent{
   {
     this.promotionEditorService.promotionEmitter.subscribe(promotion => {
       this.promotion = promotion;
-      if(promotion.returnPromotionImageDtos){
-        promotion.returnPromotionImageDtos.forEach(returnPromotionImageDto => {
-          this.returnPromotionImageDtos.push(returnPromotionImageDto);
-        })
+      if(!promotion.returnPromotionImageDtos){
+        this.promotion.returnPromotionImageDtos = [];
       }
       this.updateForm();
     });
@@ -88,7 +84,7 @@ export class PromotionEditorComponent{
 
   updatePromotionImagesIndex(updatedIndexes: any){
     for (let [key, value] of updatedIndexes){
-      let returnPromotionImageDto = this.returnPromotionImageDtos.find(returnPromotionImageDtoPredicate => returnPromotionImageDtoPredicate.id == key);
+      let returnPromotionImageDto = this.promotion.returnPromotionImageDtos.find(returnPromotionImageDtoPredicate => returnPromotionImageDtoPredicate.id == key);
       this.promotionService.savePromotionImageIndex(returnPromotionImageDto.id, value).subscribe(() => {}, error => {});
     }
   }
@@ -96,20 +92,20 @@ export class PromotionEditorComponent{
   saveNewPromotionImage(savePromotionImageDto: SavePromotionImageDto){
     this.promotionService.savePromotionImage(savePromotionImageDto).subscribe(returnPromotionImageDto => {
         if(savePromotionImageDto.id && returnPromotionImageDto.id !== 0){
-          let originalReturnPromotionImageDto = this.returnPromotionImageDtos.find(
+          let originalReturnPromotionImageDto = this.promotion.returnPromotionImageDtos.find(
             returnPromotionImageDtoPredicate => returnPromotionImageDtoPredicate.id === savePromotionImageDto.id);
           Object.assign(originalReturnPromotionImageDto, returnPromotionImageDto);
         }else {
-          this.returnPromotionImageDtos.push(returnPromotionImageDto);
+          this.promotion.returnPromotionImageDtos.push(returnPromotionImageDto);
         }
       }, error => {})
   }
 
   deletePromotionImage(id: number){
     this.promotionService.deletePromotionImage(id).subscribe(() => {
-      let returnPromotionImageDtoIndex = this.returnPromotionImageDtos.findIndex(
+      let returnPromotionImageDtoIndex = this.promotion.returnPromotionImageDtos.findIndex(
         returnPromotionImageDtoPredicate => returnPromotionImageDtoPredicate.id === id);
-      this.returnPromotionImageDtos.splice(returnPromotionImageDtoIndex, 1);
+      this.promotion.returnPromotionImageDtos.splice(returnPromotionImageDtoIndex, 1);
     }, error => {});
   }
 
