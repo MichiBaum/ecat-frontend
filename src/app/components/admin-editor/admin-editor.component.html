@@ -20,7 +20,7 @@
     </form>
     <div class="formGroup p-col">
       <label for="confirmPasswordField">{{ 'adminEditor.newPasswordConfirm' | translate }}</label>
-      <input class="input" type="password" pInputText id="confirmPasswordField" autocomplete="new-password">
+      <input [(ngModel)]="confirmPassword" class="input" type="password" pInputText id="confirmPasswordField" autocomplete="new-password">
     </div>
     <div class="formGroup p-col">
       <p-button label="{{ 'buttons.save' | translate }}" (onClick)="saveUser()" class="marginRight"></p-button>

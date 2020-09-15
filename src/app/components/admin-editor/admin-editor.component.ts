@@ -19,6 +19,7 @@ import {TranslateService} from "@ngx-translate/core";
 export class AdminEditorComponent implements OnInit {
   @ViewChild('multiSelect') multiSelect: MultiSelect;
   @ViewChild('dropdown') dropdown: Dropdown;
+  confirmPassword: string = '';
   selectedUser: User;
   ownUser: User;
   usersItems: SelectItem[] = [{label: 'Neu', value: new User()}];
@@ -98,6 +99,7 @@ export class AdminEditorComponent implements OnInit {
             summary: this.translateService.instant('toastMessages.success'),
             detail: this.translateService.instant('adminEditor.successfulSave')
           });
+          this.confirmPassword = '';
         },
         () => {})
     }
@@ -112,7 +114,7 @@ export class AdminEditorComponent implements OnInit {
 
   resetFormToLastState(){
     this.adminForm.patchValue(this.selectedUser);
-    (<HTMLInputElement>document.getElementById('confirmPasswordField')).value = '';
+    this.confirmPassword = '';
   }
 
   convertUserToSelectItem(user: User): SelectItem{
@@ -131,7 +133,7 @@ export class AdminEditorComponent implements OnInit {
   }
 
   passwordsMatch(): boolean{
-    return this.adminForm.get('password').value == (<HTMLInputElement>document.getElementById('confirmPasswordField')).value;
+    return this.adminForm.get('password').value == this.confirmPassword;
   }
   closeDropdowns(event){
     if(this.multiSelect){
