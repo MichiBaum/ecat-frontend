@@ -38,6 +38,7 @@ img{
   height: 2.4em;
   max-height: 2.4em;
   font-weight: bold;
+  word-break: break-all;
 }
 :host{
   transition: width 1s;
