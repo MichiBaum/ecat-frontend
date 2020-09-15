@@ -17,7 +17,7 @@ export class PromotionEditorComponent{
 
   @ViewChild('calendar1') calendar1: Calendar;
   @ViewChild('calendar2') calendar2: Calendar;
-  promotion: Promotion = {id: 0, title: '', description: '', startDate: null, endDate: null};
+  promotion: Promotion = new Promotion();
   showDialog: boolean = false;
 
   promotionForm = new FormGroup({

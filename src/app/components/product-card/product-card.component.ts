@@ -64,7 +64,7 @@ export class ProductCardComponent implements OnInit {
       {
         label: this.translateService.instant('navigation.new'),
         command: () => {
-          this.productEditorService.editProduct({id: 0, name: '', description: '', articleNr: '', price: null});
+          this.productEditorService.editProduct(new Product(undefined, undefined, undefined, undefined, undefined, this.product.productFamilyId));
         }
       },
       {

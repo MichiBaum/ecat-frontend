@@ -21,7 +21,7 @@ export class AdminEditorComponent implements OnInit {
   @ViewChild('dropdown') dropdown: Dropdown;
   selectedUser: User;
   ownUser: User;
-  usersItems: SelectItem[] = [{label: 'Neu', value: {id: null, name: 'Neuer Admin', permissions: [], password: ''}}];
+  usersItems: SelectItem[] = [{label: 'Neu', value: new User()}];
   permissionsItems: SelectItem[] = [];
   showDialog: boolean = false;
   adminForm = new FormGroup({

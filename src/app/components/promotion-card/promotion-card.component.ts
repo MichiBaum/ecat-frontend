@@ -68,7 +68,7 @@ export class PromotionCardComponent implements OnInit {
       {
         label: this.translateService.instant('navigation.new'),
         command: () => {
-          this.promotionEditorService.editPromotion({id: 0, title: '', description: '', startDate: Date.now(), endDate: Date.now()});
+          this.promotionEditorService.editPromotion(new Promotion());
         }
       },
       {

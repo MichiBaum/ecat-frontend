@@ -19,7 +19,7 @@ import {CustomUploadItem} from "../../models/custom-upload-item";
 export class ProductEditorComponent implements OnInit {
 
   @ViewChild('dropdown') dropdown: Dropdown;
-  product: Product = {id: 0, name: '', description: '', articleNr: '', price: null};
+  product: Product = new Product();
   productFamilyItems: SelectItem[] = [];
   showDialog: boolean = false;
 
