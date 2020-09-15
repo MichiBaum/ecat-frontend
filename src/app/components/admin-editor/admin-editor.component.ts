@@ -67,7 +67,7 @@ export class AdminEditorComponent implements OnInit {
       })
     }
     this.userService.getUser().subscribe(user => {
-      //set blank password for password reset
+      //set because User class requires password
       user.password = '';
       this.selectedUser = user;
       this.ownUser = user;
