@@ -3,6 +3,11 @@ footer{
   width: 100%;
   color: white;
 }
+.footerCategoryWrapper{
+  max-width: 1920px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
 .footerCategory{
   display: flex;
   flex-direction: column;
