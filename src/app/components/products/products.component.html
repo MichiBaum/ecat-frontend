@@ -5,5 +5,9 @@
     (deleteProduct)="onDeleteProduct($event);"
   >
   </app-product-card>
+  <div class="p-col-6 p-offset-2" id="empty" *ngIf="!products.length > 0">
+    <p>{{"emptyPage.product" | translate}}</p>
+    <p-button *ngIf="authService.hasPermission('ADMINISTRATE_PRODUCTS')" label="{{'navigation.new' | translate}}" (onClick)="createNewProduct()"></p-button>
+  </div>
 </div>
 <app-product-editor *ngIf="authService.hasPermission('ADMINISTRATE_PRODUCTS')"></app-product-editor>

@@ -170,6 +170,9 @@
   "toastMessages": {
     "success": "Erfolg",
     "error": "Fehler"
+  },
+  "emptyPage": {
+    "product": "Keine Produkte vorhanden"
   }
 
 }

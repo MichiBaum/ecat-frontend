@@ -3,6 +3,7 @@ import {Product} from "../../models/product";
 import {ProductService} from "../../services/product.service";
 import {AuthenticationService} from "../../services/authentication.service";
 import {ActivatedRoute, Params} from "@angular/router";
+import {ProductEditorService} from "../../services/product-editor.service";
 
 @Component({
   selector: 'app-products',
@@ -15,10 +16,12 @@ import {ActivatedRoute, Params} from "@angular/router";
 export class ProductsComponent implements OnInit {
 
   products: Product[] = [];
+  currentRouteParams: Params;
 
   constructor(private productService: ProductService,
               public authService: AuthenticationService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private productEditorService: ProductEditorService) {
     this.productService.products.subscribe(
       (products) => this.products = products
     );
@@ -26,6 +29,7 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
+      this.currentRouteParams = params;
       this.searchProducts(params);
     })
   }
@@ -57,6 +61,14 @@ export class ProductsComponent implements OnInit {
     }else{
       return parsedId;
     }
+  }
+
+  createNewProduct(){
+    let productFamilyId = 0;
+    if(this.currentRouteParams['productFamily']){
+      productFamilyId = this.getIdFromUrlParams(this.currentRouteParams['productFamily']);
+    }
+    this.productEditorService.editProduct(new Product(undefined, undefined, undefined, undefined, undefined, productFamilyId));
   }
 
 }
