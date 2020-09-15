@@ -3,7 +3,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {UserService} from "../../services/user.service";
 import {AuthenticationService} from "../../services/authentication.service";
 import {User} from "../../models/user";
-import {Dropdown, MessageService, MultiSelect, SelectItem} from "primeng";
+import {ConfirmationService, Dropdown, MessageService, MultiSelect, SelectItem} from "primeng";
 import {AdminEditorService} from "../../services/admin-editor.service";
 import {Permission} from "../../models/permission";
 import {PermissionService} from "../../services/permission.service";
@@ -38,7 +38,8 @@ export class AdminEditorComponent implements OnInit {
               private permissionService: PermissionService,
               private router: Router,
               private messageService: MessageService,
-              private translateService: TranslateService)
+              private translateService: TranslateService,
+              private confirmationService: ConfirmationService)
   {
     adminEditorService.showAdminEditorEmitter.subscribe(showDialog => {
       this.showDialog = showDialog;
@@ -105,11 +106,16 @@ export class AdminEditorComponent implements OnInit {
     }
   }
   deleteUser(){
-    this.userService.deleteUser(this.selectedUser.id).subscribe(() => {
-      this.usersItems.splice(this.usersItems.findIndex(userItem => userItem.value.id == this.selectedUser.id), 1);
-      this.selectedUser = this.usersItems[0].value;
-      this.adminForm.patchValue(this.selectedUser);
-    }, () =>{})
+    this.confirmationService.confirm({
+      message: this.translateService.instant('confirmation.delete.user'),
+      accept: () => {
+        this.userService.deleteUser(this.selectedUser.id).subscribe(() => {
+          this.usersItems.splice(this.usersItems.findIndex(userItem => userItem.value.id == this.selectedUser.id), 1);
+          this.selectedUser = this.usersItems[0].value;
+          this.adminForm.patchValue(this.selectedUser);
+        }, () =>{})
+      }
+    });
   }
 
   resetFormToLastState(){

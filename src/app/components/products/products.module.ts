@@ -3,7 +3,6 @@ import {ProductsComponent} from "./products.component";
 import {ProductCardModule} from "../product-card/product-card.module";
 import {CommonModule} from "@angular/common";
 import {ProductEditorModule} from "../product-editor/product-editor.module";
-import {ConfirmDialogModule} from "primeng";
 
 @NgModule({
   declarations: [
@@ -15,8 +14,7 @@ import {ConfirmDialogModule} from "primeng";
     imports: [
         ProductCardModule,
         CommonModule,
-        ProductEditorModule,
-        ConfirmDialogModule
+        ProductEditorModule
     ]
 })
 export class ProductsModule { }
