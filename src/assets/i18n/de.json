@@ -84,7 +84,7 @@
       }
     },
     "login": {
-      "wrongCredentials": "Falscher Benutzername oder falsches Passwort"
+      "wrongCredentials": "Falscher Benutzername oder Falsches Passwort"
     },
     "authErrorHandler": {
       "forbidden": "Verbotene Anfrage"
