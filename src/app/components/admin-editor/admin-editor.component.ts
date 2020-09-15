@@ -99,7 +99,7 @@ export class AdminEditorComponent implements OnInit {
             detail: this.translateService.instant('adminEditor.successfulSave')
           });
         },
-        (error => {}))
+        () => {})
     }
   }
   deleteUser(){
@@ -107,7 +107,7 @@ export class AdminEditorComponent implements OnInit {
       this.usersItems.splice(this.usersItems.findIndex(userItem => userItem.value.id == this.selectedUser.id), 1);
       this.selectedUser = this.usersItems[0].value;
       this.adminForm.patchValue(this.selectedUser);
-    }, (error =>{}))
+    }, () =>{})
   }
 
   resetFormToLastState(){

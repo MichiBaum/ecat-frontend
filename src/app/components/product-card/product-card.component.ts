@@ -82,7 +82,7 @@ export class ProductCardComponent implements OnInit {
               this.productService.deleteProduct(this.product.id).subscribe(() => {
                   this.deleteProduct.emit(this.product.id);
                 },
-                (error => {}))
+                () => {})
             }
           });
         }

@@ -86,7 +86,7 @@ export class PromotionCardComponent implements OnInit {
               this.promotionService.deletePromotion(this.promotion.id).subscribe(() => {
                   this.deletePromotion.emit(this.promotion.id);
                 },
-                (error => {}))
+                () => {})
             }
           });
         }

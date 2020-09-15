@@ -72,7 +72,7 @@ export class ProductEditorComponent implements OnInit {
       });
       this.updateProductForm();
     },
-      (error => {}))
+      () => {})
   }
 
   resetFormToLastState() {
@@ -89,7 +89,7 @@ export class ProductEditorComponent implements OnInit {
   updateProductImagesIndex(updatedIndexes: any){
     for (let [key, value] of updatedIndexes){
       let returnProductImageDto = this.product.returnProductImageDtos.find(saveProductImageDto => saveProductImageDto.id === key);
-      this.productService.saveProductImageIndex(returnProductImageDto.id, value).subscribe(() => {}, error => {});
+      this.productService.saveProductImageIndex(returnProductImageDto.id, value).subscribe(() => {}, () => {});
     }
   }
 
@@ -103,7 +103,7 @@ export class ProductEditorComponent implements OnInit {
         this.product.returnProductImageDtos.push(returnProductImageDto);
       }
     },
-      error => {})
+      () => {})
   }
 
   deleteProductImage(id: number){
@@ -111,7 +111,7 @@ export class ProductEditorComponent implements OnInit {
       let returnProductImageDtoIndex = this.product.returnProductImageDtos.findIndex(
         returnProductImageDtoPredicate => returnProductImageDtoPredicate.id === id);
       this.product.returnProductImageDtos.splice(returnProductImageDtoIndex, 1);
-    }, error => {});
+    }, () => {});
   }
 
   customUploadItemToSaveProductImageDto(customUploadItem: CustomUploadItem): SaveProductImageDto{

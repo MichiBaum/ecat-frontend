@@ -59,7 +59,7 @@ export class PromotionEditorComponent{
       });
       this.updateForm();
     },
-      (error => {}))
+      () => {})
   }
 
   resetFormToLastState() {
@@ -85,7 +85,7 @@ export class PromotionEditorComponent{
   updatePromotionImagesIndex(updatedIndexes: any){
     for (let [key, value] of updatedIndexes){
       let returnPromotionImageDto = this.promotion.returnPromotionImageDtos.find(returnPromotionImageDtoPredicate => returnPromotionImageDtoPredicate.id == key);
-      this.promotionService.savePromotionImageIndex(returnPromotionImageDto.id, value).subscribe(() => {}, error => {});
+      this.promotionService.savePromotionImageIndex(returnPromotionImageDto.id, value).subscribe(() => {}, () => {});
     }
   }
 
@@ -98,7 +98,7 @@ export class PromotionEditorComponent{
         }else {
           this.promotion.returnPromotionImageDtos.push(returnPromotionImageDto);
         }
-      }, error => {})
+      }, () => {})
   }
 
   deletePromotionImage(id: number){
@@ -106,7 +106,7 @@ export class PromotionEditorComponent{
       let returnPromotionImageDtoIndex = this.promotion.returnPromotionImageDtos.findIndex(
         returnPromotionImageDtoPredicate => returnPromotionImageDtoPredicate.id === id);
       this.promotion.returnPromotionImageDtos.splice(returnPromotionImageDtoIndex, 1);
-    }, error => {});
+    }, () => {});
   }
 
   customUploadItemToSavePromotionImageDto(customUploadItem: CustomUploadItem): SavePromotionImageDto{
