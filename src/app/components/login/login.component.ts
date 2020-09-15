@@ -37,5 +37,10 @@ export class LoginComponent {
     },
       (() => {}));
   }
+  loginOnEnter(event: KeyboardEvent){
+    if(event.key === "Enter"){
+      this.login();
+    }
+  }
 
 }
