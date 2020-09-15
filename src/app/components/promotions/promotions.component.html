@@ -14,7 +14,12 @@
    [promotion]="normalPromotion"
    (deletePromotion)="onDeletePromotion($event)"
  >
-
  </app-promotion-card>
+</div>
+<div class="p-grid" *ngIf="!promotions.length > 0">
+  <div class="p-col-6 p-offset-2" id="empty">
+    <p>{{"emptyPage.promotion" | translate}}</p>
+    <p-button *ngIf="authService.hasPermission('ADMINISTRATE_PRODUCTS')" label="{{'navigation.new' | translate}}" (onClick)="createNewPromotion()"></p-button>
+  </div>
 </div>
 <app-promotion-editor *ngIf="authService.hasPermission('ADMINISTRATE_PROMOTIONS')"></app-promotion-editor>

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Promotion} from "../../models/promotion";
 import {PromotionService} from "../../services/promotion.service";
 import {AuthenticationService} from "../../services/authentication.service";
+import {PromotionEditorService} from "../../services/promotion-editor.service";
 
 @Component({
   selector: 'app-promotions',
@@ -17,7 +18,9 @@ export class PromotionsComponent implements OnInit {
   newPromotions: Promotion[];
   normalPromotions: Promotion[];
 
-  constructor(private promotionService: PromotionService, public authService: AuthenticationService) { }
+  constructor(private promotionService: PromotionService,
+              public authService: AuthenticationService,
+              private promotionEditorService: PromotionEditorService) { }
 
   ngOnInit(): void {
     this.promotionService.getPromotions().subscribe(promotions => {
@@ -31,6 +34,9 @@ export class PromotionsComponent implements OnInit {
     this.promotions.splice(this.promotions.findIndex(promotion => promotion.id == promotionId),1);
     this.newPromotions = this.promotions.slice(0, 2);
     this.normalPromotions = this.promotions.slice(2);
+  }
+  createNewPromotion(){
+    this.promotionEditorService.editPromotion(new Promotion());
   }
 
 }

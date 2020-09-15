@@ -172,7 +172,8 @@
     "error": "Fehler"
   },
   "emptyPage": {
-    "product": "Keine Produkte vorhanden"
+    "product": "Keine Produkte vorhanden",
+    "promotion": "Keine Aktionen vorhanden"
   }
 
 }
