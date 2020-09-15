@@ -53,7 +53,6 @@ export class PromotionEditorComponent{
     this.promotionService.savePromotion(this.promotionForm.getRawValue()).subscribe(promotion => {
       if(this.promotion.id == 0 || !this.promotion.id){
         Object.assign(this.promotion, promotion);
-        console.log(this.promotion);
         this.promotionService.addNewPromotion(this.promotion);
       }else{
         Object.assign(this.promotion, promotion);

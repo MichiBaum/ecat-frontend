@@ -32,6 +32,15 @@ export class ProductsComponent implements OnInit {
       this.currentRouteParams = params;
       this.searchProducts(params);
     })
+    this.productService.newProduct.subscribe(newProduct => {
+      let productFamilyId = 0;
+      if(this.currentRouteParams['productFamily']){
+        productFamilyId = this.getIdFromUrlParams(this.currentRouteParams['productFamily']);
+      }
+      if(productFamilyId == newProduct.productFamilyId){
+        this.products.push(newProduct);
+      }
+    })
   }
 
   onDeleteProduct(productId: number){

@@ -17,6 +17,10 @@ export class ProductService {
 
   constructor(private router: Router, private apiService: ApiService) { }
 
+  addNewProduct(product: Product){
+    this.newProduct.emit(product);
+  }
+
   saveProduct(saveProductDto: SaveProductDto): Observable<Product>{
     return this.apiService.postSingle<Product>('/products/save', saveProductDto);
   }
